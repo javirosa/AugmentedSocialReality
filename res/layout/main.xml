@@ -9,4 +9,9 @@
     android:layout_height="wrap_content" 
     android:text="@string/hello"
     />
+<Button android:text="Problem Definition" android:id="@+id/probDefi" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
+<Button android:text="Social Selection" android:id="@+id/sociSele" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+<Button android:text="Narrative Selection" android:id="@+id/narrSele" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+<Button android:text="Role Assignment" android:id="@+id/roleAssi" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+<Button android:text="Mission Management" android:id="@+id/missMana" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
 </LinearLayout>
