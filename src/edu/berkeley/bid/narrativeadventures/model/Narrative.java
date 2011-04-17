@@ -26,17 +26,18 @@ public class Narrative {
 	
 	void assignMission(Mission mission, Agent agent, Role role) 
 	{
+	    //get agent
+        Agent ag = agents.get(agents.indexOf(agent));
+        ag.addMission(mission, role);
+	    //TODO Check if already assigned
 	    
-		//Get role within agent and add mission to role
-		
-	    
-	    //Check if already assigned
-	    
-		
 	}
-	void addRole()
+	void addRole(Role role, Agent agent)
 	{
-		
+	    //get agent
+        Agent ag = agents.get(agents.indexOf(agent));
+        ag.addRole(role);
+        //TODO Check if already assigned
 	}
 	/**
 	 * Adds comment to the first item which is not null. 

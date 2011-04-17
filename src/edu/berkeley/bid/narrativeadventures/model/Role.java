@@ -22,6 +22,4 @@ public class Role {
 	List<String> resources;
 	//Image associated with role
 	
-	//updateMission
-	
 }
