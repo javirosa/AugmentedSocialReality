@@ -1,13 +1,22 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class NarrativeToFromGSON {
-    Narrative fromGSON()
+    
+    Narrative fromJson(String json)
     {
         return null;
     }
     
-    String toGSON(Narrative narrative)
+    String toJson(Narrative nar) 
     {
-        return null;
+        GsonBuilder gsonCfg = new GsonBuilder();
+        gsonCfg.serializeNulls();
+        
+        Gson gson = gsonCfg.create();
+        
+        return gson.toJson(nar);
     }
 }
