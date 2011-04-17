@@ -5,18 +5,22 @@ import com.google.gson.GsonBuilder;
 
 public class NarrativeToFromGSON {
     
+    static GsonBuilder gsonCfg;
+    static {
+        gsonCfg = new GsonBuilder();
+        gsonCfg .serializeNulls()
+                .setPrettyPrinting();
+    }
+    
     Narrative fromJson(String json)
     {
-        return null;
+        Gson gson = gsonCfg.create();
+        return gson.fromJson(json, Narrative.class);
     }
     
     String toJson(Narrative nar) 
-    {
-        GsonBuilder gsonCfg = new GsonBuilder();
-        gsonCfg.serializeNulls();
-        
+    {    
         Gson gson = gsonCfg.create();
-        
         return gson.toJson(nar);
     }
 }
