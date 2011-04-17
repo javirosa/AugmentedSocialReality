@@ -1,6 +1,6 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -19,11 +19,60 @@ Rules - Define the modes of interaction between users and rules to avoid causing
 public class Narrative {
 	String prolog;
 	String setting;
-	List<Mission> msns;
-	List<Agent> agts;
-	List<Role> rls;
-	String[] comments;
-	//getMissions
-	//getRoles
-	//getAgents
+	ArrayList<Mission> associatedMssns;
+	ArrayList<Agent> agents;
+	ArrayList<Role> roles;
+	ArrayList<String> resources;
+	
+	void assignMission(Mission mission, Agent agent, Role role) 
+	{
+	    
+		//Get role within agent and add mission to role
+		
+	    
+	    //Check if already assigned
+	    
+		
+	}
+	void addRole()
+	{
+		
+	}
+	/**
+	 * Adds comment to the first item which is not null. 
+	 * This may be a narrative if all are null, 
+	 * an agent if role is null, and so on. 
+	 * @param agent
+	 * @param role
+	 * @param mission
+	 */
+	void addResource(String comment, Agent agent, Role role, Mission mission)
+	{
+		if (agent == null){
+		    this.resources.add(comment);
+		    return;
+		} 
+	    //get agent
+        Agent ag = agents.get(agents.indexOf(agent));
+        
+		if (role == null) {
+		    ag.comments.add(comment);
+		    return;
+		} 
+		//get role
+        Role ro = ag.roles.get(ag.roles.indexOf(role));
+        
+		if (mission == null) {
+            ro.resources.add(comment);
+            return;
+		}
+		
+		//add comment to resources
+		ro.missions.get(ro.missions.indexOf(mission)).resources.add(comment);
+		
+	}
+	void addMission(Mission mission)
+	{
+	    associatedMssns.add(mission);
+	}
 }

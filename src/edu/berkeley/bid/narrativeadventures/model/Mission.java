@@ -1,4 +1,7 @@
 package edu.berkeley.bid.narrativeadventures.model;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.text.format.Time;
 
 /**
@@ -15,22 +18,40 @@ Has:
  * @author javirosa
  *
  */
-public class Mission {
+public class Mission
+{
 	
-	enum STATUS {
+	enum STATUS 
+	{
 		ASSIGNED,UNASSIGNED,COMPLETE,STANDING,RECURRENT
 	};
 	
-	int benefit;
-	Time assigned;
-	Time completed;
+	int id; 			//Used to uniquely identify the mission. This should never change!
+	int benefit; 		//Used to quantify the importance of the mission
+	Time assigned; 	
+	Time completed;	
 	String description;
-	String[] resources; //Can have urls and plain textw
-	String[] comments;
-	int numAssignable;
+	ArrayList<String> resources; //Can have urls and plain textw
 	
-	//assign
-	//changeStatus
-	//first resource is manager input
+	@Override
+	public boolean equals(Object other) 
+	{
+		return this.id == ((Mission)other).id;
+	}
 	
+	public Mission()
+	{
+	    this(0,0,new Time(), "No Description");
+	    this.assigned.setToNow();
+	    
+	}
+	
+	public Mission(int id, int benefit, Time assigned,String description)
+	{   
+	    this.id = id;
+	    this.benefit = benefit;
+	    this.assigned = assigned;
+	    this.description = description;
+	    resources = new ArrayList<String>();
+	}
 }

@@ -1,5 +1,7 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
+import java.util.List;
+
 /**
 Represents the role that an agent has
 Has:
@@ -14,9 +16,12 @@ Agent
  *
  */
 public class Role {
-	//closeMission
-	//Image
+	
 	String description;
-	String[] resources;
-	int numAssignable;
+	List<Mission> missions;
+	List<String> resources;
+	//Image associated with role
+	
+	//updateMission
+	
 }
