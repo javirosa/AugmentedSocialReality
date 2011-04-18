@@ -18,13 +18,19 @@ public class NarrativeAdventures extends Activity {
     	Button narrSele = (Button)findViewById(R.id.narrSele);
     	Button roleAssi = (Button)findViewById(R.id.roleAssi);
     	Button missMana = (Button)findViewById(R.id.missMana);
-   
+   // TODO do this now!
     	probDefi.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(v.getContext(), AProblemInput.class);
 				startActivityForResult(i, 0);
 			}
 		});
+    	sociSele.setOnClickListener(new View.OnClickListener() {
+    		public void onClick(View v) {
+    			Intent i = new Intent(v.getContext(), SocialSelection.class);
+    			startActivityForResult(i, 0);
+    		}
+    	});
 
     }
 }

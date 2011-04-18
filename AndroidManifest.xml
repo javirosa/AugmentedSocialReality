@@ -12,6 +12,7 @@
             </intent-filter>
         </activity>
         <activity android:name="AProblemInput" android:label="AProblemInput"></activity>
+        <activity android:name="SocialSelection" android:label="SocialSelection"></activity>
 
     </application>
     <uses-sdk android:minSdkVersion="4"/>
