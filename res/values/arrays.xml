@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<array name="items">
-<item>john</item>
-<item>mary</item>
+<array name="namesin">
+<item>John</item>
+<item>Mary</item>
 </array>
 <array name="situation">
+<item>Test</item>
+<item>Surgery</item>
 </array>
+<array name="namesout">
+<item>Peter</item>
+<item>Jimmy</item>
+</array>
+
 </resources>
