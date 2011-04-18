@@ -3,6 +3,7 @@
 	<name>VictimToWarrior</name>
 	<comment></comment>
 	<projects>
+		<project>com_facebook_android</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
