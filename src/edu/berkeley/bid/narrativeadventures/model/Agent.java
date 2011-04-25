@@ -2,6 +2,8 @@ package edu.berkeley.bid.narrativeadventures.model;
 
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+
 /** 
  * An agent fullfills roles and can be the source of missions, completions, and suggestions.
  * In the first iteration an agent will just be a facebook id.
@@ -22,8 +24,7 @@ public class Agent {
 	String name;
 	ArrayList<String> strengths;
 	ArrayList<String> comments;
-	//Image
-	
+	Bitmap photo;
 	ArrayList<Role> roles;
 	
 	@Override

@@ -2,6 +2,8 @@ package edu.berkeley.bid.narrativeadventures.model;
 
 import java.util.List;
 
+import android.graphics.Bitmap;
+
 /**
 Represents the role that an agent has
 Has:
@@ -20,6 +22,7 @@ public class Role {
 	String description;
 	List<Mission> missions;
 	List<String> resources;
+	Bitmap roleIcon;
 	//Image associated with role
 	
 }
