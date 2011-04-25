@@ -20,17 +20,19 @@ public class Agent {
 	//commentMission/Role
 	//Add Mission added listener?
 	
-	String facebookID; //This is actually a number
+	String number; 
 	String name;
 	ArrayList<String> strengths;
 	ArrayList<String> comments;
 	Bitmap photo;
 	ArrayList<Role> roles;
+	float trust;     //From 0-1
+	float responsiveness;  //From 0-1
 	
 	@Override
 	public boolean equals(Object other)
 	{
-	    return this.facebookID.equals(((Agent)other).facebookID);
+	    return this.number.equals(((Agent)other).number);
 	}
 	
 	void addMission(Mission mission, Role role) 
