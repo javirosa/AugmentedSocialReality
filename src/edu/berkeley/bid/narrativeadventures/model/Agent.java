@@ -37,14 +37,14 @@ public class Agent {
 	
 	void addMission(Mission mission, Role role) 
 	{
-		//Notify agent of status update
+		//TODO Notify agent of status update
 	    
 	    roles.get(roles.indexOf(role)).missions.add(mission);
 		//Add mission to role
 	}
 	void addRole(Role role)
 	{
-		//Notify agent of status update
+		//TODO Notify agent of status update
 	    
 		//add role to agent
 	    roles.add(role);

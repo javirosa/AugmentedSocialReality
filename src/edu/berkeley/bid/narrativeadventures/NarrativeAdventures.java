@@ -19,6 +19,10 @@ public class NarrativeAdventures extends Activity {
     	Button roleAssi = (Button)findViewById(R.id.roleAssi);
     	Button missMana = (Button)findViewById(R.id.missMana);
    
+    	//TODO load narratives
+    	//TODO load agents
+    	//TODO connect to cloud and update narrative list and agents
+    	
     	probDefi.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(v.getContext(), AProblemInput.class);
