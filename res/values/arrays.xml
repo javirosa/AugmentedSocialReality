@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <array name="namesin">
-<item>John</item>
+<item icon="@drawable/girl.jpeg">John</item>
 <item>Mary</item>
+<item>Joe</item>
+<item>Jane</item>
+<item>Tap</item>
+
 </array>
 <array name="situation">
 <item>Test</item>
@@ -10,7 +14,18 @@
 </array>
 <array name="namesout">
 <item>Peter</item>
-<item>Jimmy</item>
+<item>Jimmy1</item>
+<item>Jimmy2</item>
+<item>Jimmy3</item>
+<item>Jimmy4</item>
+<item>Jimmy5</item>
+<item>Jimmy6</item>
+<item>Jimmy7</item>
+<item>Jimmy8</item>
+<item>Jimmy9</item>
+<item>Jimmy10</item>
+<item>Jimmy11</item>
+<item>Jimmy12</item>
 </array>
 
 </resources>
