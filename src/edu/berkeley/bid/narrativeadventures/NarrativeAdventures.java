@@ -13,22 +13,27 @@ public class NarrativeAdventures extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        //TODO load narratives
+        //TODO load agents
+        //TODO connect to cloud and update narrative list and agents
+        
     	Button probDefi = (Button)findViewById(R.id.probDefi);
     	Button sociSele = (Button)findViewById(R.id.sociSele);
     	Button narrSele = (Button)findViewById(R.id.narrSele);
     	Button roleAssi = (Button)findViewById(R.id.roleAssi);
     	Button missMana = (Button)findViewById(R.id.missMana);
-   
-    	//TODO load narratives
-    	//TODO load agents
-    	//TODO connect to cloud and update narrative list and agents
-    	
     	probDefi.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(v.getContext(), AProblemInput.class);
 				startActivityForResult(i, 0);
 			}
 		});
+    	sociSele.setOnClickListener(new View.OnClickListener() {
+    		public void onClick(View v) {
+    			Intent i = new Intent(v.getContext(), SocialSelection.class);
+    			startActivityForResult(i, 0);
+    		}
+    	});
 
     }
 }

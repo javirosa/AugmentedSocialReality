@@ -21,7 +21,15 @@ public class AProblemInput extends Activity {
 				finish();
 			}
 		});
-		
+		Button goToSociSele = (Button) findViewById(R.id.probDefiToSocial);
+		goToSociSele.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				Intent i = new Intent(view.getContext(), SocialSelection.class);
+				startActivityForResult(i, 0);
+				finish();
+			}
+		});
+
 		
 	}
 	
