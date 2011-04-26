@@ -56,6 +56,13 @@ public class NarrativeAdventures extends Activity {
     			startActivityForResult(i, 0);
     		}
     	});
+
     	
+    	narrSele.setOnClickListener(new View.OnClickListener(){
+    	    public void onClick(View v) {
+    	        Intent i = new Intent(v.getContext(), NarrativeSelection.class);
+    	        startActivityForResult(i, 0);
+    	    }
+    	});
     }
 }
