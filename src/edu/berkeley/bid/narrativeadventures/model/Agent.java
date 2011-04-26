@@ -28,6 +28,17 @@ public class Agent {
 	public float trust;     //From 0-1
 	public float responsiveness;  //From 0-1
 	
+	public Agent()
+	{
+	    number = "";
+	    name = "";
+	    strengths = new ArrayList<String>();
+	    comments = new ArrayList<String>();
+	    photo = null;
+	    roles = new ArrayList<Role>();
+	    trust = 0;
+	    responsiveness = 0;
+	}
 	@Override
 	public boolean equals(Object other)
 	{

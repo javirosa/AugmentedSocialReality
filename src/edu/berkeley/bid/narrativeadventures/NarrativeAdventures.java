@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import edu.berkeley.bid.narrativeadventures.model.Agent;
+import edu.berkeley.bid.narrativeadventures.model.Mission;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
 import edu.berkeley.bid.narrativeadventures.model.NarrativeStorage;
+import edu.berkeley.bid.narrativeadventures.model.Problem;
+import edu.berkeley.bid.narrativeadventures.model.Role;
 
 public class NarrativeAdventures extends Activity {
     /** Called when the activity is first created. */
@@ -21,12 +25,26 @@ public class NarrativeAdventures extends Activity {
         //Used to store global state of application. e.g. narrative information
         NAApp naapp = (NAApp)getApplication();
         
-        naapp.runningNarratives.add(new Narrative());
-        String json1 =NarrativeStorage.toJson(naapp.runningNarratives.get(0)); 
+        Narrative narrative1 = new Narrative();
+        Agent narrator = new Agent();
+        narrative1.agents.add(narrator);
+        narrative1.agents.get(0).name = "foobar";
+        narrative1.agents.get(0).roles.add(new Role());
+        narrative1.agents.get(0).roles.get(0).description = "descr";
+        narrative1.agents.get(0).roles.get(0).missions.add(new Mission());
+        narrative1.problem = new Problem();
+        narrative1.narrator = narrator;
+        narrative1.participant = new Agent();
+        
+        
+        naapp.runningNarratives.add(narrative1);
+        String json1 = NarrativeStorage.toJson(naapp.runningNarratives.get(0)); 
         Log.d("GSON", json1);
+        
         
         try {
             openFileOutput("narrative1",MODE_WORLD_READABLE);
+            Log.d("GSON",getFilesDir().toString());
         } catch (FileNotFoundException fne){
             Log.d("GSON","fne");
         }

@@ -17,15 +17,25 @@ Rules - Define the modes of interaction between users and rules to avoid causing
  *
  */
 public class Narrative {
-	String prolog;
-	String setting;
-	ArrayList<Mission> associatedMssns;
-	ArrayList<Agent> agents;
-	ArrayList<Role> roles;
-	ArrayList<String> resources;
-	Agent narrator;
-	Problem problem;
+	public String prolog;
+	public String setting;
+	public ArrayList<Mission> associatedMssns;
+	public ArrayList<Agent> agents;
+	public ArrayList<Role> roles;
+	public ArrayList<String> resources;
+	public Agent narrator;
+	public Agent participant;
+	public Problem problem;
 	
+	public Narrative() 
+	{
+	    prolog = "";
+	    setting = "";
+	    associatedMssns = new ArrayList<Mission>();
+	    resources= new ArrayList<String>();
+	    roles = new ArrayList<Role>();
+	    agents = new ArrayList<Agent>();
+	}
 	void assignMission(Mission mission, Agent agent, Role role) 
 	{
 	    //get agent
