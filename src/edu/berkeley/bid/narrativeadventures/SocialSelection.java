@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,13 +25,13 @@ public class SocialSelection extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.socisele_2);
 
-		Button backToProb = (Button) findViewById(R.id.sociSeleToNarr);
-		backToProb.setOnClickListener(new View.OnClickListener() {
+		Button ToNarr = (Button) findViewById(R.id.sociSeleToNarr);
+		ToNarr.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-//				Intent i = new Intent(view.getContext(), AProblemInput.class);
-	//			startActivityForResult(i, 0);
-		//        Intent intent = new Intent();
-          //      setResult(RESULT_OK, intent);
+				Intent i = new Intent(view.getContext(), NarrativeSelection.class);
+				startActivityForResult(i, 0);
+//		        Intent intent = new Intent();
+  //              setResult(RESULT_OK, intent);
 			//    finish();
 			}
 		});
@@ -46,19 +47,38 @@ public class SocialSelection extends Activity {
 		});
 		
 		ListView listin = (ListView) findViewById(R.id.sociSeleIn);
-		listin.setOnItemClickListener(new OnItemClickListener() {
+		listin.setOnItemLongClickListener(new OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position,
+                    long id) {
+                // TODO Auto-generated method stub
+  //              TextView comment = (TextView) findViewById(R.id.sociSeleNarrTitl);
+    //            comment.setText("COMENTARIO DEL ITEM: " + position);
+      //          posi=position;
+                view.setBackgroundColor(0xfff00000); 
+            //  view.performLongClick();
+                return false;
+            }
+		});
 	
+/* THIS IS THE ONCLICK		
+		listin.setOnItemClickListener(new OnItemClickListener() {
+		   int oldPosi;
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				// TODO Auto-generated method stub
-//				TextView comment = (TextView) findViewById(R.id.sociSeleNarrTitl);
-		//		comment.setText("COMENTARIO DEL ITEM: " + position);
+			    TextView comment = (TextView) findViewById(R.id.sociSeleNarrTitl);
+				comment.setText("COMENTARIO DEL ITEM: " + position);
 				posi=position;
+				view.setBackgroundColor(0xfff00000); 
+				oldPosi=position;
+			//	view.performLongClick();
 			}
 		});
 		
+*/
 		
+/*THIS IS THE LISTVIEW DRAG DROP		
 		listin.setOnTouchListener(new View.OnTouchListener() {
 			private final static int START_DRAGGING = 0;
 			private final static int STOP_DRAGGING = 1;
@@ -112,7 +132,7 @@ public class SocialSelection extends Activity {
 				return false;
 			}
 		});
-
+*/
 		ImageButton dot = (ImageButton) findViewById(R.id.sociSeleDot);
 		dot.setOnTouchListener(new View.OnTouchListener() {
 			private final static int START_DRAGGING = 0;
@@ -135,8 +155,8 @@ public class SocialSelection extends Activity {
 						papa.invalidate();
 						int testx = view.getLeft();
 						int testy = view.getTop();
-						float posx=me.getX();
-						float posy=me.getY();
+						float posx=me.getX()-view.getWidth()/2;
+						float posy=me.getY()-view.getWidth()/2;
 	//					comment.setText("DRAGGING: "+ (int) posx + " " + (int) posy + "test: " + testx + " " + testy);
 						if (posy+testy <= 0){
 							view.offsetTopAndBottom(-testy);

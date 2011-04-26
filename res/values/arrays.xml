@@ -28,4 +28,24 @@
 <item>Jimmy12</item>
 </array>
 
+<array name="humornarr">
+<item>Test Tickle</item>
+<item>Gooffy God</item>
+<item>Girfrind Surprise</item>
+<item>Defeating the trolls</item>
+<item>Other humor narrative 1</item>
+<item>Other humor narrative 2</item>
+<item>Other humor narrative 3</item>
+<item>Other humor narrative 4</item>
+</array>
+
+<array name="epicnarr">
+<item>Fighting Road</item>
+<item>Climbing Mountain</item>
+<item>Puzzle Solving</item>
+<item>Other epic narrative 1</item>
+<item>Other epic narrative 2</item>
+<item>Other epic narrative 3</item>
+</array>
+
 </resources>

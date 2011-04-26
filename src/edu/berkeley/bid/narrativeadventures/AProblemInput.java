@@ -13,7 +13,7 @@ public class AProblemInput extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.probdefix2);
 	
-		Button backToMain = (Button) findViewById(R.id.probDefiToMain);
+		Button backToMain = (Button) findViewById(R.id.probDefiToMain); //Button to go back to Main
 		backToMain.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				Intent intent = new Intent();
@@ -21,7 +21,7 @@ public class AProblemInput extends Activity {
 				finish();
 			}
 		});
-		Button goToSociSele = (Button) findViewById(R.id.probDefiToSocial);
+		Button goToSociSele = (Button) findViewById(R.id.probDefiToSocial); //Button to navigate to Social Selection
 		goToSociSele.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				Intent i = new Intent(view.getContext(), SocialSelection.class);
