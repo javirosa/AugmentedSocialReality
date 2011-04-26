@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost
+android:id="@android:id/tabhost"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+<LinearLayout
+android:id="@+id/narrSeleMainLayo"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+>
+<TextView
+android:id="@+id/narrSeleTitl"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:text="Narrative Selection"
+android:textSize="20sp"
+android:textStyle="bold"
+>
+</TextView>
+<TextView
+android:id="@+id/narrSeleProbTitl"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:text="Problem:"
+>
+</TextView>
+<Spinner
+android:id="@+id/narrSeleProbSele"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+>
+</Spinner>
+<TabWidget
+android:id="@android:id/tabs"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+>
+</TabWidget>
+<FrameLayout
+android:id="@android:id/tabcontent"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+>
+<TableLayout
+android:id="@+id/narrSeleTab1Layo">
+<TableRow
+android:id="@+id/narrSeleTab1Titl"
+android:text="THIS 1"
+>
+</TableRow>
+<TableRow
+android:id="@+id/narrSeleTab1Cont"
+android:text="Content for 1"
+>
+</TableRow>
+</TableLayout>
+<TableLayout
+android:id="@+id/narrSeleTab2Layo">
+<TableRow
+android:id="@+id/narrSeleTab2Titl"
+android:text="THIS 2"
+>
+</TableRow>
+<TableRow
+android:id="@+id/narrSeleTab2Cont"
+android:text="Content for 2"
+>
+</TableRow>
+</TableLayout>
+</FrameLayout>
+</LinearLayout>
+</TabHost>
