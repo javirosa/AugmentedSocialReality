@@ -1,9 +1,8 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
 import java.util.ArrayList;
-
-import android.graphics.Bitmap;
-
+import android.telephony.SmsManager;
+import android.telephony.SmsMessage;
 /** 
  * An agent fullfills roles and can be the source of missions, completions, and suggestions.
  * In the first iteration an agent will just be a facebook id.
@@ -20,14 +19,14 @@ public class Agent {
 	//commentMission/Role
 	//Add Mission added listener?
 	
-	String number; 
-	String name;
-	ArrayList<String> strengths;
-	ArrayList<String> comments;
-	Bitmap photo;
-	ArrayList<Role> roles;
-	float trust;     //From 0-1
-	float responsiveness;  //From 0-1
+	public String number; 
+	public String name;
+	public ArrayList<String> strengths;
+	public ArrayList<String> comments;
+	public byte[] photo;
+	public ArrayList<Role> roles;
+	public float trust;     //From 0-1
+	public float responsiveness;  //From 0-1
 	
 	@Override
 	public boolean equals(Object other)
@@ -35,30 +34,36 @@ public class Agent {
 	    return this.number.equals(((Agent)other).number);
 	}
 	
-	void addMission(Mission mission, Role role) 
+	String addMission(Mission mission, Role role) 
 	{
-		//TODO Notify agent of status update
-	    
 	    roles.get(roles.indexOf(role)).missions.add(mission);
-		//Add mission to role
+		return "New mission!\n" + Narrative.getTitle(role.description) + "\n" + Narrative.getTitle(mission.description);
 	}
-	void addRole(Role role)
-	{
-		//TODO Notify agent of status update
-	    
-		//add role to agent
+	
+	String addRole(Role role)
+	{   
 	    roles.add(role);
+	    return "New role!\n" + Narrative.getTitle(role.description);
 	}
+	
 	/**
-	 * Called after a mission has been updated. Comment added, etc
-	 * Missions are modified directly
-	 * 
-	 * @param mission
-	 * @param role
+	 * Limit message to SMS sizes for best results.
+	 * @param message 
+	 * @param truncate if true then only the first message in what would be a multi-part message is sent
 	 */
-	void updatedMission(Mission mission, Role role)
+	void sendMessage(String message, boolean truncate)
 	{
-		//notify of update
+	    if (message == null) 
+	    {
+	        message = "null";
+	    }
 	    
+	    SmsManager sms = SmsManager.getDefault();
+	    ArrayList<String> msgs = sms.divideMessage(message);
+	    if (truncate) {
+	        sms.sendTextMessage(number, null, msgs.get(0), null, null);
+	    } else {
+	        sms.sendMultipartTextMessage(number, null, msgs, null, null);
+	    }
 	}
 }

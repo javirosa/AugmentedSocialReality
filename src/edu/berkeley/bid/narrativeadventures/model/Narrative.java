@@ -77,4 +77,16 @@ public class Narrative {
 	{
 	    associatedMssns.add(mission);
 	}
+	
+	static String getTitle(String description) 
+    {
+        int end =description.indexOf(":"); 
+        if ( end == -1 || end > 22) {
+            end = 22; //22 22 22 characters for SMS message
+        } 
+        if (end > description.length()) {
+            end = description.length();
+        }
+        return description.substring(0,end);
+    }
 }

@@ -22,7 +22,9 @@ public class Role {
 	String description;
 	List<Mission> missions;
 	List<String> resources;
-	Bitmap roleIcon;
+	byte[] roleIcon;
+	
+	
 	//Image associated with role
 	
 }

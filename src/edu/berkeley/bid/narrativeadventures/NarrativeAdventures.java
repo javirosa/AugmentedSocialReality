@@ -13,9 +13,9 @@ public class NarrativeAdventures extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        //TODO connect to cloud and update narrative list
         //TODO load narratives
         //TODO load agents
-        //TODO connect to cloud and update narrative list and agents
         
     	Button probDefi = (Button)findViewById(R.id.probDefi);
     	Button sociSele = (Button)findViewById(R.id.sociSele);
