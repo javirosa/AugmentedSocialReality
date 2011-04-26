@@ -1,5 +1,6 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
+import java.io.File;
 import java.net.URL;
 
 import com.google.gson.Gson;
@@ -16,15 +17,17 @@ public class NarrativeStorage
                 .setPrettyPrinting();
     }
     
-    Narrative fromJson(String json)
+    public static Narrative fromJson(String json)
     {
         Gson gson = gsonCfg.create();
         return gson.fromJson(json, Narrative.class);
     }
     
-    String toJson(Narrative nar) 
+    public static String toJson(Narrative nar) 
     {    
         Gson gson = gsonCfg.create();
         return gson.toJson(nar);
     }
+    
+    
 }

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
     <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
     <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:name="NAApp" android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".NarrativeAdventures"
                   android:label="@string/app_name">
             <intent-filter>

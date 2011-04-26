@@ -24,6 +24,7 @@ public class Narrative {
 	ArrayList<Role> roles;
 	ArrayList<String> resources;
 	Agent narrator;
+	Problem problem;
 	
 	void assignMission(Mission mission, Agent agent, Role role) 
 	{
