@@ -11,7 +11,7 @@ android:layout_width="200px"
 android:layout_height="200px"
 android:layout_below="@+id/widget162"
 android:layout_toLeftOf="@+id/sociSeleToProb"
->
+android:layout_centerHorizontal="true">
 <ImageButton
 android:id="@+id/sociSeleDot"
 android:layout_width="100px"
@@ -32,7 +32,7 @@ android:layout_alignParentLeft="true"
 </TextView>
 <Button
 android:id="@+id/sociSeleToMain"
-android:layout_width="150px"
+android:layout_width="200px"
 android:layout_height="wrap_content"
 android:text="Back to Main"
 android:layout_alignParentBottom="true"
@@ -94,10 +94,10 @@ android:layout_alignParentLeft="true"
 android:entries="@array/situation">
 </Spinner>
 <Button
-android:id="@+id/sociSeleToProb"
-android:layout_width="150px"
+android:id="@+id/sociSeleToNarr"
+android:layout_width="200px"
 android:layout_height="wrap_content"
-android:text="Back to Problem"
+android:text="Go To Narrative Selection"
 android:layout_alignParentBottom="true"
 android:layout_alignParentRight="true"
 >

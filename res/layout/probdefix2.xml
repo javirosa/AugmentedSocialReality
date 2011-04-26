@@ -14,8 +14,9 @@
     <AutoCompleteTextView android:text="AutoCompleteTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/autoCompleteTextView3"></AutoCompleteTextView>
     <TextView android:text="TextView" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
     <SeekBar android:id="@+id/seekBar1" android:layout_width="fill_parent" android:layout_height="wrap_content"></SeekBar>
-    <LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-    	<Button android:text="Back To Main" android:id="@+id/probDefiToMain" android:layout_height="wrap_content" android:layout_width="240dip" android:layout_weight="1"></Button>
-    	<Button android:text="Go To Social Selection" android:id="@+id/probDefiToSocial" android:layout_width="240dip" android:layout_height="wrap_content" android:layout_weight="1"></Button>
-    </LinearLayout>
+    <RelativeLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/linearLayout1">
+        <Button android:layout_height="wrap_content" android:text="Back to Main" android:layout_width="200dip" android:id="@+id/probDefiToMain" android:layout_alignParentBottom="true"></Button>
+        <Button android:layout_height="wrap_content" android:text="Go To Social Selection" android:layout_width="200dip" android:id="@+id/probDefiToSocial" android:layout_toRightOf="@+id/probDefiToMain" android:layout_alignTop="@+id/probDefiToMain" android:layout_alignBottom="@+id/probDefiToMain"></Button>
+    </RelativeLayout>
+   
 </LinearLayout>

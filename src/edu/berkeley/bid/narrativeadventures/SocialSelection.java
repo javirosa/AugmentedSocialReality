@@ -24,12 +24,14 @@ public class SocialSelection extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.socisele_2);
 
-		Button backToProb = (Button) findViewById(R.id.sociSeleToProb);
+		Button backToProb = (Button) findViewById(R.id.sociSeleToNarr);
 		backToProb.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				Intent i = new Intent(view.getContext(), AProblemInput.class);
-				startActivityForResult(i, 0);
-				finish();
+//				Intent i = new Intent(view.getContext(), AProblemInput.class);
+	//			startActivityForResult(i, 0);
+		//        Intent intent = new Intent();
+          //      setResult(RESULT_OK, intent);
+			//    finish();
 			}
 		});
 
