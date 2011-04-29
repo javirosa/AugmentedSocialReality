@@ -1,17 +1,20 @@
-package edu.berkeley.bid.narrativeadventures.model;
+package edu.berkeley.bid.narrativeadventures.io;
 
 import java.util.ArrayList;
+
+import edu.berkeley.bid.narrativeadventures.model.Agent;
+import edu.berkeley.bid.narrativeadventures.model.AgentSourceI;
 
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.Contacts;
 
-public class ContactListAgents implements AgentSource
+public class ContactListAgentSource implements AgentSourceI
 {
     private ContentResolver cr;
     
-    public ContactListAgents(Activity activity)
+    public ContactListAgentSource(Activity activity)
     {
         cr = activity.getContentResolver();
     }
@@ -50,5 +53,13 @@ public class ContactListAgents implements AgentSource
         //Uri personURI = android.content.ContentUris.withAppendedId(Contacts.People.CONTENT_URI,cur.getLong(_ID) );
         //bmp = People.loadContactPhoto(activity.getApplicationContext(),personURI, R.drawable.icon, null);
         return returnMe;
-    }    
+    }
+    
+    /**
+     * Not implemented
+     */
+    public ArrayList<Agent> getAgents(AgentSourceFilterI asf) {
+        throw new UnsupportedOperationException();
+        //return null;
+    }
 }

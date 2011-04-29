@@ -1,6 +1,7 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 /**
@@ -17,7 +18,10 @@ Rules - Define the modes of interaction between users and rules to avoid causing
  *
  */
 public class Narrative {
-	public String prolog;
+    
+    private String id;
+
+    public String prolog;
 	public String setting;
 	public ArrayList<Mission> associatedMssns;
 	public ArrayList<Agent> agents;
@@ -29,6 +33,7 @@ public class Narrative {
 	
 	public Narrative() 
 	{
+	    id = UUID.randomUUID().toString();
 	    prolog = "";
 	    setting = "";
 	    associatedMssns = new ArrayList<Mission>();
@@ -36,7 +41,8 @@ public class Narrative {
 	    roles = new ArrayList<Role>();
 	    agents = new ArrayList<Agent>();
 	}
-	void assignMission(Mission mission, Agent agent, Role role) 
+	
+	public void assignMission(Mission mission, Agent agent, Role role) 
 	{
 	    //get agent
         Agent ag = agents.get(agents.indexOf(agent));
@@ -44,13 +50,15 @@ public class Narrative {
 	    //TODO Check if already assigned
 	    
 	}
-	void addRole(Role role, Agent agent)
+	
+	public void addRole(Role role, Agent agent)
 	{
 	    //get agent
         Agent ag = agents.get(agents.indexOf(agent));
         ag.addRole(role);
         //TODO Check if already assigned
 	}
+	
 	/**
 	 * Adds comment to the first item which is not null. 
 	 * This may be a narrative if all are null, 
@@ -59,7 +67,7 @@ public class Narrative {
 	 * @param role
 	 * @param mission
 	 */
-	void addResource(String comment, Agent agent, Role role, Mission mission)
+	public void addResource(String comment, Agent agent, Role role, Mission mission)
 	{
 		if (agent == null){
 		    this.resources.add(comment);
@@ -84,12 +92,13 @@ public class Narrative {
 		ro.missions.get(ro.missions.indexOf(mission)).resources.add(comment);
 		
 	}
-	void addMission(Mission mission)
+	
+	public void addMission(Mission mission)
 	{
 	    associatedMssns.add(mission);
 	}
 	
-	static String getTitle(String description) 
+	public static String getTitle(String description) 
     {
         int end =description.indexOf(":"); 
         if ( end == -1 || end > 22) {
@@ -99,5 +108,36 @@ public class Narrative {
             end = description.length();
         }
         return description.substring(0,end);
+    }
+	
+	public boolean equals(Narrative other)
+    {
+	    return this.id.equals(other.id);
+    }
+	
+	/**
+	 * Used to create a narrative based off of this one with the same 
+	 * prolog, role set, and resource set, but no agents.
+	 * @param other
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+    public Narrative cloneNarrative()
+	{
+	    Narrative returnMe = new Narrative();
+	    returnMe.id = UUID.randomUUID().toString();
+	    returnMe.prolog = this.prolog;
+	    for (Role r : this.roles) {
+	        returnMe.roles.add(r.cloneRole());
+	    }
+	    for (Mission m: this.associatedMssns) {
+	        returnMe.associatedMssns.add(m.cloneMission());
+	    }
+	    returnMe.resources = (ArrayList<String>) resources.clone();
+	    return returnMe;
+	}
+	
+	public String getId() {
+        return id;
     }
 }

@@ -1,10 +1,11 @@
-package edu.berkeley.bid.narrativeadventures.model;
+package edu.berkeley.bid.narrativeadventures.io;
 
-import java.io.File;
 import java.net.URL;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import edu.berkeley.bid.narrativeadventures.model.Narrative;
 
 public class NarrativeStorage 
 {

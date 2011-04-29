@@ -9,8 +9,15 @@ import java.util.ArrayList;
  * @author javirosa
  *
  */
-public interface AgentSource 
+public interface AgentSourceI 
 {
+    public interface AgentSourceFilterI {
+        public ArrayList<Agent> ignoredAgents();
+        public void setIgnoreAgent(Agent agent, boolean ignore);
+    }
+    
     public ArrayList<Agent> getAgents();
+    public ArrayList<Agent> getAgents(AgentSourceFilterI agsf);
+	    
 }
 

@@ -1,8 +1,8 @@
 package edu.berkeley.bid.narrativeadventures.model;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.GregorianCalendar;
+import java.util.UUID;
 
-import android.text.format.Time;
 
 /**
  * Represents a possible mission adaptable by an agent through a role
@@ -21,37 +21,54 @@ Has:
 public class Mission
 {
 	
-	enum STATUS 
+	enum Status 
 	{
 		ASSIGNED,UNASSIGNED,COMPLETE,STANDING,RECURRENT
 	};
 	
-	int id; 			//Used to uniquely identify the mission. This should never change!
+	String id; 			//Used to uniquely identify the mission. This should never change!
 	int benefit; 		//Used to quantify the importance of the mission
-	Time assigned; 	
-	Time completed;	
+	GregorianCalendar assigned; 	
+	GregorianCalendar completed;	
+	Status status;
 	String description;
 	ArrayList<String> resources; //Can have urls and plain textw
 	
-	@Override
-	public boolean equals(Object other) 
+	public boolean equals(Mission other) 
 	{
-		return this.id == ((Mission)other).id;
+		return this.id.equals(other.id);
 	}
 	
 	public Mission()
 	{
-	    this(0,0,new Time(), "No Description");
-	    this.assigned.setToNow();
-	    
+	    this(0,new GregorianCalendar(), "No Description");
 	}
 	
-	public Mission(int id, int benefit, Time assigned,String description)
+	public Mission(int benefit, GregorianCalendar gregorianCalendar,String description)
 	{   
-	    this.id = id;
+	    this.id = UUID.randomUUID().toString();
 	    this.benefit = benefit;
-	    this.assigned = assigned;
+	    this.assigned = gregorianCalendar;
 	    this.description = description;
 	    resources = new ArrayList<String>();
+	    this.status = Status.UNASSIGNED;
 	}
+	
+	/**
+     * Used to create a Mission based off of another with the same 
+     * description information.
+     * @param other
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public Mission cloneMission()
+    {
+        Mission returnMe = new Mission();
+        returnMe.id = UUID.randomUUID().toString();
+        returnMe.description = this.description;
+        returnMe.benefit = benefit;
+        returnMe.resources = (ArrayList<String>) resources.clone();
+        returnMe.status = Status.UNASSIGNED;        
+        return returnMe;
+    }
 }

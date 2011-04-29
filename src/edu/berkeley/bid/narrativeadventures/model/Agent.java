@@ -1,8 +1,6 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
 import java.util.ArrayList;
-import android.telephony.SmsManager;
-import android.telephony.SmsMessage;
 /** 
  * An agent fullfills roles and can be the source of missions, completions, and suggestions.
  * In the first iteration an agent will just be a facebook id.
@@ -57,24 +55,9 @@ public class Agent {
 	    return "New role!\n" + Narrative.getTitle(role.description);
 	}
 	
-	/**
-	 * Limit message to SMS sizes for best results.
-	 * @param message 
-	 * @param truncate if true then only the first message in what would be a multi-part message is sent
-	 */
-	void sendMessage(String message, boolean truncate)
+	public String getNumber() 
 	{
-	    if (message == null) 
-	    {
-	        message = "null";
-	    }
-	    
-	    SmsManager sms = SmsManager.getDefault();
-	    ArrayList<String> msgs = sms.divideMessage(message);
-	    if (truncate) {
-	        sms.sendTextMessage(number, null, msgs.get(0), null, null);
-	    } else {
-	        sms.sendMultipartTextMessage(number, null, msgs, null, null);
-	    }
+	    return number;
 	}
+	
 }

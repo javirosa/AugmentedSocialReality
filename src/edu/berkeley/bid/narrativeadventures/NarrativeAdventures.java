@@ -1,6 +1,7 @@
 package edu.berkeley.bid.narrativeadventures;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,10 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import edu.berkeley.bid.narrativeadventures.io.NarrativeStorage;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
-import edu.berkeley.bid.narrativeadventures.model.NarrativeStorage;
 import edu.berkeley.bid.narrativeadventures.model.Problem;
 import edu.berkeley.bid.narrativeadventures.model.Role;
 
@@ -41,12 +42,17 @@ public class NarrativeAdventures extends Activity {
         String json1 = NarrativeStorage.toJson(naapp.runningNarratives.get(0)); 
         Log.d("GSON", json1);
         
+        naapp.possibleNarratives.add(narrative1.cloneNarrative());
+        
         
         try {
             openFileOutput("narrative1",MODE_WORLD_READABLE);
+            naapp.saveNarratives();
             Log.d("GSON",getFilesDir().toString());
         } catch (FileNotFoundException fne){
             Log.d("GSON","fne");
+        } catch (IOException ioe) {
+            Log.d("GSON","ioe");
         }
         
         
