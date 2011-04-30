@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Narrative Adventures!</string>
     <string name="app_name">Narrative Adventure</string>
+    <string name="Narrative">Narrative</string>
 </resources>

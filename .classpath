@@ -8,5 +8,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/VictimToWarrior/lib/google-gson-1.7.1/gson-1.7.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="wheel_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

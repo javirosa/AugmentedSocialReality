@@ -7,12 +7,12 @@
     <TextView android:text="Enter Situation/Problem Name:" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/probDefiNameTag"></TextView>
     <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="e.g. I am stressed before final" android:id="@+id/probDefiNameFill"></EditText>
     <TextView android:layout_width="wrap_content" android:id="@+id/prodDefiDescTag" android:layout_height="wrap_content" android:text="Enter Situation/Problem Description:"></TextView>
-    <AutoCompleteTextView android:id="@+id/autoCompleteTextView1" android:layout_width="fill_parent" android:text="AutoCompleteTextView" android:layout_height="wrap_content"></AutoCompleteTextView>
+    <AutoCompleteTextView android:id="@+id/autoCompleteTextView1" android:layout_width="fill_parent" android:text="e.g. I need to take the test and I am stressed, etc..." android:layout_height="wrap_content" android:layout_weight="0"></AutoCompleteTextView>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select Place:" android:id="@+id/textView2"></TextView>
     <Spinner android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/spinner1"></Spinner>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TextView" android:id="@+id/textView3"></TextView>
     <AutoCompleteTextView android:text="AutoCompleteTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/autoCompleteTextView3"></AutoCompleteTextView>
-    <TextView android:text="TextView" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+    <TextView android:text="Rate Problem:" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
     <SeekBar android:id="@+id/seekBar1" android:layout_width="fill_parent" android:layout_height="wrap_content"></SeekBar>
     <RelativeLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/linearLayout1">
         <Button android:layout_height="wrap_content" android:text="Back to Main" android:layout_width="200dip" android:id="@+id/probDefiToMain" android:layout_alignParentBottom="true"></Button>

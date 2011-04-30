@@ -35,11 +35,11 @@ public class NarrativeSelection extends TabActivity {
     Button ToRole = (Button) findViewById(R.id.narrSeleToRole);
     ToRole.setOnClickListener(new View.OnClickListener() {
         public void onClick(View view) {
-          //  Intent i = new Intent(view.getContext(), NarrativeSelection.class);
-            //startActivityForResult(i, 0);
-//          Intent intent = new Intent();
-//              setResult(RESULT_OK, intent);
-        //    finish();
+            Intent i = new Intent(view.getContext(), RoleAssignment.class);
+            startActivityForResult(i, 0);
+          Intent intent = new Intent();
+              setResult(RESULT_OK, intent);
+            finish();
         }
     });
     

@@ -18,6 +18,8 @@
         <activity android:name="AProblemInput" android:label="AProblemInput"></activity>
         <activity android:name="SocialSelection" android:label="SocialSelection"></activity>
         <activity android:label="NarrativeSelection" android:name="NarrativeSelection"></activity>
+        <activity android:label="RoleAssignment" android:name="RoleAssignment"></activity>
+        <activity android:label="ProgressionManagement" android:name="ProgresssionManagement"></activity>
 
     </application>
     <uses-sdk android:minSdkVersion="4"/>

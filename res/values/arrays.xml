@@ -48,4 +48,23 @@
 <item>Other epic narrative 3</item>
 </array>
 
+<array name="selenarr">
+<item>Test Tickle</item>
+<item>Mountaineers</item>
+</array>
+
+<array name="rolemand">
+<item>Crazy cook</item>
+<item>Goofy God</item>
+<item>Wizard</item>
+<item>Mandatory role x</item>
+<item>Mandatory role y</item>
+<item>Mandatory role z</item>
+</array>
+
+<array name="rolesupp">
+<item>Cyndirela</item>
+<item>Hulk</item>
+</array>
+
 </resources>

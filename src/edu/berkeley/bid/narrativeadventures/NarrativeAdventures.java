@@ -66,7 +66,7 @@ public class NarrativeAdventures extends Activity {
     	Button sociSele = (Button)findViewById(R.id.sociSele);
     	Button narrSele = (Button)findViewById(R.id.narrSele);
     	Button roleAssi = (Button)findViewById(R.id.roleAssi);
-    	Button missMana = (Button)findViewById(R.id.missMana);
+    	Button progMana = (Button)findViewById(R.id.progMana);
     	
     	probDefi.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -88,5 +88,19 @@ public class NarrativeAdventures extends Activity {
     	        startActivityForResult(i, 0);
     	    }
     	});
+        roleAssi.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), RoleAssignment.class);
+                startActivityForResult(i, 0);
+            }
+        });
+
+        progMana.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), ProgresssionManagement.class);
+                startActivityForResult(i, 0);
+            }
+        });
+
     }
 }
