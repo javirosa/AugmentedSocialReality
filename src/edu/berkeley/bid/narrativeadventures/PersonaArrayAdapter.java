@@ -35,7 +35,7 @@ public class PersonaArrayAdapter extends ArrayAdapter<Persona>{
     public View getView(int position, View convertView, ViewGroup parent){
         View row = convertView;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        row = inflater.inflate(R.layout.simplerow, parent, false);
+        row = inflater.inflate(R.layout.oneiconrow, parent, false);
         
         Persona persona = getItem(position);
         label = (TextView) row.findViewById(R.id.label);

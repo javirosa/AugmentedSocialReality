@@ -5,8 +5,10 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +28,8 @@ import android.widget.TextView;
 public class SocialSelection extends Activity {
 //	int posi;
 //	private TextView selection;
-	private static final String[] items={"paul", "peter", "ermenegildo", "kayo", "johnathan", "ron", "javier","pablo","rick"};
+	private static final String[] items={"paul", "peter", "ermenegildo", "kayo", "johnathan", "ron", "javier","pablo","rick",
+	    "paul2", "peter2", "ermenegildo2", "kayo2", "johnathan2", "ron2", "javier2","pablo2","rick2"};
 	private List<Persona> personaListIn = new ArrayList<Persona>();		
     private List<Persona> personaListOut = new ArrayList<Persona>();
     PersonaArrayAdapter adapterIn;
@@ -36,81 +39,54 @@ public class SocialSelection extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.socisele_2);
+		setContentView(R.layout.socisele);
 		
 		//Load generic list of data
 		for (int i=0; i<items.length; i++) {
 	        personaListOut.add(new Persona());
 	        personaListOut.get(i).name=items[i];
-//            personaListIn.get(i).name=items[i];
-
 		}		
  		
 		//Get data for people included (actors)
-		adapterIn = new PersonaArrayAdapter(getApplicationContext(), R.layout.simplerow, personaListIn);		
+		adapterIn = new PersonaArrayAdapter(getApplicationContext(), R.layout.oneiconrow, personaListIn);		
 		ListView lvIn = (ListView) this.findViewById(R.id.sociSeleIn);
 		lvIn.setAdapter(adapterIn);		
 
 		//Get data for people excluded (not acting)
-        adapterOut = new PersonaArrayAdapter(getApplicationContext(), R.layout.simplerow, personaListOut);
+        adapterOut = new PersonaArrayAdapter(getApplicationContext(), R.layout.oneiconrow, personaListOut);
         ListView lvOut = (ListView) this.findViewById(R.id.sociSeleOut);        
         lvOut.setAdapter(adapterOut);
 
-        //Move from included to non included	
-		lvIn.setOnItemLongClickListener(new OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        //Move from actors (included people) to not acting (non included people)
+		lvIn.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Persona personaSelected = (Persona) parent.getItemAtPosition(position);
-                adapterOut.add(personaSelected);
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(300);
+                adapterOut.insert(personaSelected, 0);
+//                adapterOut.add(personaSelected);
                 adapterIn.remove(personaSelected);
                 adapterIn.notifyDataSetChanged();
                 adapterOut.notifyDataSetChanged();
+                v.cancel();
               //  moving(personaSelected); //Dialogue to confirm move
-                return true;
             }
 		});
-		// Move from not including to included
-	   
-		lvOut.setOnItemLongClickListener(new OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+		
+		// Move from actors (not included people) to not acting (included people)
+		lvOut.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Persona personaSelected = (Persona) parent.getItemAtPosition(position);
              //   moving(personaSelected); //Dialogue to confirm move
-                adapterIn.add(personaSelected);
+                adapterIn.insert(personaSelected, 0);
+   //             adapterIn.add(personaSelected);
                 adapterOut.remove(personaSelected);
                 adapterIn.notifyDataSetChanged();
                 adapterOut.notifyDataSetChanged();
-                //                personaListIn.add(personaSelected);
-  //              personaListOut.remove(personaSelected);
-    //            personaListIn.noti
-            //    view.invalidate();
-                return true;
+
             }
         });
-    //  adapterIn.notifyDataSetChanged();
-//		lvIn.invalidate();
-		
- //      lvIn.setAdapter(adapterIn);     
-   //     lvOut.setAdapter(adapterOut);
 
-		
-
-        
-/* THIS IS THE ONCLICK		
-		listin.setOnItemClickListener(new OnItemClickListener() {
-		   int oldPosi;
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-				// TODO Auto-generated method stub
-			    TextView comment = (TextView) findViewById(R.id.sociSeleNarrTitl);
-				comment.setText("COMENTARIO DEL ITEM: " + position);
-				posi=position;
-				view.setBackgroundColor(0xfff00000); 
-				oldPosi=position;
-			//	view.performLongClick();
-			}
-		});
-		
-*/
 /*
         //THIS IS THE LISTVIEW DRAG DROP		
 		lvIn.setOnTouchListener(new View.OnTouchListener() {
