@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 
 public class AProblemInput extends Activity {
@@ -31,7 +32,6 @@ public class AProblemInput extends Activity {
 		
 		listPlaces.setAdapter(adapter1);
 		
-		problemOpen = populate();
 		//Back to Main
 		Button backToMain = (Button) findViewById(R.id.probDefiToMain); //Button to go back to Main
 		backToMain.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +45,11 @@ public class AProblemInput extends Activity {
 		Button goToSociSele = (Button) findViewById(R.id.probDefiToSoci); //Button to navigate to Social Selection
 		goToSociSele.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				Intent i = new Intent(view.getContext(), SocialSelection.class);
+                problemOpen = populate();               
+                TextView textos = (TextView) findViewById(R.id.probDefiNameTag);
+    //            textos.setText(problemOpen.description + " " + problemOpen.people + " " + problemOpen.situation + " " + problemOpen.place + " " + problemOpen.difficulty);
+			    Intent i = new Intent(view.getContext(), SocialSelection.class);
 				startActivityForResult(i, 0);
-				
 				finish();
 			}
 		});
@@ -59,15 +61,15 @@ public class AProblemInput extends Activity {
 	    Problem p = new Problem();
 	    final EditText situation = (EditText) findViewById(R.id.probDefiNameFill);
 	    final EditText description = (EditText) findViewById(R.id.probDefiDescFill);
-//	    final Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);
+	    final Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);
 	    final EditText people = (EditText) findViewById(R.id.probDefiPeopFill);
-	//    final SeekBar difficulty = (SeekBar) findViewById(R.id.probDefiRateFill);
+	    final SeekBar difficulty = (SeekBar) findViewById(R.id.probDefiRateFill);
 	    
 	    p.situation = situation.getText().toString();
 	    p.description = description.getText().toString();
-	  //  p.place = place.getTag().toString();
+	    p.place = (String) place.getAdapter().getItem(place.getLastVisiblePosition());
 	    p.people = people.getText().toString();
-	    //p.difficulty = difficulty.getProgress();
+	    p.difficulty = difficulty.getProgress();
 	    return p;
 	}
 	
