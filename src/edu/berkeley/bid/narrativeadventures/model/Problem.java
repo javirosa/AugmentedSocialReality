@@ -1,7 +1,9 @@
 package edu.berkeley.bid.narrativeadventures.model;
 
+
 public class Problem 
 {
+    public String id;
     public String situation;
     public String description;
     public String place;
@@ -15,5 +17,6 @@ public class Problem
         place = "placefoo";
         hints = "hintsfoo";
         difficulty = 0;
+        
     }
 }
