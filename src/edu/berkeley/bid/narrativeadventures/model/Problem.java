@@ -7,7 +7,7 @@ public class Problem implements Ided
     public String situation;
     public String description;
     public String place;
-    public String hints;
+    public String people;
     public int difficulty;
     public Narrative narrative;
     
@@ -17,7 +17,7 @@ public class Problem implements Ided
         situation = "situationfoo";
         description = "descriptionfoo";
         place = "placefoo";
-        hints = "hintsfoo";
+        people = "peoplefoo";
         difficulty = 0;
         Narrative nar = null;
         

@@ -3,20 +3,31 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
-    <TextView android:text="Situation/Problem Input" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/probDefiHeadTag" android:textSize="10pt" android:textStyle="bold"></TextView>
-    <TextView android:text="Enter Situation/Problem Name:" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/probDefiNameTag"></TextView>
-    <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="e.g. I am stressed before final" android:id="@+id/probDefiNameFill"></EditText>
-    <TextView android:layout_width="wrap_content" android:id="@+id/prodDefiDescTag" android:layout_height="wrap_content" android:text="Enter Situation/Problem Description:"></TextView>
-    <AutoCompleteTextView android:id="@+id/autoCompleteTextView1" android:layout_width="fill_parent" android:text="e.g. I need to take the test and I am stressed, etc..." android:layout_height="wrap_content" android:layout_weight="0"></AutoCompleteTextView>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select Place:" android:id="@+id/textView2"></TextView>
-    <Spinner android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/spinner1"></Spinner>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TextView" android:id="@+id/textView3"></TextView>
-    <AutoCompleteTextView android:text="AutoCompleteTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/autoCompleteTextView3"></AutoCompleteTextView>
-    <TextView android:text="Rate Problem:" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-    <SeekBar android:id="@+id/seekBar1" android:layout_width="fill_parent" android:layout_height="wrap_content"></SeekBar>
-    <RelativeLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/linearLayout1">
-        <Button android:layout_height="wrap_content" android:text="Back to Main" android:layout_width="200dip" android:id="@+id/probDefiToMain" android:layout_alignParentBottom="true"></Button>
-        <Button android:layout_height="wrap_content" android:text="Go To Social Selection" android:layout_width="200dip" android:id="@+id/probDefiToSocial" android:layout_toRightOf="@+id/probDefiToMain" android:layout_alignTop="@+id/probDefiToMain" android:layout_alignBottom="@+id/probDefiToMain"></Button>
-    </RelativeLayout>
+    <TextView android:id="@+id/probDefiHeadTag" android:text="Situation/Problem Input" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="10pt" android:textStyle="bold"></TextView>
+    <TextView android:id="@+id/probDefiNameTag" android:text="Enter Situation/Problem Name:" android:layout_width="wrap_content" android:layout_height="wrap_content" ></TextView>
+    <EditText android:id="@+id/probDefiNameFill" android:text="e.g. I am stressed before final" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:inputType="textShortMessage"></EditText>
+    <TextView android:id="@+id/prodDefiDescTag" android:text="Enter Situation/Problem Description:" android:layout_width="wrap_content"  android:layout_height="wrap_content" ></TextView>
+    <EditText android:id="@+id/probDefiDescFill" android:text="e.g. I need to take the test and I am stressed, etc..." android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0"></EditText>
+    <TextView android:id="@+id/probDefiPlacTag" android:text="Select Place:" android:layout_width="wrap_content" android:layout_height="wrap_content" ></TextView>
+    <Spinner android:id="@+id/probDefiPlacFill" android:layout_width="fill_parent" android:layout_height="wrap_content" ></Spinner>
+    <TextView android:id="@+id/probDefiPeopTag" android:text="Pople Involved:" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+    <EditText android:id="@+id/probDefiPeopFill" android:text="e.g. My brother, my father and my friend..." android:layout_width="fill_parent" android:layout_height="wrap_content" ></EditText>
+	<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="0" android:orientation="vertical">    
+    	<TextView android:id="@+id/probDefiRateTag" android:text="Rate Problem:" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+    	<SeekBar android:id="@+id/probDefiRateFill" android:layout_width="fill_parent" android:layout_height="wrap_content" android:max="100"></SeekBar>
+		<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:orientation="horizontal">
+	    	<TextView android:id="@+id/probDefiRateSimp" android:text="Simple" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1"></TextView>
+			<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="0" ></LinearLayout>
+	    	<TextView android:id="@+id/probDefiRateNorm" android:text="Normal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1"></TextView>
+			<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="0"></LinearLayout>
+    		<TextView android:id="@+id/probDefiRateHard" android:text="Very Hard" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="right"></TextView>		
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></LinearLayout>
+	<LinearLayout android:id="@+id/probDefiButtLayo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0">
+		<Button android:id="@+id/probDefiToSoci" android:layout_width="200px" android:layout_height="wrap_content" android:text="Go To Narrative Selection"></Button>
+		<LinearLayout android:id="@+id/probDefiButtPad" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">	</LinearLayout>		
+		<Button android:id="@+id/probDefiToMain" android:layout_width="200px" android:layout_height="wrap_content" android:text="Back to Main" ></Button>
+	</LinearLayout>
    
 </LinearLayout>
