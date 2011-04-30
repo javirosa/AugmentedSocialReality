@@ -1,15 +1,14 @@
 package edu.berkeley.bid.narrativeadventures;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 
 import android.app.Application;
+import android.util.Log;
 import edu.berkeley.bid.narrativeadventures.io.NarrativeStorage;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
 
@@ -18,51 +17,40 @@ public class NAApp extends Application {
     ArrayList<Narrative> runningNarratives;
     ArrayList<Narrative> possibleNarratives;
     
-    File runningNarsDir;
-    File possibleNarsDir;
-    
     public NAApp()
     {
         super();
         runningNarratives = new ArrayList<Narrative>();
         possibleNarratives = new ArrayList<Narrative>();
-        runningNarsDir = new File(getFilesDir(),"runningNaratives");
-        possibleNarsDir = new File(getFilesDir(),"possibleNaratives");
-        runningNarsDir.mkdirs();
-        possibleNarsDir.mkdirs();
     }
     
     /**
      * 
      * @param nar the narrative to be saved.
-     * @param possible true if the narrative meant to be saved as a prototype.
      * @throws IOException 
      */
-    void saveNarrative(Narrative nar, boolean possible) throws IOException
+    void saveNarrative(Narrative nar, File narLocation) throws IOException
     {
-        File narFile = possibleNarsDir;
-        if (!possible) 
-        {
-            narFile = runningNarsDir;
+        narLocation= new File(narLocation,nar.getId());
+        if ( ! narLocation.createNewFile() ) {
+            Log.d("GSON","file exists: " + narLocation.toString() );
         }
-        
-        narFile = new File(narFile,nar.getId());
-        FileWriter fw = new FileWriter(narFile);
+        FileWriter fw = new FileWriter(narLocation);
         fw.write(NarrativeStorage.toJson(nar));
         fw.close();
     }
     
     /**
-     * 
+     * Stores all current narratives to disk
      * @throws IOException
      */
-    void saveNarratives() throws IOException
+    void saveNarratives(File possibleNarsDir, File runningNarsDir) throws IOException
     {
         for (Narrative nar: possibleNarratives) {
-            saveNarrative(nar, true);
+            saveNarrative(nar, possibleNarsDir);
         }
         for (Narrative nar: runningNarratives) {
-            saveNarrative(nar, false);
+            saveNarrative(nar, runningNarsDir);
         }
     }
     
@@ -71,10 +59,11 @@ public class NAApp extends Application {
      * Intended to be called at application initialization. 
      * @throws IOException 
      */
-    void loadNarratives() throws IOException
+    void loadNarratives(File possibleNarsDir, File runningNarsDir) throws IOException
     {
-        possibleNarratives = new ArrayList<Narrative>();
-        runningNarratives = new ArrayList<Narrative>();
+        possibleNarratives.clear();
+        runningNarratives.clear();
+        
         for (File f : possibleNarsDir.listFiles()) {
             FileReader fr = new FileReader(f);
             CharBuffer cb = CharBuffer.allocate((int)f.length());

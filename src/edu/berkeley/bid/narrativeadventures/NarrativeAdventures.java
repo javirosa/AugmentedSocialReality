@@ -1,5 +1,6 @@
 package edu.berkeley.bid.narrativeadventures;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import edu.berkeley.bid.narrativeadventures.io.NarrativeStorage;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
@@ -24,37 +26,52 @@ public class NarrativeAdventures extends Activity {
         setContentView(R.layout.main);
 
         //Used to store global state of application. e.g. narrative information
+        //all activities can call getApplication
         NAApp naapp = (NAApp)getApplication();
+        File possibleNarsDir = new File(getFilesDir(),"possibleNarratives");
+        File runningNarsDir = new File(getFilesDir(),"runningNarratives");
+        possibleNarsDir.mkdirs();
+        runningNarsDir.mkdirs();
         
+        //Generate a simple narrative with one agent,mission, and role
         Narrative narrative1 = new Narrative();
         Agent narrator = new Agent();
         narrative1.agents.add(narrator);
         narrative1.agents.get(0).name = "foobar";
-        narrative1.agents.get(0).roles.add(new Role());
-        narrative1.agents.get(0).roles.get(0).description = "descr";
-        narrative1.agents.get(0).roles.get(0).missions.add(new Mission());
+        Role role = new Role();
+        role.description = "descr";
+        role.missions.add(new Mission());
+        narrative1.agents.get(0).roles.add(role);
+        narrative1.roles.add(role.cloneRole());
         narrative1.problem = new Problem();
         narrative1.narrator = narrator;
         narrative1.participant = new Agent();
         
-        
         naapp.runningNarratives.add(narrative1);
+        naapp.possibleNarratives.add(narrative1.cloneNarrative());
+        
+        try {
+            naapp.saveNarratives(possibleNarsDir,runningNarsDir);
+        } catch (IOException e) {
+            Log.d("GSON",e.toString());
+            Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
+            //this.finish();
+        }
+        
         String json1 = NarrativeStorage.toJson(naapp.runningNarratives.get(0)); 
         Log.d("GSON", json1);
         
         naapp.possibleNarratives.add(narrative1.cloneNarrative());
         
-        
         try {
             openFileOutput("narrative1",MODE_WORLD_READABLE);
-            naapp.saveNarratives();
-            Log.d("GSON",getFilesDir().toString());
-        } catch (FileNotFoundException fne){
+            naapp.saveNarratives(possibleNarsDir,runningNarsDir);
+            //Log.d("GSON",getFilesDir().toString());
+        } catch (FileNotFoundException fne) {
             Log.d("GSON","fne");
         } catch (IOException ioe) {
             Log.d("GSON","ioe");
         }
-        
         
         //TODO load narratives from disk
         
