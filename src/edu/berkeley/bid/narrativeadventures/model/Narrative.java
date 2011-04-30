@@ -17,7 +17,8 @@ Rules - Define the modes of interaction between users and rules to avoid causing
  * @author javirosa
  *
  */
-public class Narrative {
+public class Narrative implements Ided 
+{
     
     private String id;
 
@@ -29,7 +30,6 @@ public class Narrative {
 	public ArrayList<String> resources;
 	public Agent narrator;
 	public Agent participant;
-	public Problem problem;
 	
 	public Narrative() 
 	{

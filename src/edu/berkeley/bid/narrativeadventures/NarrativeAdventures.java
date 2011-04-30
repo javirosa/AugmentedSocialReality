@@ -27,11 +27,17 @@ public class NarrativeAdventures extends Activity {
 
         //Used to store global state of application. e.g. narrative information
         //all activities can call getApplication
+        //for some odd reason getFilesDir 
+        //  returns null if this is done at the application level
         NAApp naapp = (NAApp)getApplication();
         File possibleNarsDir = new File(getFilesDir(),"possibleNarratives");
-        File runningNarsDir = new File(getFilesDir(),"runningNarratives");
+        File runningProbsDir = new File(getFilesDir(),"runningProblems");
         possibleNarsDir.mkdirs();
-        runningNarsDir.mkdirs();
+        runningProbsDir.mkdirs();
+        
+        //TESTING SAVE/LOAD
+        //Build a problem
+        Problem problem = new Problem();
         
         //Generate a simple narrative with one agent,mission, and role
         Narrative narrative1 = new Narrative();
@@ -43,42 +49,26 @@ public class NarrativeAdventures extends Activity {
         role.missions.add(new Mission());
         narrative1.agents.get(0).roles.add(role);
         narrative1.roles.add(role.cloneRole());
-        narrative1.problem = new Problem();
         narrative1.narrator = narrator;
         narrative1.participant = new Agent();
         
-        naapp.runningNarratives.add(narrative1);
+        problem.narrative = narrative1;
+        naapp.runningProblems.add(problem);
         naapp.possibleNarratives.add(narrative1.cloneNarrative());
         
-        try {
-            naapp.saveNarratives(possibleNarsDir,runningNarsDir);
-        } catch (IOException e) {
-            Log.d("GSON",e.toString());
+        if (!naapp.saveState(possibleNarsDir,runningProbsDir)) {
+            Log.d("GSON", "save unsuccessful");
             Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
-            //this.finish();
         }
         
-        String json1 = NarrativeStorage.toJson(naapp.runningNarratives.get(0)); 
-        Log.d("GSON", json1);
-        
-        naapp.possibleNarratives.add(narrative1.cloneNarrative());
-        
-        try {
-            openFileOutput("narrative1",MODE_WORLD_READABLE);
-            naapp.saveNarratives(possibleNarsDir,runningNarsDir);
-            //Log.d("GSON",getFilesDir().toString());
-        } catch (FileNotFoundException fne) {
-            Log.d("GSON","fne");
-        } catch (IOException ioe) {
-            Log.d("GSON","ioe");
+        if (! naapp.loadState(possibleNarsDir, runningProbsDir) ) {
+            Log.d("GSON", "load unsuccessful");
         }
         
-        //TODO load narratives from disk
+        // END TESTING SAVE/LOAD
         
         //TODO connect to cloud and update narrative list
 
-        //TODO load agents
-        
     	Button probDefi = (Button)findViewById(R.id.probDefi);
     	Button sociSele = (Button)findViewById(R.id.sociSele);
     	Button narrSele = (Button)findViewById(R.id.narrSele);

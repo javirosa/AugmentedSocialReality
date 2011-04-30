@@ -2,79 +2,68 @@ package edu.berkeley.bid.narrativeadventures;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 
 import android.app.Application;
-import android.util.Log;
 import edu.berkeley.bid.narrativeadventures.io.NarrativeStorage;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
+import edu.berkeley.bid.narrativeadventures.model.Problem;
 
-public class NAApp extends Application {
-    
-    ArrayList<Narrative> runningNarratives;
+public class NAApp extends Application 
+{
+
+    ArrayList<Problem> runningProblems;
     ArrayList<Narrative> possibleNarratives;
-    
-    public NAApp()
+
+    public NAApp() 
     {
         super();
-        runningNarratives = new ArrayList<Narrative>();
+        runningProblems = new ArrayList<Problem>();
         possibleNarratives = new ArrayList<Narrative>();
     }
-    
-    /**
-     * 
-     * @param nar the narrative to be saved.
-     * @throws IOException 
-     */
-    void saveNarrative(Narrative nar, File narLocation) throws IOException
-    {
-        narLocation= new File(narLocation,nar.getId());
-        if ( ! narLocation.createNewFile() ) {
-            Log.d("GSON","file exists: " + narLocation.toString() );
-        }
-        FileWriter fw = new FileWriter(narLocation);
-        fw.write(NarrativeStorage.toJson(nar));
-        fw.close();
-    }
-    
+
     /**
      * Stores all current narratives to disk
-     * @throws IOException
      */
-    void saveNarratives(File possibleNarsDir, File runningNarsDir) throws IOException
+    boolean saveState(File possibleNarsDir, File runningProbsDir) 
     {
-        for (Narrative nar: possibleNarratives) {
-            saveNarrative(nar, possibleNarsDir);
+        boolean corruption = false;
+        for (Narrative nar : possibleNarratives) {
+            if (!NarrativeStorage.saveNarrative(nar, possibleNarsDir))
+                corruption = true;
         }
-        for (Narrative nar: runningNarratives) {
-            saveNarrative(nar, runningNarsDir);
+        for (Problem problem : runningProblems) {
+            if (!NarrativeStorage.saveProblem(problem, runningProbsDir))
+                corruption = true;
         }
+        return !corruption;
     }
-    
+
     /**
-     * Overwrites current set of stored narratives from file.
-     * Intended to be called at application initialization. 
-     * @throws IOException 
+     * Overwrites current set of stored narratives from file. Intended to be
+     * called at application initialization.
      */
-    void loadNarratives(File possibleNarsDir, File runningNarsDir) throws IOException
+    boolean loadState(File possibleNarsDir, File runningProbsDir) 
     {
+        boolean corruption = false;
         possibleNarratives.clear();
-        runningNarratives.clear();
-        
+        runningProblems.clear();
         for (File f : possibleNarsDir.listFiles()) {
-            FileReader fr = new FileReader(f);
-            CharBuffer cb = CharBuffer.allocate((int)f.length());
-            fr.read(cb);
-            possibleNarratives.add( NarrativeStorage.fromJson(cb.toString()) );
+            Narrative nar = NarrativeStorage.loadNarrative(f);
+            if (nar == null)
+                corruption = true;
+            else 
+                possibleNarratives.add(nar);
         }
-        for (File f : runningNarsDir.listFiles()) {
-            FileReader fr = new FileReader(f);
-            CharBuffer cb = CharBuffer.allocate((int)f.length());
-            fr.read(cb);
-            runningNarratives.add( NarrativeStorage.fromJson(cb.toString()) );
+        for (File f : runningProbsDir.listFiles()) {
+            Problem prob = NarrativeStorage.loadProblem(f);
+            if (prob == null) 
+                corruption = true;
+            else
+                runningProblems.add(prob);
         }
+        return !corruption;
     }
 }
