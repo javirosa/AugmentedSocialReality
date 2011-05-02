@@ -15,7 +15,6 @@ public class Agent {
 	//Mission update status {Complete,Rewarded,Updated} 
 	//Get identification information
 	//commentMission/Role
-	//Add Mission added listener?
 	
 	public String number; 
 	public String name;
@@ -32,16 +31,20 @@ public class Agent {
 	    name = "";
 	    strengths = new ArrayList<String>();
 	    comments = new ArrayList<String>();
-	    photo = null;
+	    photo = new byte[0];
 	    roles = new ArrayList<Role>();
 	    trust = 0;
 	    responsiveness = 0;
 	}
+	/*
 	@Override
 	public boolean equals(Object other)
 	{
-	    return this.number.equals(((Agent)other).number);
-	}
+	    if (other instanceof Agent && other != null) {
+	        return this.number.equals(((Agent)other).number);
+	    }
+	    return false;
+	}*/
 	
 	String addMission(Mission mission, Role role) 
 	{
@@ -59,5 +62,4 @@ public class Agent {
 	{
 	    return number;
 	}
-	
 }

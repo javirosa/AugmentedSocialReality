@@ -15,9 +15,7 @@ public interface AgentSourceI
         public ArrayList<Agent> ignoredAgents();
         public void setIgnoreAgent(Agent agent, boolean ignore);
     }
-    
     public ArrayList<Agent> getAgents();
     public ArrayList<Agent> getAgents(AgentSourceFilterI agsf);
-	    
 }
 

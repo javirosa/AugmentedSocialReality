@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+@Deprecated
 public class PersonaArrayAdapter extends ArrayAdapter<Persona>{
     private static final String tag = "PersonaArrayAdapter";
     private static final String ASSETS_DIR = "images/";

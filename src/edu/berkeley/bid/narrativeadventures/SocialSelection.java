@@ -3,6 +3,9 @@ package edu.berkeley.bid.narrativeadventures;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
+import edu.berkeley.bid.narrativeadventures.model.Agent;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -30,10 +33,10 @@ public class SocialSelection extends Activity {
 //	private TextView selection;
 	private static final String[] items={"paul", "peter", "ermenegildo", "kayo", "johnathan", "ron", "javier","pablo","rick",
 	    "paul2", "peter2", "ermenegildo2", "kayo2", "johnathan2", "ron2", "javier2","pablo2","rick2"};
-	private List<Persona> personaListIn = new ArrayList<Persona>();		
-    private List<Persona> personaListOut = new ArrayList<Persona>();
-    PersonaArrayAdapter adapterIn;
-    PersonaArrayAdapter adapterOut;
+	private List<Agent> personaListIn = new ArrayList<Agent>();		
+    private List<Agent> personaListOut = new ArrayList<Agent>();
+    AgentArrayAdapter adapterIn;
+    AgentArrayAdapter adapterOut;
     
 	/** Called when the activity is first created. */
 	@Override
@@ -41,26 +44,34 @@ public class SocialSelection extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.socisele);
 		
-		//Load generic list of data
+		
+        //Load agents from contact list
+        ContactListAgentSource agentsource = new ContactListAgentSource(this);
+        personaListOut = agentsource.getAgents();
+        for (Agent agent: personaListOut) {
+            Log.d("AgentSource",agent.name);
+        }
+		
+		/*Load generic list of data
 		for (int i=0; i<items.length; i++) {
-	        personaListOut.add(new Persona());
-	        personaListOut.get(i).name=items[i];
-		}		
+	        personaListOut.add(new Persona(items[i]));
+		}*/
  		
 		//Get data for people included (actors)
-		adapterIn = new PersonaArrayAdapter(getApplicationContext(), R.layout.oneiconrow, personaListIn);		
+		adapterIn = new AgentArrayAdapter(getApplicationContext(), R.layout.oneiconrow, personaListIn);		
 		ListView lvIn = (ListView) this.findViewById(R.id.sociSeleIn);
 		lvIn.setAdapter(adapterIn);		
 
 		//Get data for people excluded (not acting)
-        adapterOut = new PersonaArrayAdapter(getApplicationContext(), R.layout.oneiconrow, personaListOut);
+        adapterOut = new AgentArrayAdapter(getApplicationContext(), R.layout.oneiconrow, personaListOut);
         ListView lvOut = (ListView) this.findViewById(R.id.sociSeleOut);        
         lvOut.setAdapter(adapterOut);
 
         //Move from actors (included people) to not acting (non included people)
 		lvIn.setOnItemClickListener(new OnItemClickListener() {
+		    @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Persona personaSelected = (Persona) parent.getItemAtPosition(position);
+                Agent personaSelected = (Agent) parent.getItemAtPosition(position);
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(300);
                 adapterOut.insert(personaSelected, 0);
@@ -76,14 +87,13 @@ public class SocialSelection extends Activity {
 		// Move from actors (not included people) to not acting (included people)
 		lvOut.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Persona personaSelected = (Persona) parent.getItemAtPosition(position);
+                Agent personaSelected = (Agent) parent.getItemAtPosition(position);
              //   moving(personaSelected); //Dialogue to confirm move
                 adapterIn.insert(personaSelected, 0);
    //             adapterIn.add(personaSelected);
                 adapterOut.remove(personaSelected);
                 adapterIn.notifyDataSetChanged();
                 adapterOut.notifyDataSetChanged();
-
             }
         });
 

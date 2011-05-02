@@ -1,8 +1,7 @@
 package edu.berkeley.bid.narrativeadventures;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import edu.berkeley.bid.narrativeadventures.io.NarrativeStorage;
+import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
@@ -56,14 +54,15 @@ public class NarrativeAdventures extends Activity {
         naapp.runningProblems.add(problem);
         naapp.possibleNarratives.add(narrative1.cloneNarrative());
         
-        if (!naapp.saveState(possibleNarsDir,runningProbsDir)) {
-            Log.d("GSON", "save unsuccessful");
-            Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
-        }
+        //if (!naapp.saveState(possibleNarsDir,runningProbsDir)) {
+        //    Log.d("GSON", "save unsuccessful");
+        //    Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
+        //}
         
         if (! naapp.loadState(possibleNarsDir, runningProbsDir) ) {
             Log.d("GSON", "load unsuccessful");
         }
+        
         
         // END TESTING SAVE/LOAD
         

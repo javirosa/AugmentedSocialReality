@@ -24,7 +24,7 @@ public class AProblemInput extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.probdefix2);
 		
-		ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item);
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
 		Spinner listPlaces = (Spinner) findViewById(R.id.probDefiPlacFill);
 		for (int i=0; i<places.length; i++) {
             adapter1.add(places[i]);
