@@ -20,7 +20,6 @@ public class Problem implements Ided
         people = "peoplefoo";
         difficulty = 0;
         Narrative nar = null;
-        
     }
     
     public String getId()

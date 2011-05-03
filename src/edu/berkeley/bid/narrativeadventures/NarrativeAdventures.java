@@ -37,7 +37,7 @@ public class NarrativeAdventures extends Activity {
         //Build a problem
         Problem problem = new Problem();
         
-        //Generate a simple narrative with one agent,mission, and role
+        /*Generate a simple narrative with one agent,mission, and role
         Narrative narrative1 = new Narrative();
         Agent narrator = new Agent();
         narrative1.agents.add(narrator);
@@ -53,15 +53,15 @@ public class NarrativeAdventures extends Activity {
         problem.narrative = narrative1;
         naapp.runningProblems.add(problem);
         naapp.possibleNarratives.add(narrative1.cloneNarrative());
-        
+        */
         //if (!naapp.saveState(possibleNarsDir,runningProbsDir)) {
         //    Log.d("GSON", "save unsuccessful");
         //    Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
         //}
         
-        if (! naapp.loadState(possibleNarsDir, runningProbsDir) ) {
-            Log.d("GSON", "load unsuccessful");
-        }
+        //if (! naapp.loadState(possibleNarsDir, runningProbsDir) ) {
+        //    Log.d("GSON", "load unsuccessful");
+        //}
         
         
         // END TESTING SAVE/LOAD

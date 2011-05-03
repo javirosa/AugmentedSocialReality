@@ -31,6 +31,7 @@ public class Mission
 	GregorianCalendar assigned; 	
 	GregorianCalendar completed;	
 	Status status;
+	//String title;
 	String description;
 	ArrayList<String> resources; //Can have urls and plain textw
 	
@@ -41,14 +42,15 @@ public class Mission
 	
 	public Mission()
 	{
-	    this(0,new GregorianCalendar(), "No Description");
+	    this(0,new GregorianCalendar(), "No Title","No Description");
 	}
 	
-	public Mission(int benefit, GregorianCalendar gregorianCalendar,String description)
+	public Mission(int benefit, GregorianCalendar gregorianCalendar,String title, String description)
 	{   
 	    this.id = UUID.randomUUID().toString();
 	    this.benefit = benefit;
 	    this.assigned = gregorianCalendar;
+	    //this.title = title;
 	    this.description = description;
 	    resources = new ArrayList<String>();
 	    this.status = Status.UNASSIGNED;
@@ -65,10 +67,16 @@ public class Mission
     {
         Mission returnMe = new Mission();
         returnMe.id = UUID.randomUUID().toString();
-        returnMe.description = this.description;
         returnMe.benefit = benefit;
+        //returnMe.title = this.title;
+        returnMe.description = this.description;
         returnMe.resources = (ArrayList<String>) resources.clone();
-        returnMe.status = Status.UNASSIGNED;        
         return returnMe;
+    }
+    
+    public void finishMission() 
+    {
+        this.completed = new GregorianCalendar();
+        this.status = Status.COMPLETE;
     }
 }

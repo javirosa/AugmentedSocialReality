@@ -61,22 +61,12 @@ public class SocialSelection extends Activity {
        return orientation;
     }
     
-    /*
-    public void filler(){
-        for (int i=0; i<items.length; i++) {
-            personaListOut.add(new Agent());
-            personaListOut.get(i).name=items[i];
-        }       
-    }
-     TO BE KILLED */
 	/** Called when the activity is first created and also when ROTATED!!. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mRuntimeOrientation = this.getScreenOrientation();
 		setContentView(R.layout.socisele);
-		
-	//	filler();
 		
         //Load agents from contact list
         ContactListAgentSource agentsource = new ContactListAgentSource(this);
@@ -267,7 +257,7 @@ public class SocialSelection extends Activity {
    //     selection.setText("");
     }
 
-    public void moving(Persona personMoving){
+    public void moving(Agent personMoving){
         //Dialogue to confirm move
               AlertDialog.Builder adb=new AlertDialog.Builder(SocialSelection.this);
               adb.setTitle("Confirm you want to move this person");

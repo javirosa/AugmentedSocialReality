@@ -4,34 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import edu.berkeley.bid.narrativeadventures.model.Agent;
+import edu.berkeley.bid.narrativeadventures.model.Role;
 
-public class ProgressionArrayAdapter extends ArrayAdapter<Persona>{
+public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
     private static final String tag = "ProgessionArrayAdapter";
     private static final String ASSETS_DIR = "images/";
     private Context context;
     private ImageView icon1;
     private ImageView icon2;
     private TextView label;
-    private List<Persona> personas = new ArrayList<Persona>();
+    private List<Agent> agents = new ArrayList<Agent>();
     
-    public ProgressionArrayAdapter(Context context, int textViewResourceId, List<Persona> objects) {
+    public ProgressionArrayAdapter(Context context, int textViewResourceId, List<Agent> objects) {
         super(context, textViewResourceId, objects);
         this.context = context;
-        this.personas = objects;
+        this.agents = objects;
     }
     
     public int getCount(){
-        return this.personas.size();
+        return this.agents.size();
     }
     
-    public Persona getItem(int index) {
-        return this.personas.get(index);
+    public Agent getItem(int index) {
+        return this.agents.get(index);
     }
     
     public View getView(int position, View convertView, ViewGroup parent){
@@ -39,19 +42,35 @@ public class ProgressionArrayAdapter extends ArrayAdapter<Persona>{
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         row = inflater.inflate(R.layout.twoicononrow, parent, false);
         
-        Persona persona = getItem(position);
         label = (TextView) row.findViewById(R.id.label);
         icon1 = (ImageView) row.findViewById(R.id.icon1);
         icon2 = (ImageView) row.findViewById(R.id.icon2);
-        label.setText(persona.name);
-
-        if (persona.name.length() > 4) {
-            icon1.setImageResource(R.drawable.man);
-            icon2.setImageResource(R.drawable.icon); 
+        
+        //Get data from Agent
+        Agent persona = getItem(position);
+        String name = persona.name;
+        byte[] agentPhoto = persona.photo;
+        Bitmap agentBmp = android.graphics.BitmapFactory.decodeByteArray(agentPhoto, 0, agentPhoto.length);
+        
+        //get data from Role
+        byte[] roleIcon = new byte[] {};
+        if (persona.roles.size() > 0) {
+            roleIcon = persona.roles.get(0).roleIcon;
         }
-        else
-            icon1.setImageResource(R.drawable.man2);       
-            icon2.setImageResource(R.drawable.icon); 
+        Bitmap roleBmp = android.graphics.BitmapFactory.decodeByteArray(roleIcon, 0, roleIcon.length);
+        
+        //Set elements in item view
+        label.setText(name);
+        if (agentBmp != null) {
+            icon1.setImageBitmap(agentBmp);
+        } else {
+            icon1.setImageResource(R.drawable.icon);
+        }
+        if (roleBmp != null) {
+            icon2.setImageBitmap(roleBmp);
+        } else {
+            icon2.setImageResource(R.drawable.icon);
+        }
         return row;
     }
 }

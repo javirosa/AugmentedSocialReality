@@ -10,7 +10,8 @@ import java.util.ArrayList;
  * @author javirosa
  *
  */
-public class Agent {
+public class Agent implements Comparable<Agent> 
+{
 	//Assign mission
 	//Mission update status {Complete,Rewarded,Updated} 
 	//Get identification information
@@ -61,5 +62,10 @@ public class Agent {
 	public String getNumber() 
 	{
 	    return number;
+	}
+	
+	public int compareTo(Agent other)
+	{
+	    return this.name.compareTo(other.name);
 	}
 }

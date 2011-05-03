@@ -10,11 +10,7 @@ Has:
     Graphic (either icon overlay or some image which serves to reinforce the role)
     Associated account/owner
 
-Missions
-
-Agent
  * @author javirosa
- *
  */
 public class Role {
 	
@@ -31,7 +27,7 @@ public class Role {
 	    name = "";
 	    missions = new ArrayList<Mission>();
 	    resources = new ArrayList<String>();
-	    roleIcon = null;
+	    roleIcon = new byte[]{};
 	}
 	
 	/**
@@ -61,5 +57,4 @@ public class Role {
     {
         return name;
     }
-	
 }

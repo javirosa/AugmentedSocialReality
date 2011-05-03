@@ -14,6 +14,7 @@ import edu.berkeley.bid.narrativeadventures.model.Problem;
 public class NAApp extends Application 
 {
 
+    Problem currentProblem = null;
     ArrayList<Problem> runningProblems;
     ArrayList<Narrative> possibleNarratives;
 
@@ -57,6 +58,7 @@ public class NAApp extends Application
             else 
                 possibleNarratives.add(nar);
         }
+        
         for (File f : runningProbsDir.listFiles()) {
             Problem prob = NarrativeStorage.loadProblem(f);
             if (prob == null) 
@@ -64,6 +66,14 @@ public class NAApp extends Application
             else
                 runningProblems.add(prob);
         }
+        
+        if (runningProblems.size() == 0) {
+            //runningProblems.add(new Problem());
+            currentProblem = null;
+        } else {
+            currentProblem = runningProblems.get(0);
+        }
+        
         return !corruption;
     }
 }

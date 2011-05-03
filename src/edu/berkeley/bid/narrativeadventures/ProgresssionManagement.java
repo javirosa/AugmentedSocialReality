@@ -11,12 +11,12 @@ import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
+import edu.berkeley.bid.narrativeadventures.model.Agent;
 
 public class ProgresssionManagement extends Activity {
     ProgressionArrayAdapter adapter;
-    private static final String[] items={"paul", "peter", "ermenegildo", "kayo", "johnathan", "ron", "javier","pablo","rick",
-        "paul2", "peter2", "ermenegildo2", "kayo2", "johnathan2", "ron2", "javier2","pablo2","rick2"};
-    private List<Persona> personaList = new ArrayList<Persona>();
+    private List<Agent> agentList;
     
     private int mRuntimeOrientation;
     private boolean mDisableScreenRotation;
@@ -41,20 +41,22 @@ public class ProgresssionManagement extends Activity {
        return orientation;
     }
     
-    public void filler(){
-        for (int i=0; i<items.length; i++) {
-            personaList.add(new Persona());
-            personaList.get(i).name=items[i];
-        }       
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //Get the list of agents in the current narrative
+        NAApp application = (NAApp)getApplication();
+        if (application.currentProblem == null) {
+            //TODO Popup narrative creation box or should we never get here?
+            agentList = new ContactListAgentSource(this).getAgents();
+        } else {
+            agentList = application.currentProblem.narrative.agents; 
+        }
+        
         super.onCreate(savedInstanceState);
         mRuntimeOrientation = this.getScreenOrientation();
         setContentView(R.layout.progmana);
         
-        filler();
-        adapter = new ProgressionArrayAdapter(getApplicationContext(), R.layout.twoicononrow, personaList);       
+        adapter = new ProgressionArrayAdapter(getApplicationContext(), R.layout.twoicononrow, agentList);       
         ListView lv = (ListView) this.findViewById(R.id.progManaPers);
         lv.setAdapter(adapter);     
         
@@ -75,7 +77,7 @@ public class ProgresssionManagement extends Activity {
           super.onConfigurationChanged(newConfig);
           this.setRequestedOrientation(mRuntimeOrientation);
        } else {
-         //  filler();
+          
           mRuntimeOrientation = this.getScreenOrientation();
           super.onConfigurationChanged(newConfig);
        }
