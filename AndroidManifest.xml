@@ -18,11 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="AProblemInput" android:label="AProblemInput"></activity>
-        <activity android:name="SocialSelection" android:label="SocialSelection"></activity>
-        <activity android:label="NarrativeSelection" android:name="NarrativeSelection"></activity>
-        <activity android:label="RoleAssignment" android:name="RoleAssignment"></activity>
-        <activity android:label="ProgressionManagement" android:name="ProgresssionManagement"></activity>
+        <activity android:name="AProblemInput" android:label="AProblemInput" android:screenOrientation="portrait"></activity>
+        <activity android:name="SocialSelection" android:label="SocialSelection" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:label="NarrativeSelection" android:name="NarrativeSelection" android:screenOrientation="portrait"></activity>
+        <activity android:label="RoleAssignment" android:name="RoleAssignment" android:screenOrientation="portrait"></activity>
+        <activity android:label="ProgressionManagement" android:name="ProgresssionManagement" android:screenOrientation="portrait"></activity>
 
     </application>
     <uses-sdk android:minSdkVersion="4"/>

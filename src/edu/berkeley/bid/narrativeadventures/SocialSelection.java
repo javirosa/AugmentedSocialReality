@@ -10,9 +10,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsoluteLayout;
@@ -31,19 +33,50 @@ import android.widget.TextView;
 public class SocialSelection extends Activity {
 //	int posi;
 //	private TextView selection;
-	private static final String[] items={"paul", "peter", "ermenegildo", "kayo", "johnathan", "ron", "javier","pablo","rick",
-	    "paul2", "peter2", "ermenegildo2", "kayo2", "johnathan2", "ron2", "javier2","pablo2","rick2"};
 	private List<Agent> personaListIn = new ArrayList<Agent>();		
     private List<Agent> personaListOut = new ArrayList<Agent>();
     AgentArrayAdapter adapterIn;
     AgentArrayAdapter adapterOut;
     
-	/** Called when the activity is first created. */
+    private int mRuntimeOrientation;
+    private boolean mDisableScreenRotation;
+
+    protected int getScreenOrientation() {
+       Display display = getWindowManager().getDefaultDisplay();
+       int orientation = display.getOrientation();
+
+       if (orientation == Configuration.ORIENTATION_UNDEFINED) {
+          orientation = getResources().getConfiguration().orientation;
+
+          if (orientation == Configuration.ORIENTATION_UNDEFINED) {
+             if (display.getWidth() == display.getHeight())
+                orientation = Configuration.ORIENTATION_SQUARE;
+             else if(display.getWidth() < display.getHeight())
+
+                orientation = Configuration.ORIENTATION_PORTRAIT;
+             else
+                orientation = Configuration.ORIENTATION_LANDSCAPE;
+             }
+          }
+       return orientation;
+    }
+    
+    /*
+    public void filler(){
+        for (int i=0; i<items.length; i++) {
+            personaListOut.add(new Agent());
+            personaListOut.get(i).name=items[i];
+        }       
+    }
+     TO BE KILLED */
+	/** Called when the activity is first created and also when ROTATED!!. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mRuntimeOrientation = this.getScreenOrientation();
 		setContentView(R.layout.socisele);
 		
+	//	filler();
 		
         //Load agents from contact list
         ContactListAgentSource agentsource = new ContactListAgentSource(this);
@@ -53,7 +86,7 @@ public class SocialSelection extends Activity {
         }
 		
 		/*Load generic list of data
-		for (int i=0; i<items.length; i++) {
+	/*	for (int i=0; i<items.length; i++) {
 	        personaListOut.add(new Persona(items[i]));
 		}*/
  		
@@ -88,7 +121,9 @@ public class SocialSelection extends Activity {
 		lvOut.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Agent personaSelected = (Agent) parent.getItemAtPosition(position);
-             //   moving(personaSelected); //Dialogue to confirm move
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(300);
+                //   moving(personaSelected); //Dialogue to confirm move
                 adapterIn.insert(personaSelected, 0);
    //             adapterIn.add(personaSelected);
                 adapterOut.remove(personaSelected);
@@ -239,5 +274,16 @@ public class SocialSelection extends Activity {
               adb.setMessage(personMoving.name +" will be moved");
               adb.setPositiveButton("Ok", null);
               adb.show();
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+       if (mDisableScreenRotation) {
+          super.onConfigurationChanged(newConfig);
+          this.setRequestedOrientation(mRuntimeOrientation);
+       } else {
+         //  filler();
+          mRuntimeOrientation = this.getScreenOrientation();
+          super.onConfigurationChanged(newConfig);
+       }
     }
 }
