@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical">
-    <TextView android:textSize="20sp" android:id="@+id/roleAssiTitl" android:text="Role Assignment" android:layout_height="wrap_content" android:layout_width="fill_parent" android:textStyle="bold"></TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
     <TextView android:id="@+id/roleAssiNarrTitl" android:text="Narrative:" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
     <Spinner android:id="@+id/roleAssiNarrSele" android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/selenarr"></Spinner>
-    <TextView android:id="@+id/roleAssiPlotTitl" android:text="Plot:" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
-    <TextView android:id="@+id/roleAssiPlotDesc" android:text="PLOT DESCRIPTION" android:layout_height="80px" android:layout_width="fill_parent"></TextView>
+
+	<LinearLayout android:id="@+id/roleAssiPlotLayo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal" android:layout_weight="0">
+    	<LinearLayout android:id="@+id/roleAssiPlotMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">
+		    <TextView android:id="@+id/roleAssiPlotTitl" android:text="Plot:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:textStyle="bold"></TextView>
+			<ScrollView android:id="@+id/roleAssiPlotScro" android:layout_width="fill_parent" android:layout_height="100px">
+ 				<TextView android:id="@+id/roleAssiPlotDesc" android:text="This is the description of the narrative that tells everything that is needed to know, and sometimes things that are not needed, to make the outcome really successful and to bla bla bla" 
+	   				android:textSize="10sp" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1" android:padding="2px" android:cropToPadding="true"></TextView>
+			</ScrollView>
+	   	</LinearLayout>
+	    <LinearLayout android:id="@+id/roleAssiPersMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">	
+	    	<TextView android:id="@+id/roleAssiPersTitl" android:text="Actor:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:textStyle="bold"></TextView>
+			<ListView android:id="@+id/roleAssiPers" android:layout_height="100px" android:layout_width="fill_parent" android:layout_weight="1" android:padding="2px"></ListView>
+		</LinearLayout>
+	</LinearLayout>   
     <LinearLayout android:id="@+id/roleAssiMain" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="1">
 	    <LinearLayout android:id="@+id/roleAssiNameInLayo" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical" android:layout_weight="1">
-	    <TextView android:id="@+id/roleAssiNameTitl" android:text="Actors:" android:layout_height="30px" android:layout_width="fill_parent"></TextView>
+	    <TextView android:id="@+id/roleAssiNameTitl" android:text="Roles:" android:layout_height="30px" android:layout_width="fill_parent"></TextView>
         <ListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/roleAssiNameIn" android:entries="@array/namesin" android:layout_weight="1"></ListView>    
-	    </LinearLayout>
-	    <LinearLayout android:id="@+id/roleAssiRole" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical" android:layout_weight="1">
-		    <TextView android:id="@+id/roleAssiRoleMandTitl" android:text="Mandatory Roles:" android:layout_height="30px" android:layout_width="fill_parent"></TextView>
-        	<ListView android:layout_height="200px" android:layout_width="fill_parent" android:id="@+id/roleAssiRoleMand" android:entries="@array/rolemand" android:layout_weight="1"></ListView>
-		    <TextView android:id="@+id/roleAssiRoleSuppTitl" android:text="Support Roles:" android:layout_height="30px" android:layout_width="fill_parent"></TextView>
-        	<ListView android:layout_height="100px" android:layout_width="fill_parent" android:id="@+id/roleAssiRoleSupp" android:entries="@array/rolesupp" android:layout_weight="1"></ListView>
 	    </LinearLayout>
     </LinearLayout>
 	<LinearLayout android:id="@+id/roleAssiButt" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="0">
-		<Button android:id="@+id/roleAssiToMain" android:layout_width="240px" android:layout_height="wrap_content" android:text="Back to Main" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
-		<Button android:id="@+id/roleAssiToProg" android:layout_width="240px" android:layout_height="wrap_content" android:text="Go To Role Assignment" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
+		<Button android:id="@+id/roleAssiToMain" android:layout_width="240px" android:layout_height="50px" android:text="Back to Main" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
+		<Button android:id="@+id/roleAssiToProg" android:layout_width="240px" android:layout_height="50px" android:text="Go To Role Assignment" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
 	</LinearLayout>
 </LinearLayout>

@@ -11,6 +11,9 @@ public class RoleAssignment extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roleassign);
+        
+        
+        
     
     Button backToMain = (Button) findViewById(R.id.roleAssiToMain);
     backToMain.setOnClickListener(new View.OnClickListener() {

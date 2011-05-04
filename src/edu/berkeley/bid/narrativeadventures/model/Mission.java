@@ -21,19 +21,20 @@ Has:
 public class Mission
 {
 	
-	enum Status 
+	public enum Status 
 	{
 		ASSIGNED,UNASSIGNED,COMPLETE,STANDING,RECURRENT
 	};
 	
-	String id; 			//Used to uniquely identify the mission. This should never change!
-	int benefit; 		//Used to quantify the importance of the mission
-	GregorianCalendar assigned; 	
-	GregorianCalendar completed;	
-	Status status;
-	//String title;
-	String description;
-	ArrayList<String> resources; //Can have urls and plain textw
+	//ADDED PUBLIC HERE>>> NEED TO DECIDE IF GETTER/PUTTER WILL BE USED
+	public String id; 			//Used to uniquely identify the mission. This should never change!
+	public int benefit; 		//Used to quantify the importance of the mission
+	public GregorianCalendar assigned; 	
+	public GregorianCalendar completed;	
+	public Status status;
+	public String description;
+	public ArrayList<String> resources; //Can have urls and plain textw
+	public byte[] icon;
 	
 	public boolean equals(Mission other) 
 	{
@@ -54,6 +55,7 @@ public class Mission
 	    this.description = description;
 	    resources = new ArrayList<String>();
 	    this.status = Status.UNASSIGNED;
+	    this.icon =  new byte[0];
 	}
 	
 	/**
@@ -71,6 +73,8 @@ public class Mission
         //returnMe.title = this.title;
         returnMe.description = this.description;
         returnMe.resources = (ArrayList<String>) resources.clone();
+        returnMe.status = Status.UNASSIGNED;    
+        returnMe.icon = this.icon;
         return returnMe;
     }
     

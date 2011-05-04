@@ -30,6 +30,7 @@ public class Narrative implements Ided
 	public ArrayList<String> resources;
 	public Agent narrator;
 	public Agent participant;
+	public String title;
 	
 	public Narrative() 
 	{
@@ -40,6 +41,7 @@ public class Narrative implements Ided
 	    resources= new ArrayList<String>();
 	    roles = new ArrayList<Role>();
 	    agents = new ArrayList<Agent>();
+	    title="";
 	}
 	
 	public void assignMission(Mission mission, Agent agent, Role role) 
@@ -127,6 +129,7 @@ public class Narrative implements Ided
 	    Narrative returnMe = new Narrative();
 	    returnMe.id = UUID.randomUUID().toString();
 	    returnMe.prolog = this.prolog;
+	    returnMe.title = this.title;
 	    for (Role r : this.roles) {
 	        returnMe.roles.add(r.cloneRole());
 	    }

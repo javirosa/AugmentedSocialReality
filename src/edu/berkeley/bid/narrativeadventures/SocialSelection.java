@@ -119,6 +119,7 @@ public class SocialSelection extends Activity {
                 adapterOut.remove(personaSelected);
                 adapterIn.notifyDataSetChanged();
                 adapterOut.notifyDataSetChanged();
+                v.cancel();
             }
         });
 
@@ -243,9 +244,6 @@ public class SocialSelection extends Activity {
         Button backToMain = (Button) findViewById(R.id.sociSeleToMain);
         backToMain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),
-                        NarrativeAdventures.class);
-                startActivityForResult(i, 0);
                 finish();
             }
         });

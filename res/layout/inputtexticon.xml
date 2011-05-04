@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
+	<TextView android:id="@+id/label1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Enter Description:" android:textSize="12sp"></TextView>  
+	<EditText android:id="@+id/edit" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+	<TextView android:id="@+id/label2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Select Icon: " android:textSize="12sp"></TextView>  
+	<ListView android:id="@+id/icons" android:layout_width="fill_parent" android:layout_height="wrap_content"></ListView>
+</LinearLayout>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+  	<ImageView android:id="@+id/icon" android:layout_width="70px" android:layout_height="70px" android:src="@drawable/man2" android:padding="2dip" android:cropToPadding="true" android:layout_weight="0"></ImageView>
+</LinearLayout>

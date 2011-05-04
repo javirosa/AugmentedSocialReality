@@ -2,7 +2,6 @@ package edu.berkeley.bid.narrativeadventures;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -39,6 +38,7 @@ public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
     
     public View getView(int position, View convertView, ViewGroup parent){
         View row = convertView;
+        
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         row = inflater.inflate(R.layout.twoicononrow, parent, false);
         

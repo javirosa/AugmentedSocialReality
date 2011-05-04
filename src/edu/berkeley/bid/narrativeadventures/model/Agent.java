@@ -47,13 +47,13 @@ public class Agent implements Comparable<Agent>
 	    return false;
 	}*/
 	
-	String addMission(Mission mission, Role role) 
+	public String addMission(Mission mission, Role role) 
 	{
 	    roles.get(roles.indexOf(role)).missions.add(mission);
 		return "New mission!\n" + Narrative.getTitle(role.description) + "\n" + Narrative.getTitle(mission.description);
 	}
 	
-	String addRole(Role role)
+	public String addRole(Role role)
 	{   
 	    roles.add(role);
 	    return "New role!\n" + Narrative.getTitle(role.description);
