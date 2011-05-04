@@ -35,11 +35,9 @@ public class IconStorage {
         for (String s: iconFileNames) {
             try {
                 InputStream is = am.open(iconDir+File.separatorChar+s);
-                Bitmap bmp = BitmapFactory.decodeStream(is);
-                if (bmp != null) {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bmp.compress(CompressFormat.PNG, 100, baos);
-                    icons.add(baos.toByteArray());
+                byte[] ba = toBytes(is);
+                if (ba.length > 0) {
+                    icons.add(ba);
                 }
             } catch (IOException e) {
             }
@@ -47,17 +45,27 @@ public class IconStorage {
         return icons;
     }
     
-    public Bitmap toBitmap(byte[] png) 
+    public static Bitmap toBitmap(byte[] png) 
     {
         Bitmap bmp = BitmapFactory.decodeByteArray(png, 0, 0);
         return bmp;
     }
     
-    public byte[] toBytes(Bitmap bmp)
+    public static byte[] toBytes(Bitmap bmp)
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
     }
-
+    
+    public static byte[] toBytes(InputStream is)
+    {
+        Bitmap bmp = BitmapFactory.decodeStream(is);
+        if (bmp != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(CompressFormat.PNG, 100, baos);
+            return baos.toByteArray();
+        }
+        return new byte[]{};
+    }
 }
