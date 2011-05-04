@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -22,9 +23,9 @@ public class IconStorage {
 
     public static final String iconDir = "icons";
 
-    public static ArrayList<byte[]> loadIcons() 
+    public static ArrayList<byte[]> loadIcons(Context context) 
     {
-        AssetManager am = Resources.getSystem().getAssets();
+        AssetManager am = context.getApplicationContext().getAssets();
         ArrayList<byte []> icons = new ArrayList<byte[]>();
         String[] iconFileNames = new String[]{};
         

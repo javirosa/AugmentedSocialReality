@@ -183,8 +183,8 @@ public class ProgresssionManagement extends Activity  {
         LayoutInflater inflater = getLayoutInflater();         
               final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
               ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
-              lv1.setAdapter(adapter3);   
-              adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons());  
+              adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons(this));
+              lv1.setAdapter(adapter3);     
               AlertDialog.Builder adb = new AlertDialog.Builder(this);
               //TODO correct line above
               adb.setView(dialoglayout);
