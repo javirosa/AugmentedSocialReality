@@ -19,8 +19,11 @@ import android.graphics.Bitmap.CompressFormat;
  */
 
 public class IconStorage {
+
     public static final String iconDir = "icons";
-    public static ArrayList<byte[]> loadIcons() {
+
+    public static ArrayList<byte[]> loadIcons() 
+    {
         AssetManager am = Resources.getSystem().getAssets();
         ArrayList<byte []> icons = new ArrayList<byte[]>();
         String[] iconFileNames = new String[]{};
@@ -43,4 +46,18 @@ public class IconStorage {
         }
         return icons;
     }
+    
+    public Bitmap toBitmap(byte[] png) 
+    {
+        Bitmap bmp = BitmapFactory.decodeByteArray(png, 0, 0);
+        return bmp;
+    }
+    
+    public byte[] toBytes(Bitmap bmp)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
 }
