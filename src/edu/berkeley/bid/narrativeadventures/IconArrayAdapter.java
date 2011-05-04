@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import edu.berkeley.bid.narrativeadventures.model.Agent;
+//import edu.berkeley.bid.narrativeadventures.model.byte[];
 
-public class IconArrayAdapter extends ArrayAdapter<Agent>{
-    private List<Agent> agents = new ArrayList<Agent>();
+public class IconArrayAdapter extends ArrayAdapter<byte[]>{
+    private List<byte[]> agents = new ArrayList<byte[]>();
     
-    public IconArrayAdapter(Context context, int textViewResourceId, List<Agent> agents) 
+    public IconArrayAdapter(Context context, int textViewResourceId, List<byte[]> agents) 
     {
         super(context, textViewResourceId, agents);
         this.agents = agents;
@@ -29,7 +29,7 @@ public class IconArrayAdapter extends ArrayAdapter<Agent>{
     }
     
     @Override
-    public Agent getItem(int index) 
+    public byte[] getItem(int index) 
     {
         return this.agents.get(index);
     }
@@ -42,9 +42,9 @@ public class IconArrayAdapter extends ArrayAdapter<Agent>{
         View row = inflater.inflate( R.layout.onlyiconrow, parent, false);
         ImageView icon = (ImageView) row.findViewById(R.id.icon);
         
-        //Get data from Agent
-        Agent persona = getItem(position);
-        byte[] photo = persona.photo;
+        //Get data from byte[]
+        byte[] photo = getItem(position);
+    //    byte[] photo = persona;
         Bitmap bmp = android.graphics.BitmapFactory.decodeByteArray(photo, 0, photo.length);
         
         //Set elements in item view

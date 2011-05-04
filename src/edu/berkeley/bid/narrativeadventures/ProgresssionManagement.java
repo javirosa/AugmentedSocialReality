@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
+import edu.berkeley.bid.narrativeadventures.io.IconStorage;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
@@ -30,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -43,7 +45,7 @@ import android.widget.TextView;
  * @author cusgadmin
  *
  */
-public class ProgresssionManagement extends Activity implements DialogInterface.OnClickListener {
+public class ProgresssionManagement extends Activity  {
     ProgressionArrayAdapter roleAdapter;
     AgentArrayAdapter adapter2;
     IconArrayAdapter adapter3;
@@ -176,32 +178,34 @@ public class ProgresssionManagement extends Activity implements DialogInterface.
     public void newMission(){
         //Dialogue to create mission
     //          AlertDialog.Builder adb=new AlertDialog.Builder(ProgresssionManagement.this);
-              LayoutInflater inflater = getLayoutInflater();         
-              View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
+        final Mission newMision = new Mission();
+        
+        LayoutInflater inflater = getLayoutInflater();         
+              final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
               ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
               lv1.setAdapter(adapter3);   
-              adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, new ArrayList<Agent>());  
+              adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons());  
               AlertDialog.Builder adb = new AlertDialog.Builder(this);
               //TODO correct line above
-//              TextView data = (TextView)
               adb.setView(dialoglayout);
               adb.setTitle("NEW MISSION");     
              // adb.setPositiveButton("Ok", null);
-              adb.setPositiveButton("Ok", this); 
+              adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
+                    newMision.description = editing.getText().toString();
+                    currentRole.missions.add(newMision);
+ 
+                }
+            }); 
               adb.setNegativeButton("Cancel", null);
               adb.show();
+ 
               update();
           }
-    
-    public void onClick(DialogInterface dialog, int which) {
-        // TODO Auto-generated method stub
-        Mission newMision = new Mission();
-        if(which == 1) {
-       //     newMision.description=(TextView) 
-     //       newMision.icon= (AlertDialog) dialog.;
-        }
-        currentRole.missions.add(newMision);
-    }
  
     
     @Override
