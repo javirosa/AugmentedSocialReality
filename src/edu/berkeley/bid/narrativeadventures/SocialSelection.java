@@ -123,65 +123,7 @@ public class SocialSelection extends Activity {
             }
         });
 
-/*
-        //THIS IS THE LISTVIEW DRAG DROP		
-		lvIn.setOnTouchListener(new View.OnTouchListener() {
-			private final static int START_DRAGGING = 0;
-			private final static int STOP_DRAGGING = 1;
-			private int status;
-			
-			@Override
-			public boolean onTouch(View view, MotionEvent me) {	
-				TextView comment = (TextView) findViewById(R.id.sociSeleNarrTitl);
-				if (me.getAction() == MotionEvent.ACTION_DOWN) {
-					status = START_DRAGGING;
-					((ListView) view).setOnItemClickListener(new ((AdapterView)((ListView) view)).oni
-//					view.setClickable(true);
-//					view.setPressed(true);
-//					boolean clicking = view.isClickable();
-					//view.setSelected(true);
-					//final ListView papa2 = (ListView) view.getParent();
-	//				AdapterView granpa = (AdapterView) papa2.getParent();
-		//			granpa.setOnItemClickListener(listener);
-					int posi = ((ListView) view).getI;
-				//	int posi = ((ListView) view).getPositionForView(view);
-//					((ListView) view).setOnItemSelectedListener(listener);
-					//papa2.getOnItemClickListener();
-					
-	//				Long itemId =  papa2.getSelectedItemId();
-					comment.setText("START DRAGGING: "+ posi);
-					//view.getTag();
-					
-					
-				}
-				if (me.getAction() == MotionEvent.ACTION_UP) {
-					status = STOP_DRAGGING;
-	//				comment.setText("STOP DRAGGING");
-					comment.setText("STOP DRAGGING: " + " " + ((ListView) view).getSelectedItemPosition());
 
-//					comment.setText("STOP DRAGGING: " + " " + posi);
-
-				} else if (me.getAction() == MotionEvent.ACTION_MOVE) {
-					if (status == START_DRAGGING) {
-						AbsoluteLayout papa = (AbsoluteLayout) findViewById(R.id.sociSeleToucPad);
-						papa.invalidate();
-						int testx = view.getLeft();
-						float posx=me.getX();
-						comment.setText("DRAGGING: "+ (int) posx + " " + testx);
-						if (posx+testx <= 0){
-							view.offsetLeftAndRight(-testx);
-						}else if (posx+testx > papa.getWidth()-view.getWidth()) {
-							view.offsetLeftAndRight(papa.getWidth()-view.getWidth()-testx);
-						}else {
-							view.offsetLeftAndRight((int) posx);
-						}
-					}
-				}
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
-*/
 		//Implementation of the 2-dimentional social-selector
 		ImageButton dot = (ImageButton) findViewById(R.id.sociSeleDot);
 		dot.setOnTouchListener(new View.OnTouchListener() {

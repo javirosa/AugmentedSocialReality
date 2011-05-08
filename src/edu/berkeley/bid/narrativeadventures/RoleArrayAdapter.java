@@ -13,17 +13,15 @@ import android.widget.TextView;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Role;
 
-public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
+public class RoleArrayAdapter extends ArrayAdapter<Agent>{
     private static final String tag = "ProgessionArrayAdapter";
     private static final String ASSETS_DIR = "images/";
     private Context context;
-    private ImageView icon1;
-    private ImageView icon2;
+    private ImageView icon;
     private TextView label;
-    private TextView label2;
     private List<Agent> agents = new ArrayList<Agent>();
     
-    public ProgressionArrayAdapter(Context context, int textViewResourceId, List<Agent> objects) {
+    public RoleArrayAdapter(Context context, int textViewResourceId, List<Agent> objects) {
         super(context, textViewResourceId, objects);
         this.context = context;
         this.agents = objects;
@@ -41,22 +39,14 @@ public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
         View row = convertView;
         
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        row = inflater.inflate(R.layout.twoicononrow, parent, false);
+        row = inflater.inflate(R.layout.oneiconrow, parent, false);
         
         label = (TextView) row.findViewById(R.id.label);
-        label2 = (TextView) row.findViewById(R.id.label2);
-        icon1 = (ImageView) row.findViewById(R.id.icon1);
-        icon2 = (ImageView) row.findViewById(R.id.icon2);
+        icon = (ImageView) row.findViewById(R.id.icon);
         
         //Get data from Agent
         Agent persona = getItem(position);
-        String nameLabel = persona.name;
-        String roleLabel;
-        if (persona.roles.get(0) == null) {
-            roleLabel = "NOT ASSIGNED";
-        } else {
-            roleLabel = persona.roles.get(0).description;
-        }
+        String name = persona.name;
         byte[] agentPhoto = persona.photo;
         Bitmap agentBmp = android.graphics.BitmapFactory.decodeByteArray(agentPhoto, 0, agentPhoto.length);
         
@@ -68,17 +58,11 @@ public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
         Bitmap roleBmp = android.graphics.BitmapFactory.decodeByteArray(roleIcon, 0, roleIcon.length);
         
         //Set elements in item view
-        label.setText(nameLabel);
-        label2.setText(roleLabel);
+        label.setText(name);
         if (agentBmp != null) {
-            icon1.setImageBitmap(agentBmp);
+            icon.setImageBitmap(agentBmp);
         } else {
-            icon1.setImageResource(R.drawable.icon);
-        }
-        if (roleBmp != null) {
-            icon2.setImageBitmap(roleBmp);
-        } else {
-            icon2.setImageResource(R.drawable.icon);
+            icon.setImageResource(R.drawable.icon);
         }
         return row;
     }

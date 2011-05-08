@@ -4,5 +4,8 @@
 		<ImageView android:id="@+id/icon1" android:layout_width="60px" android:layout_height="70px" android:src="@drawable/man2" android:padding="2dip" android:cropToPadding="true" android:layout_weight="0" ></ImageView>
 	  	<ImageView android:id="@+id/icon2" android:layout_width="60px" android:layout_height="70px" android:src="@drawable/man2" android:padding="2dip" android:cropToPadding="true" android:layout_weight="0" ></ImageView>
 	</LinearLayout>
-	<TextView android:id="@+id/label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="12sp" android:layout_weight="1" android:text="this is the text of this crazy thing" ></TextView>  
+	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_gravity="right" android:gravity="right" android:layout_weight="0">	
+		<TextView android:id="@+id/label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="12sp" android:layout_weight="1" android:text="this is the text 1" ></TextView>  		
+		<TextView android:id="@+id/label2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="8sp" android:layout_weight="1" android:text="this is the text 2" ></TextView>  
+	</LinearLayout>
 </LinearLayout>

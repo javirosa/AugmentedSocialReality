@@ -94,8 +94,15 @@ public class NarrativeAdventures extends Activity {
         narr.participant = narr.agents.get(1);
         narr.prolog = "HI This is the description of the narrative that tells everything that is needed to know, and sometimes things that are not needed, to make the outcome really successful and to bla bla bla";
         narr.setting = "NOTHING";
-        narr.agents.get(0).addRole(role1); 
-        narr.agents.get(1).addRole(role2); 
+        for (int i=0; i<narr.agents.size(); i++) {
+            if (i%2==1) {
+                narr.agents.get(i).addRole(role1);
+            } else {
+                narr.agents.get(i).addRole(role2);
+            }
+        }
+//        narr.agents.get(0).addRole(role1); 
+  //      narr.agents.get(1).addRole(role2); 
         narr.title = "the crazy narrative";
 
         problem.narrative=narr;

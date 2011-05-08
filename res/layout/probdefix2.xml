@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
-    <TextView android:id="@+id/probDefiHeadTag" android:text="Situation/Problem Input" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="10pt" android:textStyle="bold"></TextView>
     <TextView android:id="@+id/probDefiNameTag" android:text="Enter Situation/Problem Name:" android:layout_width="wrap_content" android:layout_height="wrap_content" ></TextView>
     <EditText android:id="@+id/probDefiNameFill" android:text="e.g. I am stressed before final" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:inputType="textShortMessage"></EditText>
     <TextView android:id="@+id/prodDefiDescTag" android:text="Enter Situation/Problem Description:" android:layout_width="wrap_content"  android:layout_height="wrap_content" ></TextView>
@@ -20,8 +19,8 @@
 	</LinearLayout>
 	<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></LinearLayout>
 	<LinearLayout android:id="@+id/probDefiButtLayo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0">
-		<Button android:id="@+id/probDefiToSoci" android:layout_width="200px" android:layout_height="wrap_content" android:text="Go To Narrative Selection"></Button>
+		<Button android:id="@+id/probDefiToSoci" android:layout_width="200px" android:layout_height="50px" android:text="Go To Narrative Selection"></Button>
 		<LinearLayout android:id="@+id/probDefiButtPad" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">	</LinearLayout>		
-		<Button android:id="@+id/probDefiToMain" android:layout_width="200px" android:layout_height="wrap_content" android:text="Back to Main" ></Button>
+		<Button android:id="@+id/probDefiToMain" android:layout_width="200px" android:layout_height="50px" android:text="Back to Main" ></Button>
 	</LinearLayout>
 </LinearLayout>

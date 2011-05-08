@@ -88,13 +88,13 @@ public class ProgresssionManagement extends Activity  {
     public void update(){
         //Get the list of agents in the current narrative
         NAApp application = (NAApp)getApplication();
-        currentNarrative = application.currentProblem.narrative;
-        final String[] listaproblems = new String[application.runningProblems.size()];
+        currentNarrative = application.currentProblem.narrative;  // set current narrative
+        final String[] listaproblems = new String[application.runningProblems.size()];  
                
-        TextView prolog = (TextView) this.findViewById(R.id.progManaPlotDesc);
-        prolog.setText(currentNarrative.prolog);
+        TextView prolog = (TextView) this.findViewById(R.id.progManaPlotDesc);  //set current prolog layout
+        prolog.setText(currentNarrative.prolog);  //write current prolog
         
-        Spinner spinner = (Spinner) findViewById(R.id.progManaNarrSele);
+        Spinner spinner = (Spinner) findViewById(R.id.progManaNarrSele);  //set narrative selector
         for (int i=0; i<application.runningProblems.size(); i++) {
             listaproblems[i] = application.runningProblems.get(i).narrative.title;
         }
@@ -105,11 +105,11 @@ public class ProgresssionManagement extends Activity  {
         //ArrayAdapter.createFromResource(this, application.runningProblems, android.R.layout.simple_spinner_item);
         
         
-        roleAdapter = new ProgressionArrayAdapter(getApplicationContext(), R.layout.twoicononrow, currentNarrative.agents);       
+        roleAdapter = new ProgressionArrayAdapter(getApplicationContext(), R.layout.twoicononrow, currentNarrative.agents);  //set role adapter
         if (currentRole == null) {
             currentRole = roleAdapter.getItem(0).roles.get(0);
         }
-        ListView roleList = (ListView) this.findViewById(R.id.progManaPers);
+        ListView roleList = (ListView) this.findViewById(R.id.progManaPers);  //set role list layout
         roleList.setAdapter(roleAdapter);     
         roleList.setSelection(currentRolePosition);
         missionAdapter = new MissionArrayAdapter(getApplicationContext(), R.layout.oneiconrow, currentRole.missions);
@@ -136,7 +136,7 @@ public class ProgresssionManagement extends Activity  {
         spinnerNarr.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-             //   currentNarrative = (Narrative) parent.getItemAtPosition(pos); 
+           //     currentNarrative = (Narrative) parent.getItemAtPosition(pos); 
             }
             public void onNothingSelected(AdapterView parent){
              // Do nothing   
@@ -177,9 +177,6 @@ public class ProgresssionManagement extends Activity  {
     
     public void newMission(){
         //Dialogue to create mission
-    //          AlertDialog.Builder adb=new AlertDialog.Builder(ProgresssionManagement.this);
-        final Mission newMision = new Mission();
-        
         LayoutInflater inflater = getLayoutInflater();         
               final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
               ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
@@ -189,25 +186,23 @@ public class ProgresssionManagement extends Activity  {
               //TODO correct line above
               adb.setView(dialoglayout);
               adb.setTitle("NEW MISSION");     
-             // adb.setPositiveButton("Ok", null);
               adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
-                    EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
+                   Mission newMision = new Mission();
+                   EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
                     newMision.description = editing.getText().toString();
+               //     newMision.icon =  
                     currentRole.missions.add(newMision);
- 
+                    update();
                 }
             }); 
               adb.setNegativeButton("Cancel", null);
               adb.show();
- 
-              update();
           }
  
-    
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
        if (mDisableScreenRotation) {

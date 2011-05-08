@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
     <TextView android:id="@+id/roleAssiNarrTitl" android:text="Narrative:" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
-    <Spinner android:id="@+id/roleAssiNarrSele" android:layout_height="wrap_content" android:layout_width="fill_parent" android:entries="@array/selenarr"></Spinner>
+    <Spinner android:id="@+id/roleAssiNarrSele" android:layout_height="70px" android:layout_width="fill_parent" android:entries="@array/selenarr"></Spinner>
 
 	<LinearLayout android:id="@+id/roleAssiPlotLayo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal" android:layout_weight="0">
     	<LinearLayout android:id="@+id/roleAssiPlotMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">
@@ -22,8 +22,8 @@
         <ListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/roleAssiNameIn" android:entries="@array/namesin" android:layout_weight="1"></ListView>    
 	    </LinearLayout>
     </LinearLayout>
-	<LinearLayout android:id="@+id/roleAssiButt" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="0">
-		<Button android:id="@+id/roleAssiToMain" android:layout_width="240px" android:layout_height="50px" android:text="Back to Main" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
-		<Button android:id="@+id/roleAssiToProg" android:layout_width="240px" android:layout_height="50px" android:text="Go To Role Assignment" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
+	<LinearLayout android:id="@+id/roleAssiButtLayo" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="0">
+		<Button android:id="@+id/roleAssiButt" android:layout_width="240px" android:layout_height="50px" android:text="New Role" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
+		<Button android:id="@+id/roleAssiToProg" android:layout_width="240px" android:layout_height="50px" android:text="Exit" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
 	</LinearLayout>
 </LinearLayout>

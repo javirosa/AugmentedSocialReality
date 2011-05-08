@@ -6,8 +6,7 @@
     	<LinearLayout android:id="@+id/progManaPlotMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">
 		    <TextView android:id="@+id/progManaPlotTitl" android:text="Plot:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:textStyle="bold"></TextView>
 			<ScrollView android:id="@+id/progManaPlotScro" android:layout_width="fill_parent" android:layout_height="100px">
- 				<TextView android:id="@+id/progManaPlotDesc" android:text="This is the description of the narrative that tells everything that is needed to know, and sometimes things that are not needed, to make the outcome really successful and to bla bla bla" 
-	   				android:textSize="10sp" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1" android:padding="2px" android:cropToPadding="true"></TextView>
+ 				<TextView android:id="@+id/progManaPlotDesc" android:textSize="10sp" android:layout_height="fill_parent" android:layout_width="fill_parent" android:layout_weight="1" android:padding="2px" android:cropToPadding="true"></TextView>
 			</ScrollView>
 	   	</LinearLayout>
 	    <LinearLayout android:id="@+id/progManaRoleMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">	

@@ -53,8 +53,6 @@ public class AProblemInput extends Activity {
 				finish();
 			}
 		});
-
-		
 	}
 	
 	public Problem populate(){

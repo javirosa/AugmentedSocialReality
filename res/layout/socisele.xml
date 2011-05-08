@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/sociSeleMainLayo" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:screenOrientation="portrait" xmlns:android="http://schemas.android.com/apk/res/android">
-	<TextView android:id="@+id/sociSeleTitl" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Social Selection" android:textSize="20sp" android:textStyle="bold" ></TextView>
 	<TextView android:id="@+id/sociSeleNarrTitl" android:layout_width="fill_parent" android:layout_height="26px" android:text="Narrative Selection:" android:layout_below="@+id/sociSeleTitl"></TextView>
 	<Spinner android:id="@+id/sociSeleSpin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:entries="@array/situation"></Spinner>
 	<LinearLayout android:id="@+id/sociSeleList" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
@@ -21,8 +20,8 @@
 		<LinearLayout android:id="@+id/sociSeleDotPad2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">	</LinearLayout>
 	</LinearLayout>
 	<LinearLayout android:id="@+id/sociSeleButtLayo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0">
-		<Button android:id="@+id/sociSeleToNarr" android:layout_width="200px" android:layout_height="wrap_content" android:text="Go To Narrative Selection"></Button>
+		<Button android:id="@+id/sociSeleToNarr" android:layout_width="200px" android:layout_height="50px" android:text="Go To Narrative Selection"></Button>
 		<LinearLayout android:id="@+id/sociSeleButtPad" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">	</LinearLayout>		
-		<Button android:id="@+id/sociSeleToMain" android:layout_width="200px" android:layout_height="wrap_content" android:text="Back to Main" ></Button>
+		<Button android:id="@+id/sociSeleToMain" android:layout_width="200px" android:layout_height="50px" android:text="Exit" ></Button>
 	</LinearLayout>
 </LinearLayout>

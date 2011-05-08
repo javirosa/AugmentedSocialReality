@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android" android:id="@android:id/tabhost" android:layout_width="fill_parent" android:layout_height="fill_parent">
 	<LinearLayout android:id="@+id/narrSeleMainLayo" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
-		<TextView android:id="@+id/narrSeleTitl" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Narrative Selection" android:textSize="20sp" android:textStyle="bold"></TextView>
 		<TextView android:id="@+id/narrSeleProbTitl" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Problem:"></TextView>
-		<TextView android:id="@+id/narrSeleProb" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="HERE GOES PROBLEM"></TextView>
+		<TextView android:id="@+id/narrSeleProb" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="e.g. I am stressed before final"></TextView>
 		<TabWidget android:id="@android:id/tabs" android:layout_width="fill_parent" android:layout_height="wrap_content"></TabWidget>
 		<FrameLayout android:id="@android:id/tabcontent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">
 			<TableLayout android:id="@+id/narrSeleTab1Layo" android:layout_width="fill_parent" android:layout_height="fill_parent">
@@ -20,8 +19,8 @@
 			</TableLayout>
 		</FrameLayout>
 		<LinearLayout android:id="@+id/narrSeleButt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_weight="0">
-			<Button android:id="@+id/narrSeleToMain" android:layout_width="240px" android:layout_height="wrap_content" android:text="Back to Main" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
-			<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="wrap_content" android:text="Go To Role Assignment" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
+			<Button android:id="@+id/narrSeleToMain" android:layout_width="240px" android:layout_height="50px" android:text="Exit" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
+			<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:text="Go To Role Assignment" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
 		</LinearLayout>
 	</LinearLayout>
 </TabHost>
