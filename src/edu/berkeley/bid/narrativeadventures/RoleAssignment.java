@@ -1,5 +1,7 @@
 package edu.berkeley.bid.narrativeadventures;
 
+import java.io.ByteArrayOutputStream;
+
 import edu.berkeley.bid.narrativeadventures.io.IconStorage;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
@@ -11,6 +13,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Display;
@@ -20,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Spinner;
@@ -70,11 +77,9 @@ public class RoleAssignment extends Activity  {
         //Get the list of agents in the current narrative
         NAApp application = (NAApp)getApplication();
         currentNarrative = application.currentProblem.narrative; 
-        final String[] listaproblems = new String[application.runningProblems.size()];
-               
+        final String[] listaproblems = new String[application.runningProblems.size()];               
         TextView prolog = (TextView) this.findViewById(R.id.roleAssiPlotDesc);
-        prolog.setText(currentNarrative.prolog);
-        
+        prolog.setText(currentNarrative.prolog);       
         Spinner spinner = (Spinner) findViewById(R.id.roleAssiNarrSele);
         for (int i=0; i<application.runningProblems.size(); i++) {
             listaproblems[i] = application.runningProblems.get(i).narrative.title;
@@ -84,19 +89,17 @@ public class RoleAssignment extends Activity  {
         spinner.setAdapter(spinnerAdapter);
         //application.runningProblems.get(0).narrative.title;
         //ArrayAdapter.createFromResource(this, application.runningProblems, android.R.layout.simple_spinner_item);
-       
         agentAdapter = new AgentArrayAdapter(getApplicationContext(), R.layout.oneiconrow, currentNarrative.agents);
         ListView agentList = (ListView) this.findViewById(R.id.roleAssiPers);
         agentList.setAdapter(agentAdapter);
         agentList.setSelection(currentAgentPosition);
         currentAgent = currentNarrative.agents.get(currentAgentPosition);
-        
         roleAdapter2 = new RoleArrayAdapter2(getApplicationContext(), R.layout.oneiconrow, currentAgent.roles);       
   //      if (currentMission == null) {
     //        currentMission = roleAdapter2.getItem(0).missions.get(0);
       //  }
         ListView roleList = (ListView) this.findViewById(R.id.roleAssiNameIn);
-        roleList.setAdapter(roleAdapter2);
+        roleList.setAdapter(roleAdapter2);       
         roleList.setSelection(currentRolePosition);
     }
     @Override
@@ -155,32 +158,38 @@ public class RoleAssignment extends Activity  {
     
     public void newRole(){
         //Dialogue to create new role
+        final Role newRole = new Role();
         LayoutInflater inflater = getLayoutInflater();         
-              final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
-              ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
-              adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons(this));  
-              lv1.setAdapter(adapter3);   
-              AlertDialog.Builder adb = new AlertDialog.Builder(this);
-              //TODO correct line above
-              adb.setView(dialoglayout);
-              adb.setTitle("NEW ROLE");     
-              adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                    Role newRoleVar = new Role();        
-                    EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
-                    newRoleVar.description = editing.getText().toString();
-                    currentAgent.roles.add(newRoleVar);
-            //        currentRolePosition++;
-                    update();
+        final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
+        ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
+        adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons(this));  
+        lv1.setAdapter(adapter3);   
+        lv1.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                ImageView icon = (ImageView) view.findViewById(R.id.icon);
+                Drawable d = icon.getDrawable();
+                Bitmap b = ((BitmapDrawable)d).getBitmap();
+                newRole.roleIcon = IconStorage.toBytes(b);
                 }
-            }); 
-              adb.setNegativeButton("Cancel", null);
-              adb.show();
-          }
+        });
+       AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setView(dialoglayout);
+        adb.setTitle("NEW ROLE");     
+        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
+                newRole.description = editing.getText().toString();
+                currentAgent.roles.add(newRole);
+                update();
+            }
+        }); 
+        adb.setNegativeButton("Cancel", null);
+        adb.show();
+    }
  
-    
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
        if (mDisableScreenRotation) {

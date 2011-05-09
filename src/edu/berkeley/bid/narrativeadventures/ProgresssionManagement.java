@@ -17,6 +17,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -54,10 +57,11 @@ public class ProgresssionManagement extends Activity  {
     
     private int mRuntimeOrientation;
     private boolean mDisableScreenRotation;
-    
     private Role currentRole;
     private int currentRolePosition;
-    
+    private int currentAgentPosition;
+    private int currentMissionPosition;
+    private Agent currentAgent;  
     private Narrative currentNarrative;
     
 //    private static final Mission newMission = new Mission();
@@ -89,11 +93,9 @@ public class ProgresssionManagement extends Activity  {
         //Get the list of agents in the current narrative
         NAApp application = (NAApp)getApplication();
         currentNarrative = application.currentProblem.narrative;  // set current narrative
-        final String[] listaproblems = new String[application.runningProblems.size()];  
-               
+        final String[] listaproblems = new String[application.runningProblems.size()];              
         TextView prolog = (TextView) this.findViewById(R.id.progManaPlotDesc);  //set current prolog layout
         prolog.setText(currentNarrative.prolog);  //write current prolog
-        
         Spinner spinner = (Spinner) findViewById(R.id.progManaNarrSele);  //set narrative selector
         for (int i=0; i<application.runningProblems.size(); i++) {
             listaproblems[i] = application.runningProblems.get(i).narrative.title;
@@ -102,20 +104,19 @@ public class ProgresssionManagement extends Activity  {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         //application.runningProblems.get(0).narrative.title;
-        //ArrayAdapter.createFromResource(this, application.runningProblems, android.R.layout.simple_spinner_item);
-        
-        
+        //ArrayAdapter.createFromResource(this, application.runningProblems, android.R.layout.simple_spinner_item);                
         roleAdapter = new ProgressionArrayAdapter(getApplicationContext(), R.layout.twoicononrow, currentNarrative.agents);  //set role adapter
-        if (currentRole == null) {
-            currentRole = roleAdapter.getItem(0).roles.get(0);
-        }
+//        if (currentRole == null) {
+  //          currentRole = roleAdapter.getItem(0).roles.get(0);
+    //    }
         ListView roleList = (ListView) this.findViewById(R.id.progManaPers);  //set role list layout
         roleList.setAdapter(roleAdapter);     
         roleList.setSelection(currentRolePosition);
+        currentAgent = currentNarrative.agents.get(currentAgentPosition);
         missionAdapter = new MissionArrayAdapter(getApplicationContext(), R.layout.oneiconrow, currentRole.missions);
         ListView missionList = (ListView) this.findViewById(R.id.progManaMissList);
         missionList.setAdapter(missionAdapter);  
-        
+ //       missionList.setSelection(currentMissionPosition);
 //        if (missionAdapter.getPosition(newMission) != -1) {
 //            missionAdapter.add(newMission);
 //        }
@@ -165,10 +166,10 @@ public class ProgresssionManagement extends Activity  {
            }
         });
         
-        Button backToMain = (Button) findViewById(R.id.progManaButt);
-        backToMain.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                newMission(); //Dialogue to intro new mission
+        Button newMission = (Button) findViewById(R.id.progManaButt);
+            newMission.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    newMission(); //Dialogue to intro new mission
                 }
             });
     }
@@ -177,32 +178,38 @@ public class ProgresssionManagement extends Activity  {
     
     public void newMission(){
         //Dialogue to create mission
-        LayoutInflater inflater = getLayoutInflater();         
-              final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
-              ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
-              adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons(this));
-              lv1.setAdapter(adapter3);     
-              AlertDialog.Builder adb = new AlertDialog.Builder(this);
-              //TODO correct line above
-              adb.setView(dialoglayout);
-              adb.setTitle("NEW MISSION");     
-              adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                   Mission newMision = new Mission();
-                   EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
-                    newMision.description = editing.getText().toString();
-               //     newMision.icon =  
-                    currentRole.missions.add(newMision);
-                    update();
-                }
-            }); 
-              adb.setNegativeButton("Cancel", null);
-              adb.show();
-          }
- 
+        final Mission newMision = new Mission();
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialoglayout = inflater.inflate(R.layout.inputtexticon, null);
+        ListView lv1 = (ListView) dialoglayout.findViewById(R.id.icons);
+        adapter3 = new IconArrayAdapter(getApplicationContext(), R.layout.onlyiconrow, IconStorage.loadIcons(this));
+        lv1.setAdapter(adapter3);     
+        lv1.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                ImageView icon = (ImageView) view.findViewById(R.id.icon);
+                Drawable d = icon.getDrawable();
+                Bitmap b = ((BitmapDrawable)d).getBitmap();
+                newMision.icon = IconStorage.toBytes(b);
+            }
+        });
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setView(dialoglayout);
+        adb.setTitle("NEW MISSION");     
+        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {            
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                EditText editing = (EditText) dialoglayout.findViewById(R.id.edit);
+                newMision.description = editing.getText().toString();
+                currentRole.missions.add(newMision);
+                update();
+            }
+        }); 
+        adb.setNegativeButton("Cancel", null);
+        adb.show();
+    }
+    
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
        if (mDisableScreenRotation) {

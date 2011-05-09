@@ -45,15 +45,15 @@ public class RoleArrayAdapter2 extends ArrayAdapter<Role>{
         icon = (ImageView) row.findViewById(R.id.icon);
         
         //Get data from Agent
-        Role persona = getItem(position);
-        String name = persona.name;
-       byte[] agentPhoto = persona.roleIcon;
+        Role role = getItem(position);
+        String name = role.description;
+       byte[] agentPhoto = role.roleIcon;
         Bitmap agentBmp = android.graphics.BitmapFactory.decodeByteArray(agentPhoto, 0, agentPhoto.length);
         
         //get data from Role
         byte[] roleIcon = new byte[] {};
-        if (persona.missions.size() > 0) {
-            roleIcon = persona.missions.get(0).icon;
+        if (role.missions.size() > 0) {
+            roleIcon = role.missions.get(0).icon;
         }
         Bitmap roleBmp = android.graphics.BitmapFactory.decodeByteArray(roleIcon, 0, roleIcon.length);
         
