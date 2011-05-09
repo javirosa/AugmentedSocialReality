@@ -1,47 +1,35 @@
 package edu.berkeley.bid.narrativeadventures;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
-import edu.berkeley.bid.narrativeadventures.io.IconStorage;
-import edu.berkeley.bid.narrativeadventures.model.Agent;
-import edu.berkeley.bid.narrativeadventures.model.Mission;
-import edu.berkeley.bid.narrativeadventures.model.Narrative;
-import edu.berkeley.bid.narrativeadventures.model.Role;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import edu.berkeley.bid.narrativeadventures.io.IconStorage;
+import edu.berkeley.bid.narrativeadventures.model.Agent;
+import edu.berkeley.bid.narrativeadventures.model.Mission;
+import edu.berkeley.bid.narrativeadventures.model.Narrative;
+import edu.berkeley.bid.narrativeadventures.model.Role;
 
 /** 
  * The screen is  being updated everytime there is a change in narrative, in role or when new mission is created
@@ -56,12 +44,9 @@ public class ProgresssionManagement extends Activity  {
     MissionArrayAdapter missionAdapter;   
     
     private int mRuntimeOrientation;
-    private boolean mDisableScreenRotation;
+    private boolean mDisableScreenRotation = true;
     private Role currentRole;
-    private int currentRolePosition;
     private int currentAgentPosition;
-    private int currentMissionPosition;
-    private Agent currentAgent;  
     private Narrative currentNarrative;
     
 //    private static final Mission newMission = new Mission();
@@ -111,12 +96,12 @@ public class ProgresssionManagement extends Activity  {
     //    }
         ListView roleList = (ListView) this.findViewById(R.id.progManaPers);  //set role list layout
         roleList.setAdapter(roleAdapter);     
-        roleList.setSelection(0);
-        currentAgent = currentNarrative.agents.get(currentAgentPosition);
+        roleList.setSelection(currentAgentPosition); //JR
+        //roleList.setSelection(0);
         currentRole = currentNarrative.agents.get(currentAgentPosition).roles.get(0); // ASSUMING ONLY ONE ROLE!!!
         missionAdapter = new MissionArrayAdapter(getApplicationContext(), R.layout.oneiconrow, currentRole.missions);
         ListView missionList = (ListView) this.findViewById(R.id.progManaMissList);
-        missionList.setAdapter(missionAdapter);  
+        missionList.setAdapter(missionAdapter); 
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {        
@@ -213,7 +198,6 @@ public class ProgresssionManagement extends Activity  {
           super.onConfigurationChanged(newConfig);
           this.setRequestedOrientation(mRuntimeOrientation);
        } else {
-          
           mRuntimeOrientation = this.getScreenOrientation();
           super.onConfigurationChanged(newConfig);
        }
