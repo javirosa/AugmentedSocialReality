@@ -19,7 +19,7 @@
 	</LinearLayout>
 	<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></LinearLayout>
 	<LinearLayout android:id="@+id/probDefiButtLayo" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0" android:gravity="center">
-		<Button android:id="@+id/probDefiToSoci" android:layout_width="200px" android:layout_height="50px" android:text="Go To Narrative Selection"></Button>
+		<Button android:id="@+id/probDefiToSoci" android:layout_width="200px" android:layout_height="50px" android:text="Go To Social Selection"></Button>
 		<LinearLayout android:id="@+id/probDefiButtPad" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">	</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

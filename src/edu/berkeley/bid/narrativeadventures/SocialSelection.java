@@ -177,20 +177,21 @@ public class SocialSelection extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(),
                         NarrativeSelection.class);
-                startActivityForResult(i, 0);
-                // Intent intent = new Intent();
-                // setResult(RESULT_OK, intent);
-                // finish();
+                view.setEnabled(false);
+                startActivity(i);
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
-        // Button to go back to Main
+        /* Button to go back to Main
         Button backToMain = (Button) findViewById(R.id.sociSeleToMain);
         backToMain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 finish();
             }
-        });
+        });*/
     }
 
     public void onListItemClick(ListView parent, View v, int position, long id) {

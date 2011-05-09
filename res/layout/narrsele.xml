@@ -6,7 +6,7 @@
 		<TabWidget android:id="@android:id/tabs" android:layout_width="fill_parent" android:layout_height="wrap_content"></TabWidget>
 		<FrameLayout android:id="@android:id/tabcontent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">
 			<TableLayout android:id="@+id/narrSeleTab1Layo" android:layout_width="fill_parent" android:layout_height="fill_parent">
-				<TableRow android:id="@+id/narrSeleTab1Titl" android:layout_weight="1" android:text="THIS 1"> </TableRow>
+				<TableRow android:id="@+id/narrSeleTab1Titl" android:layout_weight="1" android:text="THIS 1" android:gravity="top"> </TableRow>
 				<TableRow android:id="@+id/narrSeleTab1Cont" android:text="Content for 1">
 					<ListView android:id="@+id/narrSeleTab1List" android:layout_width="wrap_content" android:layout_height="fill_parent" android:entries="@array/humornarr" android:layout_weight="1" android:textSize="2px"></ListView>
 				</TableRow>
@@ -19,8 +19,7 @@
 			</TableLayout>
 		</FrameLayout>
 		<LinearLayout android:id="@+id/narrSeleButt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_weight="0">
-			<Button android:id="@+id/narrSeleToMain" android:layout_width="240px" android:layout_height="50px" android:text="Exit" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
-			<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:text="Go To Role Assignment" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
+			<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right" android:text="Go To Mission Assignment"></Button>
 		</LinearLayout>
 	</LinearLayout>
 </TabHost>

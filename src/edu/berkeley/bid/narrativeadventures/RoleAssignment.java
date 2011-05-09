@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -153,6 +154,19 @@ public class RoleAssignment extends Activity {
         newRoleButt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 newRole(); // Dialogue to introduce new role
+            }
+        });
+
+        Button toMissionButt = (Button) findViewById(R.id.roleAssiToProg);
+        toMissionButt.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(),
+                        ProgresssionManagement.class);
+                view.setEnabled(false);
+                startActivity(i);
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

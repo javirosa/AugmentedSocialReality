@@ -29,166 +29,192 @@ public class NarrativeAdventures extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        //Used to store global state of application. e.g. narrative information
-        //all activities can call getApplication
-        //for some odd reason getFilesDir 
-        //  returns null if this is done at the application level
-        NAApp naapp = (NAApp)getApplication();
-        File possibleNarsDir = new File(getFilesDir(),"possibleNarratives");
-        File runningProbsDir = new File(getFilesDir(),"runningProblems");
+        // Used to store global state of application. e.g. narrative information
+        // all activities can call getApplication
+        // for some odd reason getFilesDir
+        // returns null if this is done at the application level
+        NAApp naapp = (NAApp) getApplication();
+        File possibleNarsDir = new File(getFilesDir(), "possibleNarratives");
+        File runningProbsDir = new File(getFilesDir(), "runningProblems");
         possibleNarsDir.mkdirs();
         runningProbsDir.mkdirs();
-        
-        //TESTING SAVE/LOAD
-        //Build a problem
+
+        // TESTING SAVE/LOAD
+        // Build a problem
         Problem problem = new Problem();
 
-        final String[] items={"buy chicken", "cook some healthy food", "do other task without getting upset",
-             "make me laugh three times a week", "buy the following items before midnight: 1-food, 2-costumes, 3-boardgames, 4-incense, 5-many videos from the 80's, 6-all the magazines from our old room"};
-        final String[] names={"paul","joseph","rick","ermenegildo","the loco","jim","mary","jeena","roy","my love","mom","dad","gordo"};
-        final String[] messages={"nice work", "i tould you I can do it", "i am getting tired!", "this is interesting"};
-        final String[] roles={"the crazy cook", "the wizard of oz", "superwoman", "the math geek"};
-        
-        problem.situation="I am stressed for a final test";
-        problem.description="I have a lot to study and my test is in 2 days, I have not read all the material and I missed some classes... \n" +
-        		"I am freaking out";
-        problem.difficulty=25;
-        problem.narrative=new Narrative();
-        problem.place="school";
-        
-//        ArrayList<Role> roleslist = new ArrayList<Role>();      
-        Role role1 = new Role();        
+        final String[] itemsH = {
+                "Finish adding the PERMA section so all may see the rational behind the glory that is our majestic device!",
+                "Get us some pizza! The mind of a mad scientist requires nourishment!",
+                "Start reading the NIH proposal and figure out how to convince medical proffessionals of the wonders we have to offer!"};
+        // {"buy chicken",
+        // "cook some healthy food"}
+        final String[] itemsA = { "Stop the Mission Editor Memory Leak before the phone explodes!",
+                "Don't let android beat you. Get text messages sent to all of the peers.",
+                "XML is an alien language decipher the codes which represent an android Spinner!"};
+
+        // "make me laugh three times a week",
+        // "buy the following items before midnight: 1-food, 2-costumes, 3-boardgames, 4-incense, 5-many videos from the 80's, 6-all the magazines from our old room"};
+        // final String[]
+        // names={"paul","joseph","rick","ermenegildo","the loco","jim","mary","jeena","roy","my love","mom","dad","gordo"};
+        final String[] messages = { "nice work", "i tould you I can do it",
+                "i am getting tired!", "this is interesting" };
+        // final String[] roles={"the crazy cook", "the wizard of oz",
+        // "superwoman", "the math geek"};
+
+        problem.situation = "I am stressed for a final presentation.";
+        problem.description = "I have a presentation due for CS264 and I always feel ill prepared no matter what I do or how many buckets of ice cream I eat.";// "I have a lot to study and my test is in 2 days, I have not read all the material and I missed some classes... \n"
+                                                                                                                                                               // +
+        // "I am freaking out";
+        problem.difficulty = 75;
+        problem.narrative = new Narrative();
+        problem.place = "School";
+        problem.people = "Pablo, Javier, Eric";
+
+        // ArrayList<Role> roleslist = new ArrayList<Role>();
+        Role role1 = new Role();
         Role role2 = new Role();
-        
-        role1.description="This is the role number 1";
-        role1.name = "First Role";        
-        Bitmap BMP = BitmapFactory.decodeResource(getResources(), R.drawable.back_arrow);
+
+        role1.description = "Bring forth the knowledge you have gained and spead it to the world!";
+        role1.name = "The Herald";
+        Bitmap BMP = BitmapFactory.decodeResource(getResources(),
+                R.drawable.herald);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         BMP.compress(CompressFormat.PNG, 100, baos);
         role1.roleIcon = baos.toByteArray();
 
-        for (String s:items){
+        for (String s : itemsH) {
             Mission m = new Mission();
-            m.description=s;
-            m.icon=baos.toByteArray();
-            m.status=Mission.Status.ASSIGNED;
+            m.description = s;
+            m.icon = baos.toByteArray();
+            m.status = Mission.Status.ASSIGNED;
             m.resources.addAll(Arrays.asList(messages));
             role1.missions.add(m);
-        }        
-//      missions.add(new Mission());
-//      missions.get(items.length).description="[ NEW MISSION ]";
+        }
+        // missions.add(new Mission());
+        // missions.get(items.length).description="[ NEW MISSION ]";
+
+        role2 = role1.cloneRole();
+        role2.missions = new ArrayList<Mission>();
+        for (String s : itemsA) {
+            Mission m = new Mission();
+            m.description = s;
+            m.icon = baos.toByteArray();
+            m.status = Mission.Status.ASSIGNED;
+            m.resources.addAll(Arrays.asList(messages));
+            role2.missions.add(m);
+        }
+        role2.description = "The archictect is reponsible for the design and implementation of the great discovery. He/She understands the inner workings of your device.";
+        role2.name = "Chief Architect";
         
-        role2=role1.cloneRole();
-        role2.description="This is the role number 2";
-        role2.name = "Second Role";        
-        BMP = BitmapFactory.decodeResource(getResources(), R.drawable.girl);
+        BMP = BitmapFactory.decodeResource(getResources(), R.drawable.forward_arrow);
         baos = new ByteArrayOutputStream();
         BMP.compress(CompressFormat.PNG, 100, baos);
         role2.roleIcon = baos.toByteArray();
 
-        Narrative narr = problem.narrative;      
+        Narrative narr = problem.narrative;
         narr.agents = new ContactListAgentSource(this).getAgents();
-      //      new ArrayList<Agent>();
+        // new ArrayList<Agent>();
         narr.associatedMssns = new ArrayList<Mission>();
         narr.narrator = narr.agents.get(0);
         narr.participant = narr.agents.get(1);
-        narr.prolog = "HI This is the description of the narrative that tells everything that is needed to know, and sometimes things that are not needed, to make the outcome really successful and to bla bla bla";
+        narr.prolog = "A great mystery has been solved. You must present it to the world at a gathering of great scientists and inventors. It is the key to solving all of humankind's problems.";// "HI This is the description of the narrative that tells everything that is needed to know, and sometimes things that are not needed, to make the outcome really successful and to bla bla bla";
         narr.setting = "NOTHING";
-        for (int i=0; i<narr.agents.size(); i++) {
-            if (i%2==1) {
+        /*for (int i = 0; i < narr.agents.size(); i++) {
+            if (i % 2 == 1) {
                 narr.agents.get(i).addRole(role1);
             } else {
                 narr.agents.get(i).addRole(role2);
             }
-        }
-//        narr.agents.get(0).addRole(role1); 
-  //      narr.agents.get(1).addRole(role2); 
-        narr.title = "the crazy narrative";
+        }*/
+        narr.agents.get(0).addRole(role1);
+        narr.agents.get(1).addRole(role2);
+        narr.title = "Revelation Presentation";
 
-        problem.narrative=narr;
-        
-        
+        problem.narrative = narr;
+
         NAApp application = (NAApp) getApplication();
-        application.currentProblem=problem;
-        
+        application.currentProblem = problem;
+
         application.runningProblems.add(problem);
-            
-        /*Generate a simple narrative with one agent,mission, and role
-        Narrative narrative1 = new Narrative();
-        Agent narrator = new Agent();
-        narrative1.agents.add(narrator);
-        narrative1.agents.get(0).name = "foobar";
-        Role role = new Role();
-        role.description = "descr";
-        role.missions.add(new Mission());
-        narrative1.agents.get(0).roles.add(role);
-        narrative1.roles.add(role.cloneRole());
-        narrative1.narrator = narrator;
-        narrative1.participant = new Agent();
-        
-        problem.narrative = narrative1;
-        naapp.runningProblems.add(problem);
-        naapp.possibleNarratives.add(narrative1.cloneNarrative());
-        */
-        //if (!naapp.saveState(possibleNarsDir,runningProbsDir)) {
-        //    Log.d("GSON", "save unsuccessful");
-        //    Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
-        //}
-        
-        //if (! naapp.loadState(possibleNarsDir, runningProbsDir) ) {
-        //    Log.d("GSON", "load unsuccessful");
-        //}
-        
-        
+
+        /*
+         * Generate a simple narrative with one agent,mission, and role
+         * Narrative narrative1 = new Narrative(); Agent narrator = new Agent();
+         * narrative1.agents.add(narrator); narrative1.agents.get(0).name =
+         * "foobar"; Role role = new Role(); role.description = "descr";
+         * role.missions.add(new Mission());
+         * narrative1.agents.get(0).roles.add(role);
+         * narrative1.roles.add(role.cloneRole()); narrative1.narrator =
+         * narrator; narrative1.participant = new Agent();
+         * 
+         * problem.narrative = narrative1; naapp.runningProblems.add(problem);
+         * naapp.possibleNarratives.add(narrative1.cloneNarrative());
+         */
+        // if (!naapp.saveState(possibleNarsDir,runningProbsDir)) {
+        // Log.d("GSON", "save unsuccessful");
+        // Toast.makeText(this, "Save Failed", Toast.LENGTH_LONG);
+        // }
+
+        // if (! naapp.loadState(possibleNarsDir, runningProbsDir) ) {
+        // Log.d("GSON", "load unsuccessful");
+        // }
+
         // END TESTING SAVE/LOAD
-        
-        //TODO connect to cloud and update narrative list
 
-    	Button probDefi = (Button)findViewById(R.id.probDefi);
-    	Button sociSele = (Button)findViewById(R.id.sociSele);
-    	Button narrSele = (Button)findViewById(R.id.narrSele);
-    	Button roleAssi = (Button)findViewById(R.id.roleAssi);
-    	Button progMana = (Button)findViewById(R.id.progMana);
-    	
-    	probDefi.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), AProblemInput.class);
-				
-				//Create a new problem and add it
-				NAApp naapp = (NAApp) getApplication();
-				naapp.currentProblem = new Problem();
-				naapp.runningProblems.add(naapp.currentProblem);
-				
-				startActivityForResult(i, 0);
-			}
-		});
-    	sociSele.setOnClickListener(new View.OnClickListener() {
-    		public void onClick(View v) {
-    			Intent i = new Intent(v.getContext(), SocialSelection.class);
-    			startActivityForResult(i, 0);
-    		}
-    	});
+        // TODO connect to cloud and update narrative list
 
-    	
-    	narrSele.setOnClickListener(new View.OnClickListener(){
-    	    public void onClick(View v) {
-    	        Intent i = new Intent(v.getContext(), NarrativeSelection.class);
-    	        startActivityForResult(i, 0);
-    	    }
-    	});
-        roleAssi.setOnClickListener(new View.OnClickListener(){
+        Button sociSele = (Button) findViewById(R.id.sociSele);
+        Button probDefiExist = (Button) findViewById(R.id.probDefiExist);
+        Button probDefi= (Button) findViewById(R.id.probDefi);
+        Button narrSele = (Button) findViewById(R.id.narrSele);
+        Button roleAssi = (Button) findViewById(R.id.roleAssi);
+        Button progMana = (Button) findViewById(R.id.progMana);
+
+        probDefi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), AProblemInput.class);
+
+                // Create a new problem and add it
+                NAApp naapp = (NAApp) getApplication();
+                naapp.currentProblem = new Problem();
+                naapp.runningProblems.add(naapp.currentProblem);
+
+                startActivityForResult(i, 0);
+            }
+        });
+        probDefiExist.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), AProblemInput.class);
+                startActivityForResult(i, 0);
+            }
+        });
+        sociSele.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), SocialSelection.class);
+                startActivityForResult(i, 0);
+            }
+        });
+
+        narrSele.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), NarrativeSelection.class);
+                startActivityForResult(i, 0);
+            }
+        });
+        roleAssi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), RoleAssignment.class);
                 startActivityForResult(i, 0);
             }
         });
 
-        progMana.setOnClickListener(new View.OnClickListener(){
+        progMana.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ProgresssionManagement.class);
+                Intent i = new Intent(v.getContext(),
+                        ProgresssionManagement.class);
                 startActivityForResult(i, 0);
             }
         });
-
     }
 }

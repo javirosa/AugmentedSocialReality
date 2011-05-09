@@ -52,6 +52,7 @@ public class AProblemInput extends Activity {
                                                                           // Selection
         goToSociSele.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                view.setEnabled(false);
                 // TextView textos = (TextView)
                 // findViewById(R.id.probDefiNameTag);
                 saveToCurrentProblem();
@@ -63,7 +64,9 @@ public class AProblemInput extends Activity {
                 // problemOpen.people + " " + problemOpen.situation + " " +
                 // problemOpen.place + " " + problemOpen.difficulty);
                 Intent i = new Intent(view.getContext(), SocialSelection.class);
-                startActivityForResult(i, 0);
+                startActivity(i);
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
