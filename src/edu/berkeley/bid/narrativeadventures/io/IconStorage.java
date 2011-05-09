@@ -59,6 +59,11 @@ public class IconStorage {
         return baos.toByteArray();
     }
     
+    /**
+     * Takes an InputStream, from a file and 
+     * @param is
+     * @return
+     */
     public static byte[] toBytes(InputStream is)
     {
         Bitmap bmp = BitmapFactory.decodeStream(is);

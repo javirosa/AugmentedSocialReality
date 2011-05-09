@@ -66,6 +66,19 @@ public class Agent implements Comparable<Agent>
 	
 	public int compareTo(Agent other)
 	{
+	    if (this.number.equals(other.number)) {
+	        return 0;
+	    }
 	    return this.name.compareTo(other.name);
+	}
+	
+	@Override
+	public boolean equals(Object other) 
+	{
+	    if (other != null && other instanceof Agent)
+	    {
+	        return this.compareTo((Agent)other) == 0;
+	    }
+	    return false;
 	}
 }

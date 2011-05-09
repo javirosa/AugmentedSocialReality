@@ -153,6 +153,12 @@ public class NarrativeAdventures extends Activity {
     	probDefi.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(v.getContext(), AProblemInput.class);
+				
+				//Create a new problem and add it
+				NAApp naapp = (NAApp) getApplication();
+				naapp.currentProblem = new Problem();
+				naapp.runningProblems.add(naapp.currentProblem);
+				
 				startActivityForResult(i, 0);
 			}
 		});

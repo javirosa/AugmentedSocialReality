@@ -1,8 +1,5 @@
 package edu.berkeley.bid.narrativeadventures;
 
-import java.util.ArrayList;
-
-import edu.berkeley.bid.narrativeadventures.model.Problem;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,63 +9,112 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-
+import edu.berkeley.bid.narrativeadventures.model.Narrative;
+import edu.berkeley.bid.narrativeadventures.model.Problem;
 
 public class AProblemInput extends Activity {
-	private Problem problemOpen;
-	private static final String[] places = {"home", "school", "work", "friend's place", "street", "public places", "restaurant", "other"};
-	
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.probdefix2);
-		
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-		Spinner listPlaces = (Spinner) findViewById(R.id.probDefiPlacFill);
-		for (int i=0; i<places.length; i++) {
+    private static final String[] places = { "Home", "School", "Work",
+            "Friend's place", "Street", "Public places", "Restaurant", "Other" };
+
+    /**
+     * Edits the problem in currentProblem If we want to create a new Problem
+     * then we just set it to be a new Problem before this starts When this
+     * screen is first started the currentProblem should be a new problem if we
+     * are creating a new one
+     */
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.probdefix2);
+
+        // Initialize place locations
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item);
+        Spinner listPlaces = (Spinner) findViewById(R.id.probDefiPlacFill);
+        for (int i = 0; i < places.length; i++) {
             adapter1.add(places[i]);
-        }       
-		
-		listPlaces.setAdapter(adapter1);
-		
-		//Back to Main
-		Button backToMain = (Button) findViewById(R.id.probDefiToMain); //Button to go back to Main
-		backToMain.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				Intent intent = new Intent();
-				setResult(RESULT_OK, intent);
-				finish();
-			}
-		});
-		//To Social Selection
-		Button goToSociSele = (Button) findViewById(R.id.probDefiToSoci); //Button to navigate to Social Selection
-		goToSociSele.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-                problemOpen = populate();               
-                TextView textos = (TextView) findViewById(R.id.probDefiNameTag);
-    //            textos.setText(problemOpen.description + " " + problemOpen.people + " " + problemOpen.situation + " " + problemOpen.place + " " + problemOpen.difficulty);
-			    Intent i = new Intent(view.getContext(), SocialSelection.class);
-				startActivityForResult(i, 0);
-				finish();
-			}
-		});
-	}
-	
-	public Problem populate(){
-	    Problem p = new Problem();
-	    final EditText situation = (EditText) findViewById(R.id.probDefiNameFill);
-	    final EditText description = (EditText) findViewById(R.id.probDefiDescFill);
-	    final Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);
-	    final EditText people = (EditText) findViewById(R.id.probDefiPeopFill);
-	    final SeekBar difficulty = (SeekBar) findViewById(R.id.probDefiRateFill);
-	    
-	    p.situation = situation.getText().toString();
-	    p.description = description.getText().toString();
-	    p.place = (String) place.getAdapter().getItem(place.getLastVisiblePosition());
-	    p.people = people.getText().toString();
-	    p.difficulty = difficulty.getProgress();
-	    return p;
-	}
-	
+        }
+        listPlaces.setAdapter(adapter1);
+
+        /*
+         * Back to Main button Button backToMain = (Button)
+         * findViewById(R.id.probDefiToMain); //Button to go back to Main
+         * backToMain.setOnClickListener(new View.OnClickListener() { public
+         * void onClick(View view) { Intent intent = new Intent();
+         * setResult(RESULT_OK, intent); finish(); } });
+         */
+
+        // To Social Selection button
+        Button goToSociSele = (Button) findViewById(R.id.probDefiToSoci); // Button
+                                                                          // to
+                                                                          // navigate
+                                                                          // to
+                                                                          // Social
+                                                                          // Selection
+        goToSociSele.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                // TextView textos = (TextView)
+                // findViewById(R.id.probDefiNameTag);
+                saveToCurrentProblem();
+                NAApp naapp = ((NAApp) getApplication());
+                if (naapp.currentProblem.narrative == null) {
+                    naapp.currentProblem.narrative = new Narrative();
+                }
+                // textos.setText(problemOpen.description + " " +
+                // problemOpen.people + " " + problemOpen.situation + " " +
+                // problemOpen.place + " " + problemOpen.difficulty);
+                Intent i = new Intent(view.getContext(), SocialSelection.class);
+                startActivityForResult(i, 0);
+                finish();
+            }
+        });
+        loadFromCurrentProblem();
+    }
+
+    /**
+     * Reads the values from the screen and sets them in currentProblem
+     * 
+     * @return
+     */
+    private void saveToCurrentProblem() {
+        // When this screen is first started the currentProblem should be a new
+        // problem
+        Problem p = ((NAApp) getApplication()).currentProblem;
+        EditText situation = (EditText) findViewById(R.id.probDefiNameFill);
+        EditText description = (EditText) findViewById(R.id.probDefiDescFill);
+        Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);
+        EditText people = (EditText) findViewById(R.id.probDefiPeopFill);
+        SeekBar difficulty = (SeekBar) findViewById(R.id.probDefiRateFill);
+
+        p.situation = situation.getText().toString();
+        p.description = description.getText().toString();
+        p.place = (String) place.getAdapter().getItem(
+                place.getLastVisiblePosition());
+        p.people = people.getText().toString();
+        p.difficulty = difficulty.getProgress();
+    }
+
+    /**
+     * Takes input from the gui and loads it into the currentProblem
+     */
+    private void loadFromCurrentProblem() {
+        Problem p = ((NAApp) getApplication()).currentProblem;
+        EditText situation = (EditText) findViewById(R.id.probDefiNameFill);
+        EditText description = (EditText) findViewById(R.id.probDefiDescFill);
+        Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);
+        EditText people = (EditText) findViewById(R.id.probDefiPeopFill);
+        SeekBar difficulty = (SeekBar) findViewById(R.id.probDefiRateFill);
+
+        // Set screen
+        difficulty.setMax(100);
+        situation.setText(p.situation);
+        description.setText(p.description);
+        for (int idx = 0; idx < places.length; idx++) {
+            if (places[idx].equals(p.place)) {
+                place.setSelection(idx);
+                break;
+            }
+        }
+        people.setText(p.people);
+        difficulty.setProgress(p.difficulty);
+    }
 }
