@@ -113,6 +113,7 @@ public class ProgresssionManagement extends Activity  {
         roleList.setAdapter(roleAdapter);     
         roleList.setSelection(currentRolePosition);
         currentAgent = currentNarrative.agents.get(currentAgentPosition);
+        currentRole = currentNarrative.agents.get(currentAgentPosition).roles.get(0); // ASSUMING ONLY ONE ROLE!!!
         missionAdapter = new MissionArrayAdapter(getApplicationContext(), R.layout.oneiconrow, currentRole.missions);
         ListView missionList = (ListView) this.findViewById(R.id.progManaMissList);
         missionList.setAdapter(missionAdapter);  

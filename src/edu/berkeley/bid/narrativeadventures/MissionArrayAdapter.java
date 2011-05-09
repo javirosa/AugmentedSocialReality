@@ -16,11 +16,17 @@ import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
 
 public class MissionArrayAdapter extends ArrayAdapter<Mission>{
+    private static final String tag = "MissionArrayAdapter";
+    private static final String ASSETS_DIR = "images/";
+    private Context context;
+    private ImageView icon;
+    private TextView label;
     private List<Mission> missions = new ArrayList<Mission>();
     
     public MissionArrayAdapter(Context context, int textViewResourceId, List<Mission> missions) 
     {
         super(context, textViewResourceId, missions);
+        this.context = context;
         this.missions = missions;
     }
     
@@ -37,13 +43,13 @@ public class MissionArrayAdapter extends ArrayAdapter<Mission>{
     }
     
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent){
+        View row = convertView;
         //Create item view from scratch
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = inflater.inflate(R.layout.oneiconrow, parent, false);
-        TextView label = (TextView) row.findViewById(R.id.label);
-        ImageView icon = (ImageView) row.findViewById(R.id.icon);
+        row = inflater.inflate(R.layout.oneiconrow, parent, false);
+         label = (TextView) row.findViewById(R.id.label);
+         icon = (ImageView) row.findViewById(R.id.icon);
         
         //Get data from Agent
         Mission mission = getItem(position);
@@ -54,12 +60,12 @@ public class MissionArrayAdapter extends ArrayAdapter<Mission>{
         label.setText(description);
    //     label2.setText("Select Icon: ");
 //        edit.setText(name);
-        /*
+        
         if (bmp != null) {
             icon.setImageBitmap(bmp);
         } else {
             icon.setImageResource(R.drawable.back_arrow);
-        }*/
+        }
         return row;
     }
 }

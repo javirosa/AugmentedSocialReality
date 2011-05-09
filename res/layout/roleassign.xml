@@ -3,7 +3,7 @@
     <TextView android:id="@+id/roleAssiNarrTitl" android:text="Narrative:" android:layout_height="wrap_content" android:layout_width="fill_parent"></TextView>
     <Spinner android:id="@+id/roleAssiNarrSele" android:layout_height="70px" android:layout_width="fill_parent" android:entries="@array/selenarr"></Spinner>
 
-	<LinearLayout android:id="@+id/roleAssiPlotLayo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal" android:layout_weight="0">
+	<LinearLayout android:id="@+id/roleAssiPlotLayo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="0">
     	<LinearLayout android:id="@+id/roleAssiPlotMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">
 		    <TextView android:id="@+id/roleAssiPlotTitl" android:text="Plot:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:textStyle="bold"></TextView>
 			<ScrollView android:id="@+id/roleAssiPlotScro" android:layout_width="fill_parent" android:layout_height="100px">
