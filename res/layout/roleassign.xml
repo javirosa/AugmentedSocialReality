@@ -22,7 +22,7 @@
         <ListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/roleAssiNameIn" android:entries="@array/namesin" android:layout_weight="1"></ListView>    
 	    </LinearLayout>
     </LinearLayout>
-	<LinearLayout android:id="@+id/roleAssiButtLayo" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="0">
+	<LinearLayout android:id="@+id/roleAssiButtLayo" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="0" android:gravity="center_horizontal">
 		<Button android:id="@+id/roleAssiButt" android:layout_width="240px" android:layout_height="50px" android:text="New Role" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
 		<Button android:id="@+id/roleAssiToProg" android:layout_width="240px" android:layout_height="50px" android:text="Exit" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
 	</LinearLayout>
