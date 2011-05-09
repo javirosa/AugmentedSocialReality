@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/sociSeleMainLayo" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:screenOrientation="portrait" xmlns:android="http://schemas.android.com/apk/res/android">
-	<TextView android:id="@+id/sociSeleNarrTitl" android:layout_width="fill_parent" android:layout_height="26px" android:text="Narrative Selection:" android:layout_below="@+id/sociSeleTitl"></TextView>
-	<Spinner android:id="@+id/sociSeleSpin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:entries="@array/situation"></Spinner>
+	<TextView android:id="@+id/sociSeleNarrTitl" android:layout_width="fill_parent" android:layout_height="26px" android:text="Narrative:" android:layout_below="@+id/sociSeleTitl"></TextView>
+	<TextView android:id="@+id/sociSeleNarrTitlCont" android:layout_width="fill_parent" android:layout_height="26px" android:text="Narrative:" android:layout_below="@+id/sociSeleTitl"></TextView>
 	<LinearLayout android:id="@+id/sociSeleList" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
 		<LinearLayout android:id="@+id/widget163" android:layout_width="fill_parent" android:layout_height="20px" android:orientation="horizontal">
 			<TextView android:id="@+id/sociSeleLis1Title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="ACTORS:" android:textSize="10sp" android:textStyle="bold" android:layout_weight="1" android:gravity="center"></TextView>

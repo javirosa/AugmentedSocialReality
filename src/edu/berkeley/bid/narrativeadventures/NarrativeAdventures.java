@@ -43,8 +43,8 @@ public class NarrativeAdventures extends Activity {
         //Build a problem
         Problem problem = new Problem();
 
-        final String[] items={"buy chicken", "cook some healthy food", "send pictures of every family reunion", "get together every saturday to play games", "complete all the puzzles tonight", "send flowers to jenny tomorrow", "do other task without getting upset","eat all the food","take every medication by 6pm",
-            "get together with my parents to talk", "make me laugh three times a week", "buy the following items before midnight: 1-food, 2-customs, 3-boardgames, 4-incense, 5-many videos from the 80's, 6-all the magazines from our old room"};
+        final String[] items={"buy chicken", "cook some healthy food", "do other task without getting upset",
+             "make me laugh three times a week", "buy the following items before midnight: 1-food, 2-costumes, 3-boardgames, 4-incense, 5-many videos from the 80's, 6-all the magazines from our old room"};
         final String[] names={"paul","joseph","rick","ermenegildo","the loco","jim","mary","jeena","roy","my love","mom","dad","gordo"};
         final String[] messages={"nice work", "i tould you I can do it", "i am getting tired!", "this is interesting"};
         final String[] roles={"the crazy cook", "the wizard of oz", "superwoman", "the math geek"};

@@ -111,17 +111,12 @@ public class ProgresssionManagement extends Activity  {
     //    }
         ListView roleList = (ListView) this.findViewById(R.id.progManaPers);  //set role list layout
         roleList.setAdapter(roleAdapter);     
-        roleList.setSelection(currentRolePosition);
+        roleList.setSelection(0);
         currentAgent = currentNarrative.agents.get(currentAgentPosition);
         currentRole = currentNarrative.agents.get(currentAgentPosition).roles.get(0); // ASSUMING ONLY ONE ROLE!!!
         missionAdapter = new MissionArrayAdapter(getApplicationContext(), R.layout.oneiconrow, currentRole.missions);
         ListView missionList = (ListView) this.findViewById(R.id.progManaMissList);
         missionList.setAdapter(missionAdapter);  
- //       missionList.setSelection(currentMissionPosition);
-//        if (missionAdapter.getPosition(newMission) != -1) {
-//            missionAdapter.add(newMission);
-//        }
-        //missionAdapter.getItem(index)(items.length).description="[ NEW MISSION ]";
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {        
@@ -160,7 +155,8 @@ public class ProgresssionManagement extends Activity  {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                currentRole = ((Agent) parent.getItemAtPosition(position)).roles.get(0);
-               currentRolePosition = position;
+             //  currentRolePosition = position;
+               currentAgentPosition = position;
                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                v.vibrate(100);
                update();
