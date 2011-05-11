@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
     <TextView android:id="@+id/progManaNarrTitl" android:text="Narrative:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:textStyle="bold"></TextView>
-    <Spinner android:id="@+id/progManaNarrSele" android:layout_height="70px" android:layout_width="fill_parent" android:entries="@array/selenarr"></Spinner>
+    <!-- <Spinner android:id="@+id/progManaNarrSele" android:layout_height="70px" android:layout_width="fill_parent" android:entries="@array/selenarr"></Spinner>-->
 	<LinearLayout android:id="@+id/progManaPlotRole" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal" android:layout_weight="0">
     	<LinearLayout android:id="@+id/progManaPlotMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">
 		    <TextView android:id="@+id/progManaPlotTitl" android:text="Plot:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:textStyle="bold"></TextView>

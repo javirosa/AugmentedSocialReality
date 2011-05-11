@@ -10,11 +10,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import edu.berkeley.bid.narrativeadventures.adapters.ProblemArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
@@ -46,12 +49,13 @@ public class NarrativeAdventures extends Activity {
         final String[] itemsH = {
                 "Finish adding the PERMA section so all may see the rational behind the glory that is our majestic device!",
                 "Get us some pizza! The mind of a mad scientist requires nourishment!",
-                "Start reading the NIH proposal and figure out how to convince medical proffessionals of the wonders we have to offer!"};
+                "Start reading the NIH proposal and figure out how to convince medical proffessionals of the wonders we have to offer!" };
         // {"buy chicken",
         // "cook some healthy food"}
-        final String[] itemsA = { "Stop the Mission Editor Memory Leak before the phone explodes!",
+        final String[] itemsA = {
+                "Stop the Mission Editor Memory Leak before the phone explodes!",
                 "Don't let android beat you. Get text messages sent to all of the peers.",
-                "XML is an alien language decipher the codes which represent an android Spinner!"};
+                "XML is an alien language decipher the codes which represent an android Spinner!" };
 
         // "make me laugh three times a week",
         // "buy the following items before midnight: 1-food, 2-costumes, 3-boardgames, 4-incense, 5-many videos from the 80's, 6-all the magazines from our old room"};
@@ -106,14 +110,15 @@ public class NarrativeAdventures extends Activity {
         }
         role2.description = "The archictect is reponsible for the design and implementation of the great discovery. He/She understands the inner workings of your device.";
         role2.name = "Chief Architect";
-        
-        BMP = BitmapFactory.decodeResource(getResources(), R.drawable.forward_arrow);
+
+        BMP = BitmapFactory.decodeResource(getResources(),
+                R.drawable.forward_arrow);
         baos = new ByteArrayOutputStream();
         BMP.compress(CompressFormat.PNG, 100, baos);
         role2.roleIcon = baos.toByteArray();
 
         Narrative narr = problem.narrative;
-        //Take two people from the agent list
+        // Take two people from the agent list
         ArrayList<Agent> keep = new ContactListAgentSource(this).getAgents();
         narr.agents.add(keep.get(0));
         narr.agents.add(keep.get(1));
@@ -123,13 +128,11 @@ public class NarrativeAdventures extends Activity {
         narr.participant = narr.agents.get(1);
         narr.prolog = "A great mystery has been solved. You must present it to the world at a gathering of great scientists and inventors. It is the key to solving all of humankind's problems.";// "HI This is the description of the narrative that tells everything that is needed to know, and sometimes things that are not needed, to make the outcome really successful and to bla bla bla";
         narr.setting = "NOTHING";
-        /*for (int i = 0; i < narr.agents.size(); i++) {
-            if (i % 2 == 1) {
-                narr.agents.get(i).addRole(role1);
-            } else {
-                narr.agents.get(i).addRole(role2);
-            }
-        }*/
+        /*
+         * for (int i = 0; i < narr.agents.size(); i++) { if (i % 2 == 1) {
+         * narr.agents.get(i).addRole(role1); } else {
+         * narr.agents.get(i).addRole(role2); } }
+         */
         narr.agents.get(0).addRole(role1);
         narr.agents.get(1).addRole(role2);
         narr.title = "Revelation Presentation";
@@ -165,25 +168,59 @@ public class NarrativeAdventures extends Activity {
 
         // END TESTING SAVE/LOAD
 
-        // TODO connect to cloud and update narrative list
 
-        Button sociSele = (Button) findViewById(R.id.sociSele);
-        Button probDefiExist = (Button) findViewById(R.id.probDefiExist);
-        Button probDefi= (Button) findViewById(R.id.probDefi);
-        Button narrSele = (Button) findViewById(R.id.narrSele);
-        Button roleAssi = (Button) findViewById(R.id.roleAssi);
-        Button progMana = (Button) findViewById(R.id.progMana);
+        final Button sociSele = (Button) findViewById(R.id.sociSele);
+        final Button probDefiExist = (Button) findViewById(R.id.probDefiExist);
+        final Button probDefi = (Button) findViewById(R.id.probDefi);
+        final Button narrSele = (Button) findViewById(R.id.narrSele);
+        final Button roleAssi = (Button) findViewById(R.id.roleAssi);
+        final Button progMana = (Button) findViewById(R.id.progMana);
+        final Spinner narSpin = (Spinner) findViewById(R.id.narSpin);
+        
+        ProblemArrayAdapter probAAd = new ProblemArrayAdapter(
+                getApplicationContext(), R.id.oneiconrowroot,
+                ((NAApp) getApplication()).runningProblems);
+        narSpin.setAdapter(probAAd);
+        //probAAd.setDropDownViewResource(R.layout.oneiconrow);
+        narSpin.setOnItemSelectedListener( new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                    int arg2, long arg3) {
+                NAApp naapp = (NAApp)getApplication();
+                naapp.currentProblem = (Problem) ((Spinner)arg0).getSelectedItem();
+                sociSele.setEnabled(true);
+                probDefiExist.setEnabled(true);
+                narrSele.setEnabled(true);
+                roleAssi.setEnabled(true);
+                progMana.setEnabled(true);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                NAApp naapp = (NAApp)getApplication();
+                //The only value behavior is to create a new Problem
+                naapp.currentProblem = null;
+                sociSele.setEnabled(false);
+                probDefiExist.setEnabled(false);
+                narrSele.setEnabled(false);
+                roleAssi.setEnabled(false);
+                progMana.setEnabled(false);
+            }
+        });
+        // On selection set currentProblem to currently selected
+        // all additions of narratives is through spinner
 
         probDefi.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("unchecked")
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), AProblemInput.class);
 
-                // Create a new problem and add it
-                NAApp naapp = (NAApp) getApplication();
+                NAApp naapp = (NAApp)getApplication();
                 naapp.currentProblem = new Problem();
-                naapp.runningProblems.add(naapp.currentProblem);
+                ((ArrayAdapter<Problem>)narSpin.getAdapter()).add(naapp.currentProblem);
 
                 startActivityForResult(i, 0);
+                // TODO if result OK problem is not canceled then set the new problem as selected
             }
         });
         probDefiExist.setOnClickListener(new View.OnClickListener() {
