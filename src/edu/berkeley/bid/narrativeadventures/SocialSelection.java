@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import edu.berkeley.bid.narrativeadventures.adapters.AgentArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 

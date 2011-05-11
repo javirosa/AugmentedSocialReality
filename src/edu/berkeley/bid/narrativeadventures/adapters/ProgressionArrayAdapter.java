@@ -1,4 +1,4 @@
-package edu.berkeley.bid.narrativeadventures;
+package edu.berkeley.bid.narrativeadventures.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import edu.berkeley.bid.narrativeadventures.R;
+import edu.berkeley.bid.narrativeadventures.R.drawable;
+import edu.berkeley.bid.narrativeadventures.R.id;
+import edu.berkeley.bid.narrativeadventures.R.layout;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Role;
 

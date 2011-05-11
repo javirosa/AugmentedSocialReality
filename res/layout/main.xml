@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
 	<!-- <TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/hello" android:textSize="10pt" android:textStyle="bold"/> -->
+    <Spinner android:id="@+id/narselect" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hapticFeedbackEnabled="true" android:clickable="true"></Spinner>
 	<Button android:text="*New Situation*" android:id="@+id/probDefi" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
 	<Button android:text="Situation Entry" android:id="@+id/probDefiExist" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
 	<Button android:text="Social Selection" android:id="@+id/sociSele" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>

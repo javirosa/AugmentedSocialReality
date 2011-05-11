@@ -1,4 +1,4 @@
-package edu.berkeley.bid.narrativeadventures;
+package edu.berkeley.bid.narrativeadventures.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,29 +10,33 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import edu.berkeley.bid.narrativeadventures.R;
+import edu.berkeley.bid.narrativeadventures.R.drawable;
+import edu.berkeley.bid.narrativeadventures.R.id;
+import edu.berkeley.bid.narrativeadventures.R.layout;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Role;
 
-public class RoleArrayAdapter extends ArrayAdapter<Agent>{
-    private static final String tag = "ProgessionArrayAdapter";
+public class RoleArrayAdapter2 extends ArrayAdapter<Role>{
+    private static final String tag = "RolwArrayAdapter";
     private static final String ASSETS_DIR = "images/";
     private Context context;
     private ImageView icon;
     private TextView label;
-    private List<Agent> agents = new ArrayList<Agent>();
+    private List<Role> roles = new ArrayList<Role>();
     
-    public RoleArrayAdapter(Context context, int textViewResourceId, List<Agent> objects) {
+    public RoleArrayAdapter2(Context context, int textViewResourceId, List<Role> objects) {
         super(context, textViewResourceId, objects);
         this.context = context;
-        this.agents = objects;
+        this.roles = objects;
     }
     
     public int getCount(){
-        return this.agents.size();
+        return this.roles.size();
     }
     
-    public Agent getItem(int index) {
-        return this.agents.get(index);
+    public Role getItem(int index) {
+        return this.roles.get(index);
     }
     
     public View getView(int position, View convertView, ViewGroup parent){
@@ -45,15 +49,15 @@ public class RoleArrayAdapter extends ArrayAdapter<Agent>{
         icon = (ImageView) row.findViewById(R.id.icon);
         
         //Get data from Agent
-        Agent persona = getItem(position);
-        String name = persona.name;
-        byte[] agentPhoto = persona.photo;
+        Role role = getItem(position);
+        String name = role.description;
+       byte[] agentPhoto = role.roleIcon;
         Bitmap agentBmp = android.graphics.BitmapFactory.decodeByteArray(agentPhoto, 0, agentPhoto.length);
         
         //get data from Role
         byte[] roleIcon = new byte[] {};
-        if (persona.roles.size() > 0) {
-            roleIcon = persona.roles.get(0).roleIcon;
+        if (role.missions.size() > 0) {
+            roleIcon = role.missions.get(0).icon;
         }
         Bitmap roleBmp = android.graphics.BitmapFactory.decodeByteArray(roleIcon, 0, roleIcon.length);
         
