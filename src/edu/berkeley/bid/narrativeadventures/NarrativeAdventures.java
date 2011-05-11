@@ -113,7 +113,10 @@ public class NarrativeAdventures extends Activity {
         role2.roleIcon = baos.toByteArray();
 
         Narrative narr = problem.narrative;
-        narr.agents = new ContactListAgentSource(this).getAgents();
+        //Take two people from the agent list
+        ArrayList<Agent> keep = new ContactListAgentSource(this).getAgents();
+        narr.agents.add(keep.get(0));
+        narr.agents.add(keep.get(1));
         // new ArrayList<Agent>();
         narr.associatedMssns = new ArrayList<Mission>();
         narr.narrator = narr.agents.get(0);

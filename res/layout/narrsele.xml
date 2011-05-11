@@ -19,7 +19,7 @@
 			</TableLayout>
 		</FrameLayout>
 		<LinearLayout android:id="@+id/narrSeleButt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_weight="0">
-			<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right" android:text="Go To Mission Assignment"></Button>
+			<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right" android:text="Go To Role Assignment"></Button>
 		</LinearLayout>
 	</LinearLayout>
 </TabHost>

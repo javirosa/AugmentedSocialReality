@@ -71,10 +71,10 @@ public class RoleAssignment extends Activity {
         // Get the list of agents in the current narrative
         NAApp application = (NAApp) getApplication();
         currentNarrative = application.currentProblem.narrative;
-        final String[] listaproblems = new String[application.runningProblems
-                .size()];
         TextView prolog = (TextView) this.findViewById(R.id.roleAssiPlotDesc);
         prolog.setText(currentNarrative.prolog);
+        /*
+        final String[] listaproblems = new String[application.runningProblems
         Spinner spinner = (Spinner) findViewById(R.id.roleAssiNarrSele);
         for (int i = 0; i < application.runningProblems.size(); i++) {
             listaproblems[i] = application.runningProblems.get(i).narrative.title;
@@ -84,6 +84,7 @@ public class RoleAssignment extends Activity {
         spinnerAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+        */
         // application.runningProblems.get(0).narrative.title;
         // ArrayAdapter.createFromResource(this, application.runningProblems,
         // android.R.layout.simple_spinner_item);
@@ -113,7 +114,7 @@ public class RoleAssignment extends Activity {
 
         ListView actorList = (ListView) this.findViewById(R.id.roleAssiPers);
         ListView roleList = (ListView) this.findViewById(R.id.roleAssiNameIn);
-        Spinner spinnerNarr = (Spinner) this
+        /*Spinner spinnerNarr = (Spinner) this
                 .findViewById(R.id.roleAssiNarrSele);
 
         spinnerNarr.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -126,7 +127,7 @@ public class RoleAssignment extends Activity {
             public void onNothingSelected(AdapterView parent) {
                 // Do nothing
             }
-        });
+        });*/
         /*
          * roleList.setOnItemLongClickListener(new OnItemLongClickListener() {
          * 
@@ -156,17 +157,15 @@ public class RoleAssignment extends Activity {
                 newRole(); // Dialogue to introduce new role
             }
         });
-
+        
         Button toMissionButt = (Button) findViewById(R.id.roleAssiToProg);
         toMissionButt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(),
-                        ProgresssionManagement.class);
-                view.setEnabled(false);
-                startActivity(i);
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
+                    Intent i = new Intent(view.getContext(),
+                            ProgresssionManagement.class);
+                    view.setEnabled(false);
+                    startActivity(i);
+                    finish();
             }
         });
     }

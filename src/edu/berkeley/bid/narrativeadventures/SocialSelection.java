@@ -57,7 +57,8 @@ public class SocialSelection extends Activity {
         mRuntimeOrientation = this.getScreenOrientation();
         setContentView(R.layout.socisele);
 
-        // Load agents from contact list and remove them if they are already in the 
+        // Load agents from contact list and remove them if they are already in
+        // the
         // narrative.
         ContactListAgentSource agentsource = new ContactListAgentSource(this);
         personaListOut = agentsource.getAgents();
@@ -66,7 +67,7 @@ public class SocialSelection extends Activity {
         }
         personaListIn = ((NAApp) getApplication()).currentProblem.narrative.agents;
         personaListOut.removeAll(personaListIn);
-        
+
         // Get data for people included (actors)
         adapterIn = new AgentArrayAdapter(getApplicationContext(),
                 R.layout.oneiconrow, personaListIn);
@@ -179,19 +180,16 @@ public class SocialSelection extends Activity {
                         NarrativeSelection.class);
                 view.setEnabled(false);
                 startActivity(i);
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
 
-        /* Button to go back to Main
-        Button backToMain = (Button) findViewById(R.id.sociSeleToMain);
-        backToMain.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                finish();
-            }
-        });*/
+        /*
+         * Button to go back to Main Button backToMain = (Button)
+         * findViewById(R.id.sociSeleToMain); backToMain.setOnClickListener(new
+         * View.OnClickListener() { public void onClick(View view) { finish(); }
+         * });
+         */
     }
 
     public void onListItemClick(ListView parent, View v, int position, long id) {

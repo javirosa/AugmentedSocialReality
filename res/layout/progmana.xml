@@ -30,7 +30,7 @@
     
 	<LinearLayout android:id="@+id/progManaButtLayo" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="0">
 		<Button android:id="@+id/progManaButt" android:layout_width="240px" android:layout_height="50px" android:text="NEW MISSION" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"></Button>
-		<Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:text="END" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>
+		<!-- <Button android:id="@+id/narrSeleToRole" android:layout_width="240px" android:layout_height="50px" android:text="END" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_gravity="right"></Button>-->
 	</LinearLayout>
 
 </LinearLayout>
