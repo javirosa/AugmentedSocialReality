@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.berkeley.bid.narrativeadventures.adapters.AgentArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.adapters.IconArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.adapters.MissionArrayAdapter;
@@ -76,41 +77,46 @@ public class ProgresssionManagement extends Activity {
     }
 
     public void update() {
+        Button newMission = (Button) this.findViewById(R.id.progManaButt);
+        TextView prolog = (TextView) this.findViewById(R.id.progManaPlotDesc);
+        ListView roleList = (ListView) this.findViewById(R.id.progManaPers); 
+        ListView missionList = (ListView) this.findViewById(R.id.progManaMissList);
+        
         // Get the list of agents in the current narrative
         NAApp application = (NAApp) getApplication();
-        //final String[] listaproblems = new String[application.runningProblems
-        //        .size()];
         currentNarrative = application.currentProblem.narrative; // set current
                                                                  // narrative
-        TextView prolog = (TextView) this.findViewById(R.id.progManaPlotDesc); // set
-                                                                               // layout
+        
+        newMission.setEnabled(false);
+        //Handle a lack of agents 
+        if (application.currentProblem == null || currentNarrative == null || currentNarrative.agents.size() == 0) {
+            Context context = getApplicationContext();
+            Toast.makeText(context, "Please add agents using the social selection screen.", 10).show();
+            return;
+        } else {
+            //Handle a lack of roles
+            for (int i = 0; i < currentNarrative.agents.size(); i++) {
+                if (currentNarrative.agents.get(i).roles.size()== 0){
+                    Context context = getApplicationContext();
+                    Toast.makeText(context, "Please add roles to all agents using the role selection screen.", 10).show();
+                    return;
+                }
+            }
+        }
+        newMission.setEnabled(true);
+        
         prolog.setText(currentNarrative.prolog); // write current prolog
-
-        // Spinner spinner = (Spinner) findViewById(R.id.progManaNarrSele);
-        // //set narrative selector
-        //for (int i = 0; i < application.runningProblems.size(); i++) {
-        //    listaproblems[i] = application.runningProblems.get(i).narrative.title;
-        //}
-        // ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-        // android.R.layout.simple_list_item_1, listaproblems);
-        // spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // spinner.setAdapter(spinnerAdapter);
-        roleAdapter = new ProgressionArrayAdapter(getApplicationContext(),
-                R.layout.twoicononrow, currentNarrative.agents); // set role
-                                                                 // adapter
-        ListView roleList = (ListView) this.findViewById(R.id.progManaPers); // set
-                                                                             // role
-                                                                             // list
-                                                                             // layout
-        roleList.setAdapter(roleAdapter);
-        roleList.setSelection(currentAgentPosition); // JR
-        // roleList.setSelection(0);
+        //Get roles
         currentRole = currentNarrative.agents.get(currentAgentPosition).roles
                 .get(0); // ASSUMING ONLY ONE ROLE!!!
+        roleAdapter = new ProgressionArrayAdapter(getApplicationContext(),
+                R.layout.twoicononrow, currentNarrative.agents); 
+        roleList.setAdapter(roleAdapter);
+        roleList.setSelection(currentAgentPosition); 
+        
+        //Get missions
         missionAdapter = new MissionArrayAdapter(getApplicationContext(),
                 R.layout.oneiconrow, currentRole.missions);
-        ListView missionList = (ListView) this
-                .findViewById(R.id.progManaMissList);
         missionList.setAdapter(missionAdapter);
     }
 
@@ -125,25 +131,10 @@ public class ProgresssionManagement extends Activity {
         ListView roleList = (ListView) this.findViewById(R.id.progManaPers);
         ListView missionList = (ListView) this
                 .findViewById(R.id.progManaMissList);
-        // Spinner spinnerNarr = (Spinner)
-        // this.findViewById(R.id.progManaNarrSele);
-
-        /*
-         * spinnerNarr.setOnItemSelectedListener(new OnItemSelectedListener() {
-         * 
-         * @Override public void onItemSelected(AdapterView<?> parent, View
-         * view, int pos, long id) { // currentNarrative = (Narrative)
-         * parent.getItemAtPosition(pos); } public void
-         * onNothingSelected(AdapterView parent){ // Do nothing } });
-         */
-
-        // missionList.setAdapter(missionAdapter);
         missionList.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                // Mission missionSelected = (Mission)
-                // parent.getItemAtPosition(position);
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(100);
                 return true;
@@ -156,7 +147,6 @@ public class ProgresssionManagement extends Activity {
                     int position, long id) {
                 currentRole = ((Agent) parent.getItemAtPosition(position)).roles
                         .get(0);
-                // currentRolePosition = position;
                 currentAgentPosition = position;
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(100);

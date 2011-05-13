@@ -16,15 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleExpandableListAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.berkeley.bid.narrativeadventures.adapters.AgentArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.adapters.IconArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.adapters.MissionArrayAdapter;
@@ -46,7 +44,6 @@ public class RoleAssignment extends Activity {
 
     private int mRuntimeOrientation;
     private boolean mDisableScreenRotation;
-    private Role currentRole;
     private int currentRolePosition;
     private int currentAgentPosition;
     private Agent currentAgent;
@@ -73,38 +70,39 @@ public class RoleAssignment extends Activity {
     }
 
     public void update() {
-        // Get the list of agents in the current narrative
+        Button newRole = (Button) this.findViewById(R.id.roleAssiButt);
+        TextView prolog = (TextView) this.findViewById(R.id.roleAssiPlotDesc);
+        ListView agentList = (ListView) this.findViewById(R.id.roleAssiPers);
+        ListView roleList = (ListView) this.findViewById(R.id.roleAssiNameIn);
+        
+        //Pull data about the current problem and narrative from the application
         NAApp application = (NAApp) getApplication();
         currentNarrative = application.currentProblem.narrative;
-        TextView prolog = (TextView) this.findViewById(R.id.roleAssiPlotDesc);
-        prolog.setText(currentNarrative.prolog);
-        /*
-        final String[] listaproblems = new String[application.runningProblems
-        Spinner spinner = (Spinner) findViewById(R.id.roleAssiNarrSele);
-        for (int i = 0; i < application.runningProblems.size(); i++) {
-            listaproblems[i] = application.runningProblems.get(i).narrative.title;
+        
+        //Handle a lack of agents
+        if (application.currentProblem == null || currentNarrative == null || currentNarrative.agents.size() == 0) {
+            newRole.setEnabled(false);
+            Context context = getApplicationContext();
+            Toast.makeText(context, "Please add agents using the social selection screen.", 10).show();
+            return;
+        } else {
+            newRole.setEnabled(true);
         }
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, listaproblems);
-        spinnerAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
-        */
-        // application.runningProblems.get(0).narrative.title;
-        // ArrayAdapter.createFromResource(this, application.runningProblems,
-        // android.R.layout.simple_spinner_item);
+        
+        currentAgent = currentNarrative.agents.get(currentAgentPosition);
+        
+        //Update view
+        
+        prolog.setText(currentNarrative.prolog);
+        // Get the list of agents in the current narrative 
         agentAdapter = new AgentArrayAdapter(getApplicationContext(),
                 R.layout.oneiconrow, currentNarrative.agents);
-        ListView agentList = (ListView) this.findViewById(R.id.roleAssiPers);
         agentList.setAdapter(agentAdapter);
         agentList.setSelection(currentAgentPosition);
-        currentAgent = currentNarrative.agents.get(currentAgentPosition);
+        
+        //Get the list of roles for the current agent
         roleAdapter2 = new RoleArrayAdapter2(getApplicationContext(),
                 R.layout.oneiconrow, currentAgent.roles);
-        // if (currentMission == null) {
-        // currentMission = roleAdapter2.getItem(0).missions.get(0);
-        // }
-        ListView roleList = (ListView) this.findViewById(R.id.roleAssiNameIn);
         roleList.setAdapter(roleAdapter2);
         roleList.setSelection(currentRolePosition);
     }
@@ -115,41 +113,16 @@ public class RoleAssignment extends Activity {
         mRuntimeOrientation = this.getScreenOrientation();
         setContentView(R.layout.roleassign);
 
+        currentAgentPosition = 0;
         update();
 
         ListView actorList = (ListView) this.findViewById(R.id.roleAssiPers);
-        ListView roleList = (ListView) this.findViewById(R.id.roleAssiNameIn);
-        /*Spinner spinnerNarr = (Spinner) this
-                .findViewById(R.id.roleAssiNarrSele);
-
-        spinnerNarr.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                    int pos, long id) {
-                // currentNarrative = (Narrative) parent.getItemAtPosition(pos);
-            }
-
-            public void onNothingSelected(AdapterView parent) {
-                // Do nothing
-            }
-        });*/
-        /*
-         * roleList.setOnItemLongClickListener(new OnItemLongClickListener() {
-         * 
-         * @Override public boolean onItemLongClick(AdapterView<?> parent, View
-         * view, int position, long id) { Vibrator v = (Vibrator)
-         * getSystemService(Context.VIBRATOR_SERVICE); v.vibrate(100); return
-         * true; } });
-         */
         actorList.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 currentAgent = (Agent) parent.getItemAtPosition(position);
                 currentAgentPosition = position;
-                // currentRole = ((Agent)
-                // parent.getItemAtPosition(position)).roles.get(0);
-                // currentRolePosition = 0;
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(100);
                 update();

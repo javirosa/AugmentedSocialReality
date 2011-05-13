@@ -173,7 +173,7 @@ public class SocialSelection extends Activity {
             }
         });
 
-        // Button to return to narrative selection
+        // Button to go to narrative selection
         Button ToNarr = (Button) findViewById(R.id.sociSeleToNarr);
         ToNarr.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -184,27 +184,10 @@ public class SocialSelection extends Activity {
                 finish();
             }
         });
-
-        /*
-         * Button to go back to Main Button backToMain = (Button)
-         * findViewById(R.id.sociSeleToMain); backToMain.setOnClickListener(new
-         * View.OnClickListener() { public void onClick(View view) { finish(); }
-         * });
-         */
     }
 
     public void onListItemClick(ListView parent, View v, int position, long id) {
-        // selection.setText(items[position]+" was sent to other list");
-        // selection.setText("");
     }
-
-    /*
-     * public void moving(Agent personMoving){ //Dialogue to confirm move
-     * AlertDialog.Builder adb=new AlertDialog.Builder(SocialSelection.this);
-     * adb.setTitle("Confirm you want to move this person");
-     * adb.setMessage(personMoving.name +" will be moved");
-     * adb.setPositiveButton("Ok", null); adb.show(); }
-     */
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
