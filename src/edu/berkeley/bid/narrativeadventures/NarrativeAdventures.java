@@ -213,14 +213,15 @@ public class NarrativeAdventures extends Activity {
         probDefi.setOnClickListener(new View.OnClickListener() {
             @SuppressWarnings("unchecked")
             public void onClick(View v) {
+
+                //Create new problem
+                ArrayAdapter<Problem> aap = ((ArrayAdapter<Problem>)narSpin.getAdapter());
+                aap.add(new Problem());
+                narSpin.setSelection(aap.getCount()-1);
+
                 Intent i = new Intent(v.getContext(), AProblemInput.class);
-
-                NAApp naapp = (NAApp)getApplication();
-                naapp.currentProblem = new Problem();
-                ((ArrayAdapter<Problem>)narSpin.getAdapter()).add(naapp.currentProblem);
-
                 startActivityForResult(i, 0);
-                // TODO if result OK problem is not canceled then set the new problem as selected
+                // TODO if result OK then problem is not canceled then set the new problem as selected
             }
         });
         probDefiExist.setOnClickListener(new View.OnClickListener() {

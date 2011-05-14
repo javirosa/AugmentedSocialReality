@@ -35,34 +35,12 @@ public class AProblemInput extends Activity {
         }
         listPlaces.setAdapter(adapter1);
 
-        /*
-         * Back to Main button Button backToMain = (Button)
-         * findViewById(R.id.probDefiToMain); //Button to go back to Main
-         * backToMain.setOnClickListener(new View.OnClickListener() { public
-         * void onClick(View view) { Intent intent = new Intent();
-         * setResult(RESULT_OK, intent); finish(); } });
-         */
-
         // To Social Selection button
-        Button goToSociSele = (Button) findViewById(R.id.probDefiToSoci); // Button
-                                                                          // to
-                                                                          // navigate
-                                                                          // to
-                                                                          // Social
-                                                                          // Selection
+        Button goToSociSele = (Button) findViewById(R.id.probDefiToSoci); 
         goToSociSele.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 view.setEnabled(false);
-                // TextView textos = (TextView)
-                // findViewById(R.id.probDefiNameTag);
                 saveToCurrentProblem();
-                NAApp naapp = ((NAApp) getApplication());
-                if (naapp.currentProblem.narrative == null) {
-                    naapp.currentProblem.narrative = new Narrative();
-                }
-                // textos.setText(problemOpen.description + " " +
-                // problemOpen.people + " " + problemOpen.situation + " " +
-                // problemOpen.place + " " + problemOpen.difficulty);
                 Intent i = new Intent(view.getContext(), SocialSelection.class);
                 startActivity(i);
                 Intent intent = new Intent();

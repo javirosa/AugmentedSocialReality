@@ -19,7 +19,7 @@ public class Problem implements Ided
         place = "placefoo";
         people = "peoplefoo";
         difficulty = 0;
-        Narrative nar = null;
+        Narrative nar = new Narrative();
     }
     
     public String getId()
