@@ -11,7 +11,9 @@
 	   	</LinearLayout>
 	    <LinearLayout android:id="@+id/progManaRoleMix" android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:layout_weight="1">	
 	    	<TextView android:id="@+id/progManaRoleTitl" android:text="Actor and Role:" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:textStyle="bold"></TextView>
-			<ListView android:id="@+id/progManaPers" android:layout_height="100px" android:layout_width="fill_parent" android:layout_weight="1" android:padding="2px"></ListView>
+	    	<!-- Replace the below with a wheelview -->
+	    	<kankan.wheel.widget.WheelView android:id="@+id/progManaPersWheel" android:layout_height="150px" android:layout_width="fill_parent"/>
+			<!--  <ListView android:id="@+id/progManaPers" android:layout_height="100px" android:layout_width="fill_parent" android:layout_weight="1" android:padding="2px"></ListView> -->
 		</LinearLayout>
 	</LinearLayout>   
 	

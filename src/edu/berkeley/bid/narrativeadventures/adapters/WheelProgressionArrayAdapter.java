@@ -1,6 +1,7 @@
 package edu.berkeley.bid.narrativeadventures.adapters;
 
 import java.util.ArrayList;
+import kankan.wheel.widget.adapters.AbstractWheelAdapter;
 import java.util.List;
 
 import android.content.Context;
@@ -8,21 +9,20 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import edu.berkeley.bid.narrativeadventures.R;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 
-public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
+public class WheelProgressionArrayAdapter extends AbstractWheelAdapter{
     private ImageView icon1;
     private ImageView icon2;
     private TextView label;
     private TextView label2;
     private List<Agent> agents = new ArrayList<Agent>();
     
-    public ProgressionArrayAdapter(Context context, int textViewResourceId, List<Agent> objects) {
-        super(context, textViewResourceId, objects);
+    public WheelProgressionArrayAdapter(Context context, int textViewResourceId, List<Agent> objects) {
+        super();
         this.agents = objects;
     }
     
@@ -37,7 +37,7 @@ public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
     public View getView(int position, View convertView, ViewGroup parent){
         View row = convertView;
         
-        LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         row = inflater.inflate(R.layout.twoicononrow, parent, false);
         
         label = (TextView) row.findViewById(R.id.label);
@@ -78,5 +78,25 @@ public class ProgressionArrayAdapter extends ArrayAdapter<Agent>{
             icon2.setImageResource(R.drawable.icon);
         }
         return row;
+    }
+
+    //For some odd reason the wheel adapter doesn't use the usual adapter method names.
+    @Override
+    public int getItemsCount() {
+        return getCount();
+    }
+
+    //For some odd reason the wheel adapter doesn't use the usual adapter method names.
+    @Override
+    public View getItem(int index, View convertView, ViewGroup parent) {
+        return getView(index, convertView, parent);
+    }
+    
+    @Override
+    public View getEmptyItem(View convertView, ViewGroup parent) {
+        TextView view = new TextView(parent.getContext());
+        view.setText("Empty");
+        return null;
+        
     }
 }

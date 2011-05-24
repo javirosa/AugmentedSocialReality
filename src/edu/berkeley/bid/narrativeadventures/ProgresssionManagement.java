@@ -1,5 +1,8 @@
 package edu.berkeley.bid.narrativeadventures;
 
+import kankan.wheel.widget.OnWheelChangedListener;
+import kankan.wheel.widget.OnWheelScrollListener;
+import kankan.wheel.widget.WheelView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,20 +19,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleExpandableListAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.berkeley.bid.narrativeadventures.adapters.AgentArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.adapters.IconArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.adapters.MissionArrayAdapter;
-import edu.berkeley.bid.narrativeadventures.adapters.ProgressionArrayAdapter;
+import edu.berkeley.bid.narrativeadventures.adapters.WheelProgressionArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.io.IconStorage;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
 import edu.berkeley.bid.narrativeadventures.model.Mission;
@@ -44,7 +44,7 @@ import edu.berkeley.bid.narrativeadventures.model.Role;
  * 
  */
 public class ProgresssionManagement extends Activity {
-    ProgressionArrayAdapter roleAdapter;
+    WheelProgressionArrayAdapter roleAdapter;
     AgentArrayAdapter adapter2;
     IconArrayAdapter adapter3;
     SimpleExpandableListAdapter adaptador;
@@ -55,6 +55,7 @@ public class ProgresssionManagement extends Activity {
     private Role currentRole;
     private int currentAgentPosition;
     private Narrative currentNarrative;
+    private boolean scrolling;
 
     protected int getScreenOrientation() {
         Display display = getWindowManager().getDefaultDisplay();
@@ -79,8 +80,8 @@ public class ProgresssionManagement extends Activity {
     public void update() {
         Button newMission = (Button) this.findViewById(R.id.progManaButt);
         TextView prolog = (TextView) this.findViewById(R.id.progManaPlotDesc);
-        ListView roleList = (ListView) this.findViewById(R.id.progManaPers); 
         ListView missionList = (ListView) this.findViewById(R.id.progManaMissList);
+        WheelView roleWheel= (WheelView) this.findViewById(R.id.progManaPersWheel); 
         
         // Get the list of agents in the current narrative
         NAApp application = (NAApp) getApplication();
@@ -107,12 +108,12 @@ public class ProgresssionManagement extends Activity {
         
         prolog.setText(currentNarrative.prolog); // write current prolog
         //Get roles
-        currentRole = currentNarrative.agents.get(currentAgentPosition).roles
-                .get(0); // ASSUMING ONLY ONE ROLE!!!
-        roleAdapter = new ProgressionArrayAdapter(getApplicationContext(),
+        // ASSUMING ONLY ONE ROLE!!!
+        currentRole = 
+            currentNarrative.agents.get(currentAgentPosition).roles.get(0); 
+        roleAdapter = new WheelProgressionArrayAdapter(getApplicationContext(),
                 R.layout.twoicononrow, currentNarrative.agents); 
-        roleList.setAdapter(roleAdapter);
-        roleList.setSelection(currentAgentPosition); 
+        roleWheel.setViewAdapter(roleAdapter);
         
         //Get missions
         missionAdapter = new MissionArrayAdapter(getApplicationContext(),
@@ -126,9 +127,13 @@ public class ProgresssionManagement extends Activity {
         mRuntimeOrientation = this.getScreenOrientation();
         setContentView(R.layout.progmana);
 
+        WheelView roleWheel= (WheelView) this.findViewById(R.id.progManaPersWheel); 
+        roleWheel.setVisibleItems(1);
+        roleWheel.setVerticalFadingEdgeEnabled(false);
+        roleWheel.setHorizontalFadingEdgeEnabled(false);
+        roleWheel.setFadingEdgeLength(0);
         update();
 
-        ListView roleList = (ListView) this.findViewById(R.id.progManaPers);
         ListView missionList = (ListView) this
                 .findViewById(R.id.progManaMissList);
         missionList.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -141,11 +146,29 @@ public class ProgresssionManagement extends Activity {
             }
         });
 
-        roleList.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                currentRole = ((Agent) parent.getItemAtPosition(position)).roles
+        roleWheel.addChangingListener(new OnWheelChangedListener() {
+
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                if (!scrolling) {
+                    int position = wheel.getCurrentItem();
+                    currentRole = ((Agent) roleAdapter.getItem(position)).roles
+                            .get(0);
+                    currentAgentPosition = position;
+                    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(100);
+                    update();
+                }
+            }
+        });
+        
+        roleWheel.addScrollingListener( new OnWheelScrollListener() {
+            public void onScrollingStarted(WheelView wheel) {
+                scrolling = true;
+            }
+            public void onScrollingFinished(WheelView wheel) {
+                scrolling = false;
+                int position = wheel.getCurrentItem();
+                currentRole = ((Agent) roleAdapter.getItem(position)).roles
                         .get(0);
                 currentAgentPosition = position;
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
