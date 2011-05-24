@@ -15,7 +15,7 @@ public class NAApplication extends Application
 {
 
     Problem currentProblem = null;
-    ArrayList<Problem> runningProblems;
+    ArrayList<Problem> runningProblems; 
     ArrayList<Narrative> prototypeNarratives;
 
     public NAApplication() 
