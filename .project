@@ -37,11 +37,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.stateofflow.eclipse.metrics.MetricsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>wheel_src</name>
-			<type>2</type>
-			<locationURI>_android_wheel_6bdbb5b/src</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
