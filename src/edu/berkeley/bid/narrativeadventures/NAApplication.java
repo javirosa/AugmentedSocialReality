@@ -14,6 +14,7 @@ import edu.berkeley.bid.narrativeadventures.model.Problem;
 public class NAApplication extends Application 
 {
 
+    //Fucking hell
     Problem currentProblem = null;
     ArrayList<Problem> runningProblems;
     ArrayList<Narrative> prototypeNarratives;
