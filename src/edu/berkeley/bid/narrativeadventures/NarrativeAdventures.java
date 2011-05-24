@@ -36,7 +36,7 @@ public class NarrativeAdventures extends Activity {
         // all activities can call getApplication
         // for some odd reason getFilesDir
         // returns null if this is done at the application level
-        NAApp naapp = (NAApp) getApplication();
+        NAApplication naapp = (NAApplication) getApplication();
         File possibleNarsDir = new File(getFilesDir(), "possibleNarratives");
         File runningProbsDir = new File(getFilesDir(), "runningProblems");
         possibleNarsDir.mkdirs();
@@ -139,7 +139,7 @@ public class NarrativeAdventures extends Activity {
 
         problem.narrative = narr;
 
-        NAApp application = (NAApp) getApplication();
+        NAApplication application = (NAApplication) getApplication();
         application.currentProblem = problem;
 
         application.runningProblems.add(problem);
@@ -179,14 +179,14 @@ public class NarrativeAdventures extends Activity {
         
         ProblemArrayAdapter probAAd = new ProblemArrayAdapter(
                 getApplicationContext(), R.id.oneiconrowroot,
-                ((NAApp) getApplication()).runningProblems);
+                ((NAApplication) getApplication()).runningProblems);
         narSpin.setAdapter(probAAd);
         //probAAd.setDropDownViewResource(R.layout.oneiconrow);
         narSpin.setOnItemSelectedListener( new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                     int arg2, long arg3) {
-                NAApp naapp = (NAApp)getApplication();
+                NAApplication naapp = (NAApplication)getApplication();
                 naapp.currentProblem = (Problem) ((Spinner)arg0).getSelectedItem();
                 sociSele.setEnabled(true);
                 probDefiExist.setEnabled(true);
@@ -197,7 +197,7 @@ public class NarrativeAdventures extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                NAApp naapp = (NAApp)getApplication();
+                NAApplication naapp = (NAApplication)getApplication();
                 //The only value behavior is to create a new Problem
                 naapp.currentProblem = null;
                 sociSele.setEnabled(false);
@@ -224,6 +224,8 @@ public class NarrativeAdventures extends Activity {
                 // TODO if result OK then problem is not canceled then set the new problem as selected
             }
         });
+        
+        //BUTTONS
         probDefiExist.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), AProblemInput.class);

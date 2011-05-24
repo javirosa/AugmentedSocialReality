@@ -59,7 +59,7 @@ public class AProblemInput extends Activity {
     private void saveToCurrentProblem() {
         // When this screen is first started the currentProblem should be a new
         // problem
-        Problem p = ((NAApp) getApplication()).currentProblem;
+        Problem p = ((NAApplication) getApplication()).currentProblem;
         EditText situation = (EditText) findViewById(R.id.probDefiNameFill);
         EditText description = (EditText) findViewById(R.id.probDefiDescFill);
         Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);
@@ -78,7 +78,7 @@ public class AProblemInput extends Activity {
      * Takes input from the gui and loads it into the currentProblem
      */
     private void loadFromCurrentProblem() {
-        Problem p = ((NAApp) getApplication()).currentProblem;
+        Problem p = ((NAApplication) getApplication()).currentProblem;
         EditText situation = (EditText) findViewById(R.id.probDefiNameFill);
         EditText description = (EditText) findViewById(R.id.probDefiDescFill);
         Spinner place = (Spinner) findViewById(R.id.probDefiPlacFill);

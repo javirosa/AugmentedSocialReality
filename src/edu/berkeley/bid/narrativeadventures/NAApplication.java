@@ -11,18 +11,18 @@ import edu.berkeley.bid.narrativeadventures.io.NarrativeStorage;
 import edu.berkeley.bid.narrativeadventures.model.Narrative;
 import edu.berkeley.bid.narrativeadventures.model.Problem;
 
-public class NAApp extends Application 
+public class NAApplication extends Application 
 {
 
     Problem currentProblem = null;
     ArrayList<Problem> runningProblems;
-    ArrayList<Narrative> possibleNarratives;
+    ArrayList<Narrative> prototypeNarratives;
 
-    public NAApp() 
+    public NAApplication() 
     {
         super();
         runningProblems = new ArrayList<Problem>();
-        possibleNarratives = new ArrayList<Narrative>();
+        prototypeNarratives = new ArrayList<Narrative>();
     }
 
     /**
@@ -31,7 +31,7 @@ public class NAApp extends Application
     boolean saveState(File possibleNarsDir, File runningProbsDir) 
     {
         boolean corruption = false;
-        for (Narrative nar : possibleNarratives) {
+        for (Narrative nar : prototypeNarratives) {
             if (!NarrativeStorage.saveNarrative(nar, possibleNarsDir))
                 corruption = true;
         }
@@ -49,14 +49,14 @@ public class NAApp extends Application
     boolean loadState(File possibleNarsDir, File runningProbsDir) 
     {
         boolean corruption = false;
-        possibleNarratives.clear();
+        prototypeNarratives.clear();
         runningProblems.clear();
         for (File f : possibleNarsDir.listFiles()) {
             Narrative nar = NarrativeStorage.loadNarrative(f);
             if (nar == null)
                 corruption = true;
             else 
-                possibleNarratives.add(nar);
+                prototypeNarratives.add(nar);
         }
         
         for (File f : runningProbsDir.listFiles()) {

@@ -1,5 +1,6 @@
 package edu.berkeley.bid.narrativeadventures;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -21,6 +22,8 @@ import android.widget.ListView;
 import edu.berkeley.bid.narrativeadventures.adapters.AgentArrayAdapter;
 import edu.berkeley.bid.narrativeadventures.io.ContactListAgentSource;
 import edu.berkeley.bid.narrativeadventures.model.Agent;
+import edu.berkeley.bid.narrativeadventures.model.Narrative;
+import edu.berkeley.bid.narrativeadventures.model.Problem;
 
 public class SocialSelection extends Activity {
     // int posi;
@@ -66,7 +69,11 @@ public class SocialSelection extends Activity {
         for (Agent agent : personaListOut) {
             Log.d("AgentSource", agent.name);
         }
-        personaListIn = ((NAApp) getApplication()).currentProblem.narrative.agents;
+        NAApplication naapp = (NAApplication)getApplication();
+        Problem problem = naapp.currentProblem;
+        Narrative nar = problem.narrative;
+        ArrayList<Agent> agents = problem.narrative.agents;
+        personaListIn = naapp.currentProblem.narrative.agents;
         personaListOut.removeAll(personaListIn);
 
         // Get data for people included (actors)

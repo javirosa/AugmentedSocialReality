@@ -84,7 +84,7 @@ public class ProgresssionManagement extends Activity {
         WheelView roleWheel= (WheelView) this.findViewById(R.id.progManaPersWheel); 
         
         // Get the list of agents in the current narrative
-        NAApp application = (NAApp) getApplication();
+        NAApplication application = (NAApplication) getApplication();
         currentNarrative = application.currentProblem.narrative; // set current
                                                                  // narrative
         

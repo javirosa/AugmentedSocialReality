@@ -76,7 +76,7 @@ public class RoleAssignment extends Activity {
         ListView roleList = (ListView) this.findViewById(R.id.roleAssiNameIn);
         
         //Pull data about the current problem and narrative from the application
-        NAApp application = (NAApp) getApplication();
+        NAApplication application = (NAApplication) getApplication();
         currentNarrative = application.currentProblem.narrative;
         
         //Handle a lack of agents
